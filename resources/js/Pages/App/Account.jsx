@@ -4,8 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import AccountCard from '@/Components/Account/AccountCard';
 import AppLayout from '@/Layouts/AppLayout';
 import 'swiper/css';
-import 'swiper/css/effect-cards';
-import { EffectCards } from 'swiper/modules';
+import { Pagination } from 'swiper/modules';
 
 const Account = ({ accounts }) => {
   //   const handleSwipe = (swiper) => {
@@ -22,12 +21,14 @@ const Account = ({ accounts }) => {
   return (
     <div className="">
       <Swiper
-        effect={'cards'}
         grabCursor={true}
-        modules={[EffectCards]}
-        className="mySwiper"
+        spaceBetween={32}
+        pagination={{
+          dynamicBullets: true,
+        }}
+        modules={[Pagination]}
       >
-        {accounts.map((acc, key) => (
+        {accounts.map((acc) => (
           <SwiperSlide key={acc.id}>
             <AccountCard data={acc} />
           </SwiperSlide>

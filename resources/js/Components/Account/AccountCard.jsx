@@ -4,7 +4,7 @@ const AccountCard = ({ data }) => {
       <div className="card-body flex flex-row justify-between">
         <div className="flex flex-col justify-end">
           <div className="text-sm">Total Balance</div>
-          <div className="text-xl font-bold">{data.balance}</div>
+          <div className="text-xl font-bold mb-2">{data.balance}</div>
         </div>
         <div className="font-bold">{data.name}</div>
       </div>

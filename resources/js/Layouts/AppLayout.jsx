@@ -27,7 +27,7 @@ export default function AppLayout({
           <main className="mt-10">{children}</main>
 
           {/* footer nav */}
-          <div className="h-18 fixed bottom-4 left-1/2 z-50 w-[290px] -translate-x-1/2 transform rounded-full border-x-2 border-b-4 border-t-2 border-primary bg-base-100 shadow-md transition-transform duration-300 sm:w-full sm:max-w-3xl">
+          <div className="h-18 fixed bottom-0 left-1/2 z-50 w-[290px] -translate-x-1/2 transform rounded-full border-x-2 border-b-4 border-t-2 border-primary bg-base-100 shadow-md transition-transform duration-300 sm:w-full sm:max-w-3xl">
             <div className="flex justify-evenly px-2 py-2">
               <Link
                 prefetch

@@ -1,4 +1,15 @@
-const Toast = ({ message = 'Toast message', type = 'success' }) => {
+import { useEffect, useState } from 'react';
+
+const Toast = ({
+  message = 'Toast message',
+  type = 'success',
+  show = false,
+}) => {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    show ? setVisible(true) : setVisible(false);
+  }, [show]);
+
   let typeToast = type;
   switch (type) {
     case 'info':
@@ -13,11 +24,15 @@ const Toast = ({ message = 'Toast message', type = 'success' }) => {
   }
 
   return (
-    <div className="toast toast-center toast-top z-50">
-      <div className={`alert ${typeToast}`}>
-        <span>{message}</span>
-      </div>
-    </div>
+    <>
+      {visible && (
+        <div className="toast toast-center toast-top z-50">
+          <div className={`alert ${typeToast}`}>
+            <span>{message}</span>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

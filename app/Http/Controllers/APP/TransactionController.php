@@ -62,7 +62,6 @@ class TransactionController extends Controller
 
     public function update(Request $request, $id)
     {
-        sleep(1);
         $validated = $request->validate([
             'name' => 'required|min:2|max:100',
             'transactionDate' => 'required',

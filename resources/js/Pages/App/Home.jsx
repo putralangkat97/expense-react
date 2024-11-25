@@ -7,23 +7,47 @@ import TransactionCard from '@/Components/Transactions/TransactionCard';
 import TransactionDetail from '@/Components/Transactions/TransactionDetail';
 import TransactionForm from '@/Components/Transactions/TransactionForm';
 import AppLayout from '@/Layouts/AppLayout';
-import { Link, usePage } from '@inertiajs/react';
+import { Link, router, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
+import Toast from '@/Components/Toast';
 import 'swiper/css';
-import 'swiper/css/effect-cards';
-import { EffectCards } from 'swiper/modules';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
 
 const Home = ({ totalBalance, transactions, categories, accounts }) => {
-  const { flash } = usePage().props;
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [modalTitle, setModalTitle] = useState('Modal Title');
   const [isForm, setIsForm] = useState(false);
   const [categoryType, setCategoryType] = useState('out');
+  const [toastMessage, setToastMessage] = useState('out');
+  const [toastType, setToastType] = useState('out');
+  const [showToast, setShowToast] = useState(false);
+
+  const { flash } = usePage().props;
+
+  useEffect(() => {
+    if (flash.message) {
+      setToastMessage(flash.message);
+      setToastType(flash.type);
+      setShowToast(true);
+      const timer = setTimeout(() => {
+        setShowToast(false);
+        router.visit(window.location.href, {
+          preserveState: true,
+          preserveScroll: true,
+          only: ['flash'],
+          data: { flash: { message: null, type: null } },
+        });
+      }, 3000);
+
+      // Cleanup function to clear timer if component unmounts
+      return () => clearTimeout(timer);
+    }
+  }, [flash]);
 
   const openModal = (
     title = modalTitle,
@@ -59,6 +83,11 @@ const Home = ({ totalBalance, transactions, categories, accounts }) => {
 
   return (
     <>
+      {/* toastr */}
+      {showToast && (
+        <Toast message={toastMessage} type={toastType} show={showToast} />
+      )}
+
       {/* balance */}
       <div className="card card-compact border-x-2 border-b-4 border-t-2 border-primary bg-base-200">
         <div className="card-body">
@@ -84,13 +113,15 @@ const Home = ({ totalBalance, transactions, categories, accounts }) => {
         </div>
         <div className="mt-4">
           <Swiper
-            effect={'cards'}
             grabCursor={true}
-            modules={[EffectCards]}
-            className="mySwiper"
+            spaceBetween={32}
+            pagination={{
+              dynamicBullets: true,
+            }}
+            modules={[Pagination]}
           >
             {accounts.map((acc, key) => (
-              <SwiperSlide key={acc.id}>
+              <SwiperSlide key={key}>
                 <AccountCard data={acc} />
               </SwiperSlide>
             ))}

@@ -15,3 +15,14 @@
 .swiper-slide {
   border-radius: 1rem;
 }
+
+.swiper-pagination-bullet-active {
+  background: #419400 !important;
+}
+
+.swiper-horizontal
+  > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic,
+.swiper-pagination-horizontal.swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
+  bottom: 8%;
+  opacity: 0.3;
+}
