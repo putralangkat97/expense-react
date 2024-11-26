@@ -4,6 +4,8 @@ namespace App\Http\Controllers\APP;
 
 use App\Actions\AccountAction;
 use App\Http\Controllers\Controller;
+use App\Models\Account;
+use App\Models\Category;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,6 +18,27 @@ class TransactionController extends Controller
     public function index()
     {
         $current_user = Auth::user();
+
+
+        $categories = Category::orderBy('name')
+            ->get();
+        $categories_mapped = $categories->map(function ($data) {
+            return [
+                'id' => $data->id,
+                'name' => ucwords($data->name),
+                'type' => $data->type,
+            ];
+        });
+
+        $accounts = Account::where('user_id', $current_user->id);
+        $account_mapped = $accounts->get()->map(function ($data) {
+            return [
+                'id' => $data->id,
+                'name' => $data->name,
+                'balance' => $data->balance,
+                'colour' => $data->colour,
+            ];
+        });
         $transactions = Transaction::with('category')
             ->where('user_id', $current_user->id)
             ->orderBy('transaction_date', 'desc')
@@ -31,10 +54,12 @@ class TransactionController extends Controller
                     'categoryId' => $transaction->category_id,
                     'note' => $transaction->note,
                 ];
-            });;
+            });
 
         return Inertia::render('App/Transaction', [
             'transactions' => $transactions,
+            'categories' => $categories_mapped,
+            'accounts' => $account_mapped,
         ]);
     }
 

@@ -7,7 +7,7 @@ import AppLayout from '@/Layouts/AppLayout';
 import { router, usePage } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 
-const Transaction = ({ transactions }) => {
+const Transaction = ({ transactions, categories, accounts }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTransaction, setSelectedTransaction] = useState(null);
   const [modalTitle, setModalTitle] = useState('Modal Title');
