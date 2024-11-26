@@ -1,4 +1,4 @@
-import ConfigHelper from '@/Helpers/ConfigHelpers';
+import ConfigHelper from '@/Helpers/ConfigHelpers.js';
 import { useForm } from '@inertiajs/react';
 import InputError from '../InputError';
 import PrimaryButton from '../PrimaryButton';

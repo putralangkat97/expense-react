@@ -1,4 +1,4 @@
-import ConfigHelper from '@/Helpers/ConfigHelpers';
+import ConfigHelper from '@/Helpers/ConfigHelpers.js';
 import { Pencil, Trash } from 'lucide-react';
 import CategoryIcon from '../Category/CategoryIcon';
 import InputLabel from '../InputLabel';

@@ -1,4 +1,4 @@
-import ConfigHelper from '@/Helpers/ConfigHelpers';
+import ConfigHelper from '@/Helpers/ConfigHelpers.js';
 import CategoryIcon from '../Category/CategoryIcon';
 
 const TransactionCard = ({ data, ...props }) => {

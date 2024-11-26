@@ -1,4 +1,4 @@
-import ConfigHelper from '@/Helpers/ConfigHelpers';
+import ConfigHelper from '@/Helpers/ConfigHelpers.js';
 
 const AccountCard = ({ data }) => {
   const configHelper = new ConfigHelper();
