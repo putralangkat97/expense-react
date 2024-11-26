@@ -40,7 +40,6 @@ class HomeController extends Controller
         });
 
         $sum_balance = $accounts->sum('balance');
-        $total_balance = Number::currency(number: $sum_balance, in: 'IDR', locale: 'id');
 
         $categories = Category::orderBy('name')
             ->get();
@@ -56,13 +55,13 @@ class HomeController extends Controller
             return [
                 'id' => $data->id,
                 'name' => $data->name,
-                'balance' => Number::currency(number: $data->balance, in: 'IDR', locale: 'id'),
+                'balance' => $data->balance,
                 'colour' => $data->colour,
             ];
         });
 
         return Inertia::render('App/Home', [
-            'totalBalance' => $total_balance,
+            'totalBalance' => $sum_balance,
             'categories' => $categories_mapped,
             'accounts' => $account_mapped,
             'transactions' => $transactions,

@@ -1,3 +1,4 @@
+import ConfigHelper from '@/Helpers/ConfigHelpers';
 import { Pencil, Trash } from 'lucide-react';
 import CategoryIcon from '../Category/CategoryIcon';
 import InputLabel from '../InputLabel';
@@ -5,6 +6,7 @@ import PrimaryButton from '../PrimaryButton';
 import SecondaryButton from '../SecondaryButton';
 
 const TransactionDetail = ({ data, triggerModal }) => {
+  const configHelper = new ConfigHelper();
   return (
     <div className="grid grid-cols-1 gap-2">
       <div>
@@ -40,10 +42,7 @@ const TransactionDetail = ({ data, triggerModal }) => {
         />
         <h2 className="-mt-1 text-gray-600">
           {data.transactionType === 'in' ? '' : '-'}
-          {data.amount.toLocaleString('id-ID', {
-            style: 'currency',
-            currency: 'IDR',
-          })}
+          {configHelper.formatCurrency(data.amount)}
         </h2>
       </div>
       <div className="col-span-2 mt-4">

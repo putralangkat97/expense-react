@@ -27,7 +27,7 @@ const Toast = ({
     <>
       {visible && (
         <div className="toast toast-center toast-top z-50">
-          <div className={`alert ${typeToast}`}>
+          <div className={`alert ${typeToast} shadow-md`}>
             <span>{message}</span>
           </div>
         </div>

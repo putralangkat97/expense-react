@@ -1,40 +1,18 @@
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import AccountCard from '@/Components/Account/AccountCard';
 import AppLayout from '@/Layouts/AppLayout';
-import 'swiper/css';
-import { Pagination } from 'swiper/modules';
 
 const Account = ({ accounts }) => {
-  //   const handleSwipe = (swiper) => {
-  //     // Get the current slide's index
-  //     const currentIndex = swiper.activeIndex;
-
-  //     // Get the account ID of the current slide
-  //     const currentAccountId = accounts[currentIndex].id;
-
-  //     // Perform your desired action with the account ID
-  //     console.log('Current Account ID:', currentAccountId);
-  //   };
-
   return (
-    <div className="">
-      <Swiper
-        grabCursor={true}
-        spaceBetween={32}
-        pagination={{
-          dynamicBullets: true,
-        }}
-        modules={[Pagination]}
-      >
-        {accounts.map((acc) => (
-          <SwiperSlide key={acc.id}>
-            <AccountCard data={acc} />
-          </SwiperSlide>
+    <>
+      <div className="flex flex-col items-center justify-center space-y-2">
+        <h2 className="text-center text-3xl sm:text-4xl">Account List</h2>
+      </div>
+      <div className="mt-10 flex flex-col space-y-2">
+        {accounts.map((acc, key) => (
+          <AccountCard data={acc} key={key} />
         ))}
-      </Swiper>
-    </div>
+      </div>
+    </>
   );
 };
 

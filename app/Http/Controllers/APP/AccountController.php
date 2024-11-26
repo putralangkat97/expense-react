@@ -19,7 +19,7 @@ class AccountController extends Controller
                 return [
                     'id' => $data->id,
                     'name' => $data->name,
-                    'balance' => Number::currency(number: $data->balance, in: 'IDR', locale: 'id'),
+                    'balance' => $data->balance,
                     'colour' => $data->colour,
                 ];
             });

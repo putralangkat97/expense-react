@@ -1,6 +1,8 @@
+import ConfigHelper from '@/Helpers/ConfigHelpers';
 import CategoryIcon from '../Category/CategoryIcon';
 
 const TransactionCard = ({ data, ...props }) => {
+  const configHelper = new ConfigHelper();
   return (
     <div
       className={
@@ -26,17 +28,16 @@ const TransactionCard = ({ data, ...props }) => {
             </div>
             <div className="flex flex-col items-start justify-center">
               <div className="tooltip font-bold" data-tip={data.name}>
-                {data.name.slice(0, 12) + '..'}
+                {data.name.length > 12
+                  ? data.name.slice(0, 12) + '..'
+                  : data.name}
               </div>
               <div className="text-sm text-neutral">{data.transactionDate}</div>
             </div>
           </div>
           <div>
             {data.transactionType === 'in' ? '' : '-'}
-            {data.amount.toLocaleString('id-ID', {
-              style: 'currency',
-              currency: 'IDR',
-            })}
+            {configHelper.formatCurrency(data.amount)}
           </div>
         </div>
       </div>

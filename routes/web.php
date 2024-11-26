@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
         ->prefix('/transaction')
         ->name('transaction.')
         ->group(function () {
+            Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
             Route::patch('/{id}/update', 'update')->name('update');
         });

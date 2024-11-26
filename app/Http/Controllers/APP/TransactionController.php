@@ -9,9 +9,35 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
 
 class TransactionController extends Controller
 {
+    public function index()
+    {
+        $current_user = Auth::user();
+        $transactions = Transaction::with('category')
+            ->where('user_id', $current_user->id)
+            ->orderBy('transaction_date', 'desc')
+            ->get()->map(function ($transaction) {
+                return [
+                    'id' => $transaction->id,
+                    'name' => $transaction->name,
+                    'category_name' => ucwords($transaction->category->name),
+                    'transactionDate' => date('d/m/Y', strtotime($transaction->transaction_date)),
+                    'amount' => $transaction->amount,
+                    'transactionType' => $transaction->type ? 'in' : 'out',
+                    'accountId' => $transaction->account_id,
+                    'categoryId' => $transaction->category_id,
+                    'note' => $transaction->note,
+                ];
+            });;
+
+        return Inertia::render('App/Transaction', [
+            'transactions' => $transactions,
+        ]);
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -31,7 +57,7 @@ class TransactionController extends Controller
                 if (!$action->accountHelper($validated, $transaction)) {
                     DB::rollBack();
                 } else {
-                    $date = $validated['transactionDate'] . '' . now()->toTimeString();
+                    $date = $validated['transactionDate'] . '00:00:00';
                     $format = Carbon::parse($date, 'UTC')
                         ->timezone(config('app.timezone_name'))
                         ->toDateTimeString();

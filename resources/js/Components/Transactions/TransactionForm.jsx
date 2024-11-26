@@ -1,4 +1,4 @@
-import DateFormat from '@/libs/dateFormat';
+import ConfigHelper from '@/Helpers/ConfigHelpers';
 import { useForm } from '@inertiajs/react';
 import InputError from '../InputError';
 import PrimaryButton from '../PrimaryButton';
@@ -12,13 +12,13 @@ const TransactionForm = ({
   transactionData = null,
   closeModal,
 }) => {
-  const dateHelper = new DateFormat();
+  const configHelper = new ConfigHelper();
   const { data, setData, post, patch, processing, errors, reset } = useForm({
     name: transactionData ? transactionData.name : '',
     accountId: transactionData ? transactionData.accountId : '',
     categoryId: transactionData ? transactionData.categoryId : '',
     transactionDate: transactionData
-      ? dateHelper.formatDate(transactionData.transactionDate)
+      ? configHelper.formatDate(transactionData.transactionDate)
       : '',
     amount: transactionData ? transactionData.amount : '',
     note: transactionData ? transactionData.note : '',
