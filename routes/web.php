@@ -17,6 +17,7 @@ Route::middleware('auth')->group(function () {
         ->name('account.')
         ->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::get('/{id}/view', 'index')->name('view');
         });
 
     Route::controller(\App\Http\Controllers\APP\TransactionController::class)
@@ -36,6 +37,13 @@ Route::middleware('auth')->group(function () {
             Route::get('/edit', 'edit')->name('edit');
             Route::patch('/update', 'update')->name('update');
             Route::delete('/destroy', 'destroy')->name('destroy');
+        });
+
+    Route::controller(\App\Http\Controllers\APP\ReportController::class)
+        ->prefix('/report')
+        ->name('report.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
         });
 });
 

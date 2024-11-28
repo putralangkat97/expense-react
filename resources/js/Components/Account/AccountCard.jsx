@@ -1,9 +1,14 @@
 import ConfigHelper from '@/Helpers/ConfigHelpers.js';
+import { Link } from '@inertiajs/react';
 
 const AccountCard = ({ data }) => {
   const configHelper = new ConfigHelper();
+
   return (
-    <div className="card card-compact h-40 border-x-2 border-b-4 border-t-2 border-primary bg-base-200">
+    <Link
+      href={route('account.view', data.id)}
+      className="card card-compact mx-auto h-40 min-w-96 border-x-2 border-b-4 border-t-2 border-primary bg-base-200"
+    >
       <div className="card-body flex flex-row justify-between">
         <div className="flex flex-col justify-end">
           <div className="text-sm">Total Balance</div>
@@ -13,7 +18,7 @@ const AccountCard = ({ data }) => {
         </div>
         <div className="font-bold">{data.name}</div>
       </div>
-    </div>
+    </Link>
   );
 };
 

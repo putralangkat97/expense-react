@@ -19,7 +19,6 @@ class TransactionController extends Controller
     {
         $current_user = Auth::user();
 
-
         $categories = Category::orderBy('name')
             ->get();
         $categories_mapped = $categories->map(function ($data) {
@@ -39,6 +38,7 @@ class TransactionController extends Controller
                 'colour' => $data->colour,
             ];
         });
+
         $transactions = Transaction::with('category')
             ->where('user_id', $current_user->id)
             ->orderBy('transaction_date', 'desc')

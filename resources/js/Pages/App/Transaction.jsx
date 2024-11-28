@@ -3,73 +3,22 @@ import Toast from '@/Components/Toast';
 import TransactionCard from '@/Components/Transactions/TransactionCard';
 import TransactionDetail from '@/Components/Transactions/TransactionDetail';
 import TransactionForm from '@/Components/Transactions/TransactionForm';
+import { useTransactionHook } from '@/Helpers/TransactionModalHook';
 import AppLayout from '@/Layouts/AppLayout';
-import { router, usePage } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
 
 const Transaction = ({ transactions, categories, accounts }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTransaction, setSelectedTransaction] = useState(null);
-  const [modalTitle, setModalTitle] = useState('Modal Title');
-  const [isForm, setIsForm] = useState(false);
-  const [categoryType, setCategoryType] = useState('out');
-  const [toastMessage, setToastMessage] = useState('out');
-  const [toastType, setToastType] = useState('out');
-  const [showToast, setShowToast] = useState(false);
-
-  const { flash } = usePage().props;
-
-  useEffect(() => {
-    if (flash.message) {
-      setToastMessage(flash.message);
-      setToastType(flash.type);
-      setShowToast(true);
-      const timer = setTimeout(() => {
-        setShowToast(false);
-        router.visit(window.location.href, {
-          preserveState: true,
-          preserveScroll: true,
-          only: ['flash'],
-          data: { flash: { message: null, type: null } },
-        });
-      }, 3000);
-
-      // Cleanup function to clear timer if component unmounts
-      return () => clearTimeout(timer);
-    }
-  }, [flash]);
-
-  const openModal = (
-    title = modalTitle,
-    transaction = null,
-    type = null,
-    edit = false,
-  ) => {
-    setIsModalOpen(true);
-    setModalTitle(title);
-    if (type === 'transaction-detail') {
-      setIsForm(false);
-      setSelectedTransaction(transaction);
-    } else {
-      setIsForm(true);
-      if (edit) {
-        setSelectedTransaction(transaction);
-      }
-      if (type === 'transaction-out') {
-        setCategoryType('out');
-      } else {
-        setCategoryType('in');
-      }
-    }
-  };
-
-  const closeModal = () => {
-    setIsForm(false);
-    setIsModalOpen(false);
-    setModalTitle('');
-    setCategoryType('');
-    setSelectedTransaction(null);
-  };
+  const {
+    isModalOpen,
+    selectedTransaction,
+    modalTitle,
+    isForm,
+    categoryType,
+    toastMessage,
+    toastType,
+    showToast,
+    openModal,
+    closeModal,
+  } = useTransactionHook();
 
   return (
     <>
@@ -78,7 +27,7 @@ const Transaction = ({ transactions, categories, accounts }) => {
         <Toast message={toastMessage} type={toastType} show={showToast} />
       )}
 
-      <div className="flex flex-col items-center justify-center space-y-2">
+      <div className="flex items-center justify-center">
         <h2 className="text-center text-3xl sm:text-4xl">
           Transactions History
         </h2>

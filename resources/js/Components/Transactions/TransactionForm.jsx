@@ -11,6 +11,7 @@ const TransactionForm = ({
   categoryType,
   transactionData = null,
   closeModal,
+  accountView = false,
 }) => {
   const configHelper = new ConfigHelper();
   const { data, setData, post, patch, processing, errors, reset } = useForm({
