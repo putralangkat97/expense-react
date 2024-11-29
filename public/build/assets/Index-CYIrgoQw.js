@@ -1,1 +1,0 @@
-import{j as t,U as e}from"./app-B9OWeLqS.js";import{A as r}from"./AppLayout-4bDQIkLk.js";import"./createLucideIcon-BgNTwM8i.js";const s=()=>t.jsx(e,{as:"button",method:"post",href:route("logout"),className:"btn btn-error btn-block",children:"Logout"});s.layout=o=>t.jsx(r,{title:"Profile",useNavHead:!1,children:o});export{s as default};

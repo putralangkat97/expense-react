@@ -8,7 +8,7 @@ const AccountCard = ({ data }) => {
     <Link
       as="button"
       href={route('account.view', data.id)}
-      className="card card-compact mx-auto h-40 min-w-80 border-x-2 border-b-4 border-t-2 border-primary bg-base-200"
+      className="card card-compact mx-auto h-40 w-full border-x-2 border-b-4 border-t-2 border-primary bg-base-200"
     >
       <div className="card-body flex flex-row justify-between">
         <div className="flex flex-col justify-end">
