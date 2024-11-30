@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Number;
 use Inertia\Inertia;
 
@@ -74,6 +75,64 @@ class AccountController extends Controller
             return Inertia::render('App/Account', [
                 'accounts' => $accounts,
             ]);
+        }
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'balance' => 'required',
+        ]);
+
+        if ($validated) {
+            DB::beginTransaction();
+            try {
+                $account = new Account();
+                $account->name = $validated['name'];
+                $account->balance = $validated['balance'];
+                $account->user_id = Auth::user()->id;
+                $account->save();
+                $type = 'success';
+                $message = 'Account created successfully';
+                DB::commit();
+            } catch (\Exception $e) {
+                $type = 'error';
+                $message = 'Internal server error';
+                info($e->getMessage());
+                DB::rollBack();
+            }
+
+            session()->flash($type, $message);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => 'required',
+            'balance' => 'required',
+        ]);
+
+        if ($validated) {
+            DB::beginTransaction();
+            try {
+                $account = Account::findOrFail($id);
+                $account->name = $validated['name'];
+                $account->balance = $validated['balance'];
+                $account->user_id = Auth::user()->id;
+                $account->save();
+                $type = 'success';
+                $message = 'Account updated successfully';
+                DB::commit();
+            } catch (\Exception $e) {
+                $type = 'error';
+                $message = 'Internal server error';
+                info($e->getMessage());
+                DB::rollBack();
+            }
+
+            session()->flash($type, $message);
         }
     }
 }

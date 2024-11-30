@@ -11,7 +11,6 @@ const TransactionForm = ({
   categoryType,
   transactionData = null,
   closeModal,
-  accountView = false,
 }) => {
   const configHelper = new ConfigHelper();
   const { data, setData, post, patch, processing, errors, reset } = useForm({
@@ -36,6 +35,7 @@ const TransactionForm = ({
       'amount',
       'note',
       'type',
+      'transactionId',
     );
     closeModal();
   };

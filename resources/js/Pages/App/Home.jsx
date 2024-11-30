@@ -11,7 +11,12 @@ import { Link } from '@inertiajs/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
+import AccountDetail from '@/Components/Account/AccountDetail';
+import AccountEmpty from '@/Components/Account/AccountEmpty';
+import AccountForm from '@/Components/Account/AccountForm';
 import Toast from '@/Components/Toast';
+import TransactionEmpty from '@/Components/Transactions/TransactionEmpty';
+import { useAccountHook } from '@/Helpers/AccountModalHook';
 import { useTransactionHook } from '@/Helpers/TransactionModalHook';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -31,9 +36,30 @@ const Home = ({ totalBalance, transactions, categories, accounts }) => {
     closeModal,
   } = useTransactionHook();
 
+  const {
+    selectedAccount,
+    isAccountModalOpen,
+    accountModalTitle,
+    isAccountForm,
+    accountToastMessage,
+    accountToastType,
+    showAccountToast,
+    openAccountModal,
+    closeAccountModal,
+  } = useAccountHook();
+
   return (
     <>
-      {/* toastr */}
+      {/* toastr for account */}
+      {showAccountToast && (
+        <Toast
+          message={accountToastMessage}
+          type={accountToastType}
+          show={showAccountToast}
+        />
+      )}
+
+      {/* toastr for transaction */}
       {showToast && (
         <Toast message={toastMessage} type={toastType} show={showToast} />
       )}
@@ -54,56 +80,91 @@ const Home = ({ totalBalance, transactions, categories, accounts }) => {
           <h2 className="text-xl font-bold text-neutral sm:text-2xl">
             Accounts
           </h2>
-          <Link
-            href={route('account.index')}
-            className="transition-colors duration-200 hover:link hover:link-primary"
-          >
-            View all
-          </Link>
+          {accounts.length > 0 && (
+            <Link
+              href={route('account.index')}
+              className="transition-colors duration-200 hover:link hover:link-primary"
+            >
+              View all
+            </Link>
+          )}
         </div>
         <div className="mt-4">
-          <Swiper
-            grabCursor={true}
-            spaceBetween={32}
-            pagination={{
-              dynamicBullets: true,
-            }}
-            modules={[Pagination]}
-          >
-            {accounts.map((acc, key) => (
-              <SwiperSlide key={key}>
-                <AccountCard data={acc} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          {accounts.length > 0 ? (
+            <Swiper
+              grabCursor={true}
+              spaceBetween={32}
+              pagination={{
+                dynamicBullets: true,
+              }}
+              modules={[Pagination]}
+            >
+              {accounts.map((acc, key) => (
+                <SwiperSlide key={key}>
+                  <AccountCard data={acc} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <AccountEmpty triggerModal={openAccountModal} />
+          )}
         </div>
       </div>
 
       {/* Recent transactions */}
-      <div className="mt-6">
-        <div className="flex items-end justify-between">
-          <h2 className="text-xl font-bold text-neutral sm:text-2xl">
-            Recent Transactions
-          </h2>
-          <Link
-            href={route('transaction.index')}
-            className="transition-colors duration-200 hover:link hover:link-primary"
-          >
-            View all
-          </Link>
+      {accounts.length > 0 && (
+        <div className="mt-6">
+          <div className="flex items-end justify-between">
+            <h2 className="text-xl font-bold text-neutral sm:text-2xl">
+              Recent Transactions
+            </h2>
+            {accounts.length > 0 ||
+              (transactions.length > 0 && (
+                <Link
+                  href={route('transaction.index')}
+                  className="transition-colors duration-200 hover:link hover:link-primary"
+                >
+                  View all
+                </Link>
+              ))}
+          </div>
+          <div className="mt-4 flex flex-col space-y-2">
+            {transactions.length > 0 ? (
+              transactions.map((data, key) => (
+                <TransactionCard
+                  data={data}
+                  key={key}
+                  onClick={() =>
+                    openModal('Transaction Detail', data, 'transaction-detail')
+                  }
+                />
+              ))
+            ) : (
+              <TransactionEmpty />
+            )}
+          </div>
         </div>
-        <div className="mt-4 flex flex-col space-y-2">
-          {transactions.map((data, key) => (
-            <TransactionCard
-              data={data}
-              key={key}
-              onClick={() =>
-                openModal('Transaction Detail', data, 'transaction-detail')
-              }
+      )}
+
+      <BottomSheet
+        isOpen={isAccountModalOpen}
+        onClose={closeAccountModal}
+        title={accountModalTitle}
+      >
+        {isAccountForm ? (
+          <AccountForm
+            accountData={selectedAccount}
+            closeModal={closeAccountModal}
+          />
+        ) : (
+          selectedAccount && (
+            <AccountDetail
+              data={selectedAccount}
+              triggerModal={openAccountModal}
             />
-          ))}
-        </div>
-      </div>
+          )
+        )}
+      </BottomSheet>
 
       <BottomSheet isOpen={isModalOpen} onClose={closeModal} title={modalTitle}>
         {isForm ? (

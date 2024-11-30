@@ -8,10 +8,10 @@ const AccountCard = ({ data }) => {
     <Link
       as="button"
       href={route('account.view', data.id)}
-      className="card card-compact mx-auto h-40 w-full border-x-2 border-b-4 border-t-2 border-primary bg-base-200"
+      className="btn card card-compact mx-auto h-40 w-full border-x-2 border-b-4 border-t-2 border-primary bg-base-200"
     >
-      <div className="card-body flex flex-row justify-between">
-        <div className="flex flex-col justify-end">
+      <div className="card-body flex w-full flex-row justify-between">
+        <div className="flex flex-col items-start justify-end">
           <div className="text-sm">Total Balance</div>
           <div className="mb-2 text-xl font-bold">
             {configHelper.formatCurrency(data.balance)}

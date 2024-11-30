@@ -6,7 +6,7 @@ const TransactionCard = ({ data, ...props }) => {
   return (
     <div
       className={
-        'card card-compact w-full cursor-pointer border-x-2 border-b-4 border-t-2 ' +
+        'card card-compact h-auto cursor-pointer border-x-2 border-b-4 border-t-2 ' +
         (data.transactionType === 'in'
           ? 'border-primary bg-success hover:bg-primary'
           : 'border-red-700 bg-error hover:bg-red-700')

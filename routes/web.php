@@ -18,6 +18,8 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/{id}/view', 'index')->name('view');
+            Route::post('/store', 'store')->name('store');
+            Route::patch('/{id}/update', 'update')->name('update');
         });
 
     Route::controller(\App\Http\Controllers\APP\TransactionController::class)

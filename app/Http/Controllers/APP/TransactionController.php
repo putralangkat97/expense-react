@@ -76,6 +76,7 @@ class TransactionController extends Controller
         ]);
 
         if ($validated) {
+            DB::beginTransaction();
             try {
                 $transaction = new Transaction();
                 $action = new AccountAction();
@@ -124,6 +125,7 @@ class TransactionController extends Controller
         ]);
 
         if ($validated) {
+            DB::beginTransaction();
             try {
                 $transaction = Transaction::findOrFail($id);
                 $action = new AccountAction();

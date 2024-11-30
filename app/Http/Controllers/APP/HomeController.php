@@ -19,7 +19,7 @@ class HomeController extends Controller
     {
         $current_user = Auth::user();
         $accounts = Account::where('user_id', $current_user->id);
-        $transactions = Transaction::with('category')
+        $transactions = Transaction::with(['category', 'account'])
             ->where('user_id', $current_user->id)
             ->orderBy('id', 'desc')
             ->take(5)
@@ -30,6 +30,7 @@ class HomeController extends Controller
                 'id' => $transaction->id,
                 'name' => $transaction->name,
                 'category_name' => ucwords($transaction->category->name),
+                'account_name' => ucwords($transaction->account->name),
                 'transactionDate' => date('d/m/Y', strtotime($transaction->transaction_date)),
                 'amount' => $transaction->amount,
                 'transactionType' => $transaction->type ? 'in' : 'out',

@@ -1,9 +1,8 @@
 import ConfigHelper from '@/Helpers/ConfigHelpers.js';
-import { Pencil, Trash } from 'lucide-react';
+import { Pencil } from 'lucide-react';
 import CategoryIcon from '../Category/CategoryIcon';
 import InputLabel from '../InputLabel';
 import PrimaryButton from '../PrimaryButton';
-import SecondaryButton from '../SecondaryButton';
 
 const TransactionDetail = ({ data, triggerModal }) => {
   const configHelper = new ConfigHelper();
@@ -45,6 +44,17 @@ const TransactionDetail = ({ data, triggerModal }) => {
           {configHelper.formatCurrency(data.amount)}
         </h2>
       </div>
+      <div>
+        <InputLabel
+          value={'Account'}
+          className="text-sm font-medium sm:text-lg"
+        />
+        <h2 className="-mt-1 text-gray-600">{data.account_name}</h2>
+      </div>
+      <div>
+        <InputLabel value={'Note'} className="text-sm font-medium sm:text-lg" />
+        <h2 className="-mt-1 text-gray-600">{data.note || '-'}</h2>
+      </div>
       <div className="col-span-2 mt-4">
         <PrimaryButton
           type="button"
@@ -63,7 +73,7 @@ const TransactionDetail = ({ data, triggerModal }) => {
           <Pencil size={16} />
           Edit
         </PrimaryButton>
-        <SecondaryButton
+        {/* <SecondaryButton
           type="button"
           variant="error"
           className="btn-block mt-2"
@@ -71,7 +81,7 @@ const TransactionDetail = ({ data, triggerModal }) => {
         >
           <Trash size={16} />
           Delete
-        </SecondaryButton>
+        </SecondaryButton> */}
       </div>
     </div>
   );

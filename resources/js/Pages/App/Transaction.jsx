@@ -2,6 +2,7 @@ import BottomSheet from '@/Components/BottomSheet';
 import Toast from '@/Components/Toast';
 import TransactionCard from '@/Components/Transactions/TransactionCard';
 import TransactionDetail from '@/Components/Transactions/TransactionDetail';
+import TransactionEmpty from '@/Components/Transactions/TransactionEmpty';
 import TransactionForm from '@/Components/Transactions/TransactionForm';
 import { useTransactionHook } from '@/Helpers/TransactionModalHook';
 import AppLayout from '@/Layouts/AppLayout';
@@ -33,15 +34,19 @@ const Transaction = ({ transactions, categories, accounts }) => {
         </h2>
       </div>
       <div className="mt-10 flex flex-col space-y-2">
-        {transactions.map((data, key) => (
-          <TransactionCard
-            data={data}
-            key={key}
-            onClick={() =>
-              openModal('Transaction Detail', data, 'transaction-detail')
-            }
-          />
-        ))}
+        {transactions.length > 0 ? (
+          transactions.map((data, key) => (
+            <TransactionCard
+              data={data}
+              key={key}
+              onClick={() =>
+                openModal('Transaction Detail', data, 'transaction-detail')
+              }
+            />
+          ))
+        ) : (
+          <TransactionEmpty />
+        )}
       </div>
 
       <BottomSheet isOpen={isModalOpen} onClose={closeModal} title={modalTitle}>

@@ -2,7 +2,7 @@ import { Send } from 'lucide-react';
 
 const TransactionButton = ({ triggerModal }) => {
   return (
-    <div className="flex justify-start space-x-4">
+    <div className="flex justify-start space-x-4" id="trx">
       <div className="flex flex-col items-center">
         <button
           className="btn btn-error rounded-full border-x-2 border-b-4 border-t-2 border-red-700 p-2 text-red-700 hover:border-red-700 hover:text-red-700"
