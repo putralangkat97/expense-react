@@ -6,7 +6,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
-})->name('welcome');
+})->middleware('guest')->name('welcome');
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', \App\Http\Controllers\APP\HomeController::class)
@@ -36,8 +36,9 @@ Route::middleware('auth')->group(function () {
         ->name('profile.')
         ->group(function () {
             Route::get('/', 'index')->name('index');
-            Route::get('/edit', 'edit')->name('edit');
-            Route::patch('/update', 'update')->name('update');
+            Route::get('/edit/information', 'editInformation')->name('edit-information');
+            Route::patch('/edit/information/update', 'update')->name('update');
+            Route::get('/edit/password', 'editPassword')->name('edit-password');
             Route::delete('/destroy', 'destroy')->name('destroy');
         });
 
