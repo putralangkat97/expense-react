@@ -17,6 +17,7 @@ import AccountForm from '@/Components/Account/AccountForm';
 import Toast from '@/Components/Toast';
 import TransactionEmpty from '@/Components/Transactions/TransactionEmpty';
 import { useAccountHook } from '@/Helpers/AccountModalHook';
+import ConfigHelper from '@/Helpers/ConfigHelpers';
 import { useTransactionHook } from '@/Helpers/TransactionModalHook';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -47,6 +48,8 @@ const Home = ({ totalBalance, transactions, categories, accounts }) => {
     openAccountModal,
     closeAccountModal,
   } = useAccountHook();
+
+  const configHelper = new ConfigHelper();
 
   return (
     <>

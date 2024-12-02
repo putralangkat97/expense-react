@@ -26,7 +26,9 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "chart.js": "^4.4.7",
         "lucide-react": "^0.456.0",
+        "react-chartjs-2": "^5.2.0",
         "react-hot-toast": "^2.4.1",
         "swiper": "^11.1.15"
     }

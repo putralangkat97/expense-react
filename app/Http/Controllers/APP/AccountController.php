@@ -28,7 +28,7 @@ class AccountController extends Controller
                     'colour' => $data->colour,
                 ];
             });
-            $transactions = Transaction::with('category')
+            $transactions = Transaction::with(['category', 'account'])
                 ->where('user_id', $current_user->id)
                 ->where('account_id', $id)
                 ->orderBy('transaction_date', 'desc')
@@ -37,6 +37,7 @@ class AccountController extends Controller
                         'id' => $transaction->id,
                         'name' => $transaction->name,
                         'category_name' => ucwords($transaction->category->name),
+                        'account_name' => ucwords($transaction->account->name),
                         'transactionDate' => date('d/m/Y', strtotime($transaction->transaction_date)),
                         'amount' => $transaction->amount,
                         'transactionType' => $transaction->type ? 'in' : 'out',
