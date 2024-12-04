@@ -1,14 +1,17 @@
+import AccountForm from "@/Components/Account/AccountForm";
 import BottomSheet from "@/Components/BottomSheet";
+import PrimaryButton from "@/Components/PrimaryButton";
 import Toast from "@/Components/Toast";
 import TransactionCard from "@/Components/Transactions/TransactionCard";
 import TransactionDetail from "@/Components/Transactions/TransactionDetail";
 import TransactionEmpty from "@/Components/Transactions/TransactionEmpty";
 import TransactionForm from "@/Components/Transactions/TransactionForm";
 import { useModalHook } from "@/Helpers/modalHook";
-import { useTransactionHook } from "@/Helpers/TransactionModalHook";
 import AppLayout from "@/Layouts/AppLayout";
+import { Link } from "@inertiajs/react";
+import { Pencil, Trash, Trash2 } from "lucide-react";
 
-const Transaction = ({ transactions, categories, accounts }) => {
+const TransactionView = ({ transactions, accounts, categories }) => {
   const {
     isModalOpen: isTransactionModalOpen,
     selectedItem: selectedTransaction,
@@ -29,29 +32,33 @@ const Transaction = ({ transactions, categories, accounts }) => {
         <Toast message={toastMessage} type={toastType} show={showToast} />
       )}
 
-      <div className="flex items-center justify-center">
+      <div className="flex flex-col items-center justify-center space-y-2">
         <h2 className="text-center text-3xl sm:text-4xl">
-          Transactions History
+          {transactions.name}
         </h2>
       </div>
       <div className="mt-10 flex flex-col space-y-2">
-        {transactions.length > 0 ? (
-          transactions.map((data, key) => (
-            <TransactionCard
-              data={data}
-              key={key}
-              onClick={() =>
-                openTransactionModal(
-                  "Transaction Detail",
-                  data,
-                  "transaction-detail",
-                )
-              }
-            />
-          ))
-        ) : (
-          <TransactionEmpty />
-        )}
+        <TransactionDetail data={transactions} />
+        <PrimaryButton
+          type="button"
+          className=""
+          variant="info"
+          onClick={() =>
+            openTransactionModal(
+              "Edit Transaction",
+              transactions,
+              `transaction-${transactions.transactionType}`,
+              true,
+            )
+          }
+        >
+          <Pencil size={16} />
+          edit transaksi
+        </PrimaryButton>
+        <PrimaryButton type="button" className="" variant="error">
+          <Trash size={16} />
+          hapus transaksi
+        </PrimaryButton>
       </div>
 
       {/* Transaction Modal */}
@@ -60,7 +67,7 @@ const Transaction = ({ transactions, categories, accounts }) => {
         onClose={closeTransactionModal}
         title={transactionModalTitle}
       >
-        {isTransactionForm ? (
+        {isTransactionForm && (
           <TransactionForm
             accounts={accounts}
             categories={categories}
@@ -68,23 +75,16 @@ const Transaction = ({ transactions, categories, accounts }) => {
             transactionData={selectedTransaction}
             closeModal={closeTransactionModal}
           />
-        ) : (
-          selectedTransaction && (
-            <TransactionDetail
-              data={selectedTransaction}
-              triggerModal={openTransactionModal}
-            />
-          )
         )}
       </BottomSheet>
     </>
   );
 };
 
-Transaction.layout = (page) => (
-  <AppLayout title="Transactions" useNavHead={false}>
+TransactionView.layout = (page) => (
+  <AppLayout title="Detail Transaksi" useNavHead={false}>
     {page}
   </AppLayout>
 );
 
-export default Transaction;
+export default TransactionView;

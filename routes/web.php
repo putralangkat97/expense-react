@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
         ->name('transaction.')
         ->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::get('/{id}/view', 'index')->name('view');
             Route::post('/store', 'store')->name('store');
             Route::patch('/{id}/update', 'update')->name('update');
         });

@@ -5,11 +5,10 @@ const BottomSheet = ({
   onClose,
   title,
   children,
-  position = 'modal-bottom',
 }) => {
   return (
     <dialog
-      className={`modal ${position} ${isOpen ? 'modal-open' : ''}`}
+      className={`modal modal-bottom md:modal-middle ${isOpen ? 'modal-open' : ''}`}
       open={isOpen}
     >
       <div className="modal-box mx-auto max-w-md">

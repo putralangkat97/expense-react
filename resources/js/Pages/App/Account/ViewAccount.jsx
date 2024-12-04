@@ -1,39 +1,39 @@
-import AccountCard from '@/Components/Account/AccountCard';
-import AccountForm from '@/Components/Account/AccountForm';
-import BottomSheet from '@/Components/BottomSheet';
-import PrimaryButton from '@/Components/PrimaryButton';
-import Toast from '@/Components/Toast';
-import TransactionCard from '@/Components/Transactions/TransactionCard';
-import TransactionDetail from '@/Components/Transactions/TransactionDetail';
-import TransactionEmpty from '@/Components/Transactions/TransactionEmpty';
-import TransactionForm from '@/Components/Transactions/TransactionForm';
-import { useAccountHook } from '@/Helpers/AccountModalHook';
-import { useTransactionHook } from '@/Helpers/TransactionModalHook';
-import AppLayout from '@/Layouts/AppLayout';
-import { Link } from '@inertiajs/react';
-import { Pencil } from 'lucide-react';
+import AccountCard from "@/Components/Account/AccountCard";
+import AccountForm from "@/Components/Account/AccountForm";
+import BottomSheet from "@/Components/BottomSheet";
+import PrimaryButton from "@/Components/PrimaryButton";
+import Toast from "@/Components/Toast";
+import TransactionCard from "@/Components/Transactions/TransactionCard";
+import TransactionDetail from "@/Components/Transactions/TransactionDetail";
+import TransactionEmpty from "@/Components/Transactions/TransactionEmpty";
+import TransactionForm from "@/Components/Transactions/TransactionForm";
+import { useAccountHook } from "@/Helpers/AccountModalHook";
+import { useModalHook } from "@/Helpers/modalHook";
+import AppLayout from "@/Layouts/AppLayout";
+import { Link } from "@inertiajs/react";
+import { Pencil } from "lucide-react";
 
 const AccountView = ({ account, transactions, accounts, categories }) => {
   const {
-    isModalOpen,
-    selectedTransaction,
-    modalTitle,
-    isForm,
+    isModalOpen: isTransactionModalOpen,
+    selectedItem: selectedTransaction,
+    modalTitle: transactionModalTitle,
+    isForm: isTransactionForm,
     categoryType,
     toastMessage,
     toastType,
     showToast,
-    openModal,
-    closeModal,
-  } = useTransactionHook();
+    openModal: openTransactionModal,
+    closeModal: closeTransactionModal,
+  } = useModalHook({ type: "transaction" });
 
   const {
-    openAccountModal,
-    closeAccountModal,
-    isAccountForm,
-    isAccountModalOpen,
-    accountModalTitle,
-  } = useAccountHook();
+    isModalOpen: isAccountModalOpen,
+    modalTitle: accountModalTitle,
+    isForm: isAccountForm,
+    openModal: openAccountModal,
+    closeModal: closeAccountModal,
+  } = useModalHook({ type: "account" });
 
   return (
     <>
@@ -52,7 +52,7 @@ const AccountView = ({ account, transactions, accounts, categories }) => {
           variant="info"
           size="sm"
           onClick={() =>
-            openAccountModal('Edit Account', account, 'account-edit', true)
+            openAccountModal("Edit Account", account, "account-edit", true)
           }
         >
           <Pencil size={16} />
@@ -70,7 +70,7 @@ const AccountView = ({ account, transactions, accounts, categories }) => {
           </h2>
           {transactions.length > 0 && (
             <Link
-              href={route('transaction.index')}
+              href={route("transaction.index")}
               className="transition-colors duration-200 hover:link hover:link-primary"
             >
               View all
@@ -84,7 +84,11 @@ const AccountView = ({ account, transactions, accounts, categories }) => {
                 data={data}
                 key={key}
                 onClick={() =>
-                  openModal('Transaction Detail', data, 'transaction-detail')
+                  openTransactionModal(
+                    "Transaction Detail",
+                    data,
+                    "transaction-detail",
+                  )
                 }
               />
             ))
@@ -104,21 +108,25 @@ const AccountView = ({ account, transactions, accounts, categories }) => {
         )}
       </BottomSheet>
 
-      <BottomSheet isOpen={isModalOpen} onClose={closeModal} title={modalTitle}>
-        {isForm ? (
+      {/* Transaction Modal */}
+      <BottomSheet
+        isOpen={isTransactionModalOpen}
+        onClose={closeTransactionModal}
+        title={transactionModalTitle}
+      >
+        {isTransactionForm ? (
           <TransactionForm
             accounts={accounts}
             categories={categories}
             categoryType={categoryType}
             transactionData={selectedTransaction}
-            closeModal={closeModal}
-            accountView
+            closeModal={closeTransactionModal}
           />
         ) : (
           selectedTransaction && (
             <TransactionDetail
               data={selectedTransaction}
-              triggerModal={openModal}
+              triggerModal={openTransactionModal}
             />
           )
         )}

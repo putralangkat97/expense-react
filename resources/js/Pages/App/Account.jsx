@@ -1,26 +1,26 @@
-import AccountCard from '@/Components/Account/AccountCard';
-import AccountDetail from '@/Components/Account/AccountDetail';
-import AccountEmpty from '@/Components/Account/AccountEmpty';
-import AccountForm from '@/Components/Account/AccountForm';
-import BottomSheet from '@/Components/BottomSheet';
-import PrimaryButton from '@/Components/PrimaryButton';
-import Toast from '@/Components/Toast';
-import { useAccountHook } from '@/Helpers/AccountModalHook';
-import AppLayout from '@/Layouts/AppLayout';
-import { CirclePlus } from 'lucide-react';
+import AccountCard from "@/Components/Account/AccountCard";
+import AccountDetail from "@/Components/Account/AccountDetail";
+import AccountEmpty from "@/Components/Account/AccountEmpty";
+import AccountForm from "@/Components/Account/AccountForm";
+import BottomSheet from "@/Components/BottomSheet";
+import PrimaryButton from "@/Components/PrimaryButton";
+import Toast from "@/Components/Toast";
+import { useModalHook } from "@/Helpers/modalHook";
+import AppLayout from "@/Layouts/AppLayout";
+import { CirclePlus } from "lucide-react";
 
 const Account = ({ accounts }) => {
   const {
-    selectedAccount,
-    isAccountModalOpen,
-    accountModalTitle,
-    isAccountForm,
-    accountToastMessage,
-    accountToastType,
-    showAccountToast,
-    openAccountModal,
-    closeAccountModal,
-  } = useAccountHook();
+    isModalOpen: isAccountModalOpen,
+    selectedItem: selectedAccount,
+    modalTitle: accountModalTitle,
+    isForm: isAccountForm,
+    toastMessage: accountToastMessage,
+    toastType: accountToastType,
+    showToast: showAccountToast,
+    openModal: openAccountModal,
+    closeModal: closeAccountModal,
+  } = useModalHook({ type: "account" });
 
   return (
     <>
@@ -43,7 +43,7 @@ const Account = ({ accounts }) => {
           variant="success"
           size="sm"
           onClick={() =>
-            openAccountModal('Create Account', null, 'account-create', true)
+            openAccountModal("Create Account", null, "account-create", true)
           }
         >
           <CirclePlus size={16} />
@@ -54,7 +54,7 @@ const Account = ({ accounts }) => {
         {accounts.length > 0 ? (
           accounts.map((acc, key) => <AccountCard data={acc} key={key} />)
         ) : (
-          <AccountEmpty />
+          <AccountEmpty title="No account" />
         )}
       </div>
 

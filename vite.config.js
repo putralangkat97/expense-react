@@ -11,4 +11,9 @@ export default defineConfig({
         }),
         react(),
     ],
+    server: {
+        hmr: {
+            host: '127.0.0.1',
+        },
+    },
 });

@@ -1,87 +1,64 @@
-import ConfigHelper from '@/Helpers/ConfigHelpers.js';
-import { Pencil } from 'lucide-react';
-import CategoryIcon from '../Category/CategoryIcon';
-import InputLabel from '../InputLabel';
-import PrimaryButton from '../PrimaryButton';
+import ConfigHelper from "@/Helpers/ConfigHelpers.js";
+import { Pencil } from "lucide-react";
+import CategoryIcon from "../Category/CategoryIcon";
+import InputLabel from "../InputLabel";
+import PrimaryButton from "../PrimaryButton";
 
-const TransactionDetail = ({ data, triggerModal }) => {
+const TransactionDetail = ({ data }) => {
   const configHelper = new ConfigHelper();
   return (
-    <div className="grid grid-cols-1 gap-2">
-      <div>
-        <InputLabel
-          value={'Transaction Name'}
-          className="text-sm font-medium sm:text-lg"
-        />
-        <h2 className="-mt-1 text-gray-600">{data.name}</h2>
-      </div>
-      <div>
-        <InputLabel
-          value={'Transaction Date'}
-          className="text-sm font-medium sm:text-lg"
-        />
-        <h2 className="-mt-1 text-gray-600">{data.transactionDate}</h2>
-      </div>
-      <div>
-        <InputLabel
-          value={'Category'}
-          className="text-sm font-medium sm:text-lg"
-        />
-        <div className="-mt-1 flex items-center space-x-1 text-gray-600">
-          <div>
-            <CategoryIcon category={data.category_name} size={18} />
-          </div>
-          <div className="">{data.category_name}</div>
+    <div className="card card-compact border-x-2 border-t-2 border-b-4 border-primary">
+      <div className="card-body grid grid-cols-2 gap-6">
+        <div>
+          <InputLabel
+            value={"Transaction Name"}
+            className="text-sm font-medium sm:text-lg"
+          />
+          <h2 className="text-gray-600">{data.name}</h2>
         </div>
-      </div>
-      <div>
-        <InputLabel
-          value={'Amount'}
-          className="text-sm font-medium sm:text-lg"
-        />
-        <h2 className="-mt-1 text-gray-600">
-          {data.transactionType === 'in' ? '' : '-'}
-          {configHelper.formatCurrency(data.amount)}
-        </h2>
-      </div>
-      <div>
-        <InputLabel
-          value={'Account'}
-          className="text-sm font-medium sm:text-lg"
-        />
-        <h2 className="-mt-1 text-gray-600">{data.account_name}</h2>
-      </div>
-      <div>
-        <InputLabel value={'Note'} className="text-sm font-medium sm:text-lg" />
-        <h2 className="-mt-1 text-gray-600">{data.note || '-'}</h2>
-      </div>
-      <div className="col-span-2 mt-4">
-        <PrimaryButton
-          type="button"
-          className="btn-block"
-          variant="info"
-          size="sm"
-          onClick={() =>
-            triggerModal(
-              'Edit Transaction',
-              data,
-              `transaction-${data.transactionType}`,
-              true,
-            )
-          }
-        >
-          <Pencil size={16} />
-          Edit
-        </PrimaryButton>
-        {/* <SecondaryButton
-          type="button"
-          variant="error"
-          className="btn-block mt-2"
-          size="sm"
-        >
-          <Trash size={16} />
-          Delete
-        </SecondaryButton> */}
+        <div>
+          <InputLabel
+            value={"Transaction Date"}
+            className="text-sm font-medium sm:text-lg"
+          />
+          <h2 className="text-gray-600">{data.transactionDate}</h2>
+        </div>
+        <div>
+          <InputLabel
+            value={"Category"}
+            className="text-sm font-medium sm:text-lg"
+          />
+          <div className="flex items-center space-x-1 text-gray-600">
+            <div>
+              <CategoryIcon category={data.category_name} size={18} />
+            </div>
+            <div className="">{data.category_name}</div>
+          </div>
+        </div>
+        <div>
+          <InputLabel
+            value={"Amount"}
+            className="text-sm font-medium sm:text-lg"
+          />
+          <h2 className="text-gray-600">
+            {data.transactionType === "in" ? "" : "-"}
+            {configHelper.formatCurrency(data.amount)}
+          </h2>
+        </div>
+        <div>
+          <InputLabel
+            value={"Account"}
+            className="text-sm font-medium sm:text-lg"
+          />
+          <h2 className="text-gray-600">{data.account_name}</h2>
+        </div>
+        <div>
+          <InputLabel
+            value={"Note"}
+            className="text-sm font-medium sm:text-lg"
+          />
+          <h2 className="text-gray-600">{data.note || "-"}</h2>
+        </div>
       </div>
     </div>
   );

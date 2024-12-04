@@ -1,9 +1,9 @@
-import NavHead from '@/Components/Home/NavHead';
-import { Head, usePage } from '@inertiajs/react';
-import FooterNav from './FooterNav';
+import NavHead from "@/Components/Home/NavHead";
+import { Head, usePage } from "@inertiajs/react";
+import FooterNav from "./FooterNav";
 
 export default function AppLayout({
-  title = 'App',
+  title = "App",
   children,
   useNavHead = true,
 }) {
@@ -13,12 +13,12 @@ export default function AppLayout({
     <>
       <Head title={title} />
       <div className="min-h-screen bg-base-100">
-        <div className="mx-auto w-full px-6 pb-36 pt-10 sm:max-w-md">
+        <div className="mx-auto w-full pb-36 pt-16 px-6 sm:max-w-md">
           {/* header nav */}
           {useNavHead && <NavHead user={user} />}
 
           {/* main content */}
-          <main className={`${useNavHead ? 'mt-10' : ''}`}>{children}</main>
+          <main className={`${useNavHead ? "mt-10" : ""}`}>{children}</main>
 
           {/* footer nav */}
           <FooterNav />

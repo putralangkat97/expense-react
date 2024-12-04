@@ -15,7 +15,7 @@ use Inertia\Inertia;
 
 class TransactionController extends Controller
 {
-    public function index()
+    public function index(string|int $id = null)
     {
         $current_user = Auth::user();
 
@@ -40,8 +40,13 @@ class TransactionController extends Controller
         });
 
         $transactions = Transaction::with(['category', 'account'])
-            ->where('user_id', $current_user->id)
-            ->orderBy('transaction_date', 'desc')
+            ->where('user_id', $current_user->id);
+
+        if ($id) {
+            $transactions = $transactions->where('id', $id);
+        }
+
+        $transactions = $transactions->orderBy('transaction_date', 'desc')
             ->get()->map(function ($transaction) {
                 return [
                     'id' => $transaction->id,
@@ -57,6 +62,13 @@ class TransactionController extends Controller
                 ];
             });
 
+        if ($id) {
+            return Inertia::render('App/Transaction/ViewTransaction', [
+                'transactions' => $transactions[0],
+                'categories' => $categories_mapped,
+                'accounts' => $account_mapped,
+            ]);
+        }
         return Inertia::render('App/Transaction', [
             'transactions' => $transactions,
             'categories' => $categories_mapped,

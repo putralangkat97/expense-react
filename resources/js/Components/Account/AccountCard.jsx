@@ -1,5 +1,5 @@
-import ConfigHelper from '@/Helpers/ConfigHelpers.js';
-import { Link } from '@inertiajs/react';
+import ConfigHelper from "@/Helpers/ConfigHelpers.js";
+import { Link } from "@inertiajs/react";
 
 const AccountCard = ({ data }) => {
   const configHelper = new ConfigHelper();
@@ -7,8 +7,8 @@ const AccountCard = ({ data }) => {
   return (
     <Link
       as="button"
-      href={route('account.view', data.id)}
-      className="btn card card-compact mx-auto h-40 w-full border-x-2 border-b-4 border-t-2 border-primary bg-base-200"
+      href={route("account.view", data.id)}
+      className="card card-compact mx-auto h-40 w-full border-x-2 border-b-4 border-t-2 border-primary bg-base-200"
     >
       <div className="card-body flex w-full flex-row justify-between">
         <div className="flex flex-col items-start justify-end">
