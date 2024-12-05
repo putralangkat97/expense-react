@@ -18,63 +18,51 @@ class AccountController extends Controller
     {
         $current_user = Auth::user();
         $accounts = Account::where('user_id', $current_user->id);
+        $account_mapped = $accounts->get()->map(fn($data) => [
+            'id' => $data->id,
+            'name' => $data->name,
+            'balance' => $data->balance,
+            'colour' => $data->colour,
+        ]);
+        $transactions = Transaction::with(['category', 'account'])
+            ->where('user_id', $current_user->id)
+            ->where('account_id', $id)
+            ->orderBy('transaction_date', 'desc')
+            ->get()->map(function ($transaction) {
+                return [
+                    'id' => $transaction->id,
+                    'name' => $transaction->name,
+                    'category_name' => ucwords($transaction->category->name),
+                    'account_name' => ucwords($transaction->account->name),
+                    'transactionDate' => date('d/m/Y', strtotime($transaction->transaction_date)),
+                    'amount' => $transaction->amount,
+                    'transactionType' => $transaction->type ? 'in' : 'out',
+                    'accountId' => $transaction->account_id,
+                    'categoryId' => $transaction->category_id,
+                    'note' => $transaction->note,
+                ];
+            });
+
+        $categories = Category::orderBy('name')
+            ->get();
+        $categories_mapped = $categories->map(function ($data) {
+            return [
+                'id' => $data->id,
+                'name' => ucwords($data->name),
+                'type' => $data->type,
+            ];
+        });
+
         if ($id) {
-            $account = $accounts->where('id', $id)->first();
-            $account_mapped = $accounts->get()->map(function ($data) {
-                return [
-                    'id' => $data->id,
-                    'name' => $data->name,
-                    'balance' => $data->balance,
-                    'colour' => $data->colour,
-                ];
-            });
-            $transactions = Transaction::with(['category', 'account'])
-                ->where('user_id', $current_user->id)
-                ->where('account_id', $id)
-                ->orderBy('transaction_date', 'desc')
-                ->get()->map(function ($transaction) {
-                    return [
-                        'id' => $transaction->id,
-                        'name' => $transaction->name,
-                        'category_name' => ucwords($transaction->category->name),
-                        'account_name' => ucwords($transaction->account->name),
-                        'transactionDate' => date('d/m/Y', strtotime($transaction->transaction_date)),
-                        'amount' => $transaction->amount,
-                        'transactionType' => $transaction->type ? 'in' : 'out',
-                        'accountId' => $transaction->account_id,
-                        'categoryId' => $transaction->category_id,
-                        'note' => $transaction->note,
-                    ];
-                });
-
-            $categories = Category::orderBy('name')
-                ->get();
-            $categories_mapped = $categories->map(function ($data) {
-                return [
-                    'id' => $data->id,
-                    'name' => ucwords($data->name),
-                    'type' => $data->type,
-                ];
-            });
-
             return Inertia::render('App/Account/ViewAccount', [
-                'account' => $account,
+                'account' => $accounts->where('id', $id)->first(),
                 'transactions' => $transactions,
                 'accounts' => $account_mapped,
                 'categories' => $categories_mapped,
             ]);
         } else {
-            $accounts = $accounts->get()->map(function ($data) {
-                return [
-                    'id' => $data->id,
-                    'name' => $data->name,
-                    'balance' => $data->balance,
-                    'colour' => $data->colour,
-                ];
-            });
-
             return Inertia::render('App/Account', [
-                'accounts' => $accounts,
+                'accounts' => $account_mapped,
             ]);
         }
     }
