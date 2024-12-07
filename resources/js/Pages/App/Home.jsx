@@ -64,30 +64,32 @@ const Home = ({ totalBalance, transactions, categories, accounts }) => {
       )}
 
       {/* Balance */}
-      <div className="card card-compact border-x-2 border-b-4 border-t-2 border-primary bg-base-200">
-        <div className="card-body">
-          <TotalBalance totalBalance={totalBalance} />
-          <Divider className={"my-2"} />
-          <TransactionButton triggerModal={openTransactionModal} />
+      <div className="px-6">
+        <div className="card card-compact border-x-2 border-b-4 border-t-2 border-primary bg-base-200">
+          <div className="card-body">
+            <TotalBalance totalBalance={totalBalance} />
+            <Divider className={"my-2"} />
+            <TransactionButton triggerModal={openTransactionModal} />
+          </div>
         </div>
       </div>
 
       {/* Account List */}
-      <div className="mt-6">
-        <div className="flex items-end justify-between">
+      <div className="mt-10">
+        <div className="flex items-end justify-between px-6">
           <h2 className="text-xl font-bold text-neutral sm:text-2xl">
-            Accounts
+            Akun
           </h2>
           {accounts.length > 0 && (
             <Link
               href={route("account.index")}
               className="transition-colors duration-200 hover:link hover:link-primary"
             >
-              View all
+              Lihat semua
             </Link>
           )}
         </div>
-        <div className="mt-4">
+        <div className="mt-3 px-6">
           {accounts.length > 0 ? (
             <Swiper
               grabCursor={true}
@@ -111,21 +113,21 @@ const Home = ({ totalBalance, transactions, categories, accounts }) => {
 
       {/* Recent transactions */}
       {accounts.length > 0 && (
-        <div className="mt-6">
+        <div className="mt-10 px-6">
           <div className="flex items-end justify-between">
             <h2 className="text-xl font-bold text-neutral sm:text-2xl">
-              Recent Transactions
+              Transaksi terakhir
             </h2>
             {accounts.length > 0 && transactions.length > 0 && (
               <Link
                 href={route("transaction.index")}
                 className="transition-colors duration-200 hover:link hover:link-primary"
               >
-                View all
+                Lihat semua
               </Link>
             )}
           </div>
-          <div className="mt-4 flex flex-col space-y-2">
+          <div className="mt-3 flex flex-col space-y-2">
             {transactions.length > 0 ? (
               transactions.map((data, key) => (
                 <TransactionCard

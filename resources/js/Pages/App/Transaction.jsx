@@ -29,29 +29,31 @@ const Transaction = ({ transactions, categories, accounts }) => {
         <Toast message={toastMessage} type={toastType} show={showToast} />
       )}
 
-      <div className="flex items-center justify-center">
-        <h2 className="text-center text-3xl sm:text-4xl">
-          Transactions History
-        </h2>
-      </div>
-      <div className="mt-10 flex flex-col space-y-2">
-        {transactions.length > 0 ? (
-          transactions.map((data, key) => (
-            <TransactionCard
-              data={data}
-              key={key}
-              onClick={() =>
-                openTransactionModal(
-                  "Transaction Detail",
-                  data,
-                  "transaction-detail",
-                )
-              }
-            />
-          ))
-        ) : (
-          <TransactionEmpty />
-        )}
+      <div className="px-6">
+        <div className="flex items-center justify-center">
+          <h2 className="text-center text-3xl sm:text-4xl">
+            Catatan Transaksi
+          </h2>
+        </div>
+        <div className="mt-10 flex flex-col space-y-2">
+          {transactions.length > 0 ? (
+            transactions.map((data, key) => (
+              <TransactionCard
+                data={data}
+                key={key}
+                onClick={() =>
+                  openTransactionModal(
+                    "Transaction Detail",
+                    data,
+                    "transaction-detail",
+                  )
+                }
+              />
+            ))
+          ) : (
+            <TransactionEmpty />
+          )}
+        </div>
       </div>
 
       {/* Transaction Modal */}

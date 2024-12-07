@@ -32,33 +32,35 @@ const TransactionView = ({ transactions, accounts, categories }) => {
         <Toast message={toastMessage} type={toastType} show={showToast} />
       )}
 
-      <div className="flex flex-col items-center justify-center space-y-2">
-        <h2 className="text-center text-3xl sm:text-4xl">
-          {transactions.name}
-        </h2>
-      </div>
-      <div className="mt-10 flex flex-col space-y-2">
-        <TransactionDetail data={transactions} />
-        <PrimaryButton
-          type="button"
-          className=""
-          variant="info"
-          onClick={() =>
-            openTransactionModal(
-              "Edit Transaction",
-              transactions,
-              `transaction-${transactions.transactionType}`,
-              true,
-            )
-          }
-        >
-          <Pencil size={16} />
-          edit transaksi
-        </PrimaryButton>
-        <PrimaryButton type="button" className="" variant="error">
-          <Trash size={16} />
-          hapus transaksi
-        </PrimaryButton>
+      <div className="px-6">
+        <div className="flex flex-col items-center justify-center space-y-2">
+          <h2 className="text-center text-3xl sm:text-4xl">
+            {transactions.name}
+          </h2>
+        </div>
+        <div className="mt-10 flex flex-col space-y-2">
+          <TransactionDetail data={transactions} />
+          <PrimaryButton
+            type="button"
+            className=""
+            variant="info"
+            onClick={() =>
+              openTransactionModal(
+                "Edit Transaction",
+                transactions,
+                `transaction-${transactions.transactionType}`,
+                true,
+              )
+            }
+          >
+            <Pencil size={16} />
+            edit transaksi
+          </PrimaryButton>
+          {/* <PrimaryButton type="button" className="" variant="error">
+            <Trash size={16} />
+            hapus transaksi
+          </PrimaryButton> */}
+        </div>
       </div>
 
       {/* Transaction Modal */}

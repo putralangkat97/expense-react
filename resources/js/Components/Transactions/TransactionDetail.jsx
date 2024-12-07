@@ -3,6 +3,7 @@ import { Pencil } from "lucide-react";
 import CategoryIcon from "../Category/CategoryIcon";
 import InputLabel from "../InputLabel";
 import PrimaryButton from "../PrimaryButton";
+import { Link } from "@inertiajs/react";
 
 const TransactionDetail = ({ data }) => {
   const configHelper = new ConfigHelper();
@@ -11,22 +12,22 @@ const TransactionDetail = ({ data }) => {
       <div className="card-body grid grid-cols-2 gap-6">
         <div>
           <InputLabel
-            value={"Transaction Name"}
-            className="text-sm font-medium sm:text-lg"
+            value={"Nama transaksi"}
+            className="text-sm font-bold sm:text-lg"
           />
           <h2 className="text-gray-600">{data.name}</h2>
         </div>
         <div>
           <InputLabel
-            value={"Transaction Date"}
-            className="text-sm font-medium sm:text-lg"
+            value={"Tanggal transaksi"}
+            className="text-sm font-bold sm:text-lg"
           />
           <h2 className="text-gray-600">{data.transactionDate}</h2>
         </div>
         <div>
           <InputLabel
-            value={"Category"}
-            className="text-sm font-medium sm:text-lg"
+            value={"Kategori"}
+            className="text-sm font-bold sm:text-lg"
           />
           <div className="flex items-center space-x-1 text-gray-600">
             <div>
@@ -37,8 +38,8 @@ const TransactionDetail = ({ data }) => {
         </div>
         <div>
           <InputLabel
-            value={"Amount"}
-            className="text-sm font-medium sm:text-lg"
+            value={"Jumlah"}
+            className="text-sm font-bold sm:text-lg"
           />
           <h2 className="text-gray-600">
             {data.transactionType === "in" ? "" : "-"}
@@ -47,15 +48,20 @@ const TransactionDetail = ({ data }) => {
         </div>
         <div>
           <InputLabel
-            value={"Account"}
-            className="text-sm font-medium sm:text-lg"
+            value={"Akun"}
+            className="text-sm font-bold sm:text-lg"
           />
-          <h2 className="text-gray-600">{data.account_name}</h2>
+          <Link
+            href={route("account.view", data.accountId)}
+            className="text-gray-600 hover:underline"
+          >
+            {data.account_name}
+          </Link>
         </div>
         <div>
           <InputLabel
-            value={"Note"}
-            className="text-sm font-medium sm:text-lg"
+            value={"Catatan"}
+            className="text-sm font-bold sm:text-lg"
           />
           <h2 className="text-gray-600">{data.note || "-"}</h2>
         </div>

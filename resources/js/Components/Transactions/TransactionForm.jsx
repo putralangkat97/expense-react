@@ -60,8 +60,8 @@ const TransactionForm = ({
       <div>
         <TextInput
           type="date"
-          placeholder="transaction date"
           className="mt-1 block w-full"
+          placeholder="tanggal"
           value={data.transactionDate}
           onChange={(e) => setData("transactionDate", e.target.value)}
         />
@@ -74,7 +74,7 @@ const TransactionForm = ({
           onChange={(e) => setData("accountId", e.target.value)}
         >
           <option value="" disabled>
-            Choose Account
+            Pilih Akun
           </option>
           {accounts.map((acc, key) => (
             <option key={key} value={acc.id}>
@@ -86,7 +86,7 @@ const TransactionForm = ({
       </div>
       <div>
         <TextInput
-          placeholder="transaction name"
+          placeholder="nama transaksi"
           className="mt-1 block w-full"
           value={data.name}
           onChange={(e) => setData("name", e.target.value)}
@@ -110,7 +110,7 @@ const TransactionForm = ({
           onChange={(e) => setData("categoryId", e.target.value)}
         >
           <option value="" disabled>
-            Category
+            Pilih Kategori
           </option>
           {categories
             .filter((category) => category.type === categoryType)
@@ -124,7 +124,7 @@ const TransactionForm = ({
       </div>
       <div>
         <TextInput
-          placeholder="note"
+          placeholder="catatan"
           className="mt-1 block w-full"
           value={data.note}
           onChange={(e) => setData("note", e.target.value)}

@@ -30,10 +30,10 @@ class ReportController extends Controller
         $month_export = Carbon::now()->month;
         $year_export = Carbon::now()->year;
 
-        $startOfWeek = Carbon::parse($current_date)->copy()->startOfWeek(Carbon::MONDAY);
-        $endOfWeek = Carbon::parse($current_date)->copy()->endOfWeek(Carbon::SUNDAY);
+        $start_of_week = Carbon::parse($current_date)->copy()->startOfWeek(Carbon::MONDAY);
+        $end_of_weekdays = Carbon::parse($current_date)->copy()->endOfWeek(Carbon::SUNDAY);
 
-        $days = CarbonPeriod::create($startOfWeek, $endOfWeek);
+        $days = CarbonPeriod::create($start_of_week, $end_of_weekdays);
         $labels = [];
 
         // Create an array to hold total amounts for expenses and income
@@ -48,21 +48,21 @@ class ReportController extends Controller
 
         // Fetch transactions for both types in a single query
         $transactions = Transaction::selectRaw('DATE(transaction_date) as date, SUM(CASE WHEN type = "0" THEN amount ELSE 0 END) as total_expense, SUM(CASE WHEN type = "1" THEN amount ELSE 0 END) as total_income')
-            ->whereBetween('transaction_date', [$startOfWeek, $endOfWeek])
+            ->whereBetween('transaction_date', [$start_of_week, $end_of_weekdays])
             ->where('user_id', Auth::user()->id)
             ->groupBy('date')
             ->get();
 
         // Initialize the totals for each day
         foreach ($labels as $day) {
-            $formatted_day = $startOfWeek->format('Y-m') . "-$day"; // Use current year and month
+            $formatted_day = $start_of_week->format('Y-m') . "-$day"; // Use current year and month
             $transaction = collect($transactions)->firstWhere('date', $formatted_day);
 
             $totalAmounts['expense'][] = $transaction ? $transaction['total_expense'] : 0;
             $totalAmounts['income'][] = $transaction ? $transaction['total_income'] : 0;
         }
         $label_chart = $labels;
-        $month = $startOfWeek->format('F');
+        $month = $start_of_week->format('F');
 
         return [
             'labels' => $label_chart,

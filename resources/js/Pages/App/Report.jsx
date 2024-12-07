@@ -59,11 +59,17 @@ const Report = ({ data }) => {
 
   return (
     <>
-      <div className="flex items-center justify-center">
-        <h2 className="text-center text-3xl sm:text-4xl">Report</h2>
+      <div className="px-6">
+        <div className="flex items-center justify-center">
+          <h2 className="text-center text-3xl sm:text-4xl">
+            Laporan Transaksi
+          </h2>
+        </div>
       </div>
-      <div className="mt-10 flex flex-col items-center justify-center space-y-2">
-        <Line options={options} data={chartData} />
+      <div className="px-2">
+        <div className="mt-10 flex flex-col items-center justify-center space-y-2">
+          <Line options={options} data={chartData} />
+        </div>
       </div>
     </>
   );

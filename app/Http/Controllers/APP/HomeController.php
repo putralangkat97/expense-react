@@ -52,14 +52,16 @@ class HomeController extends Controller
             ];
         });
 
-        $account_mapped = $accounts->get()->map(function ($data) {
-            return [
-                'id' => $data->id,
-                'name' => $data->name,
-                'balance' => $data->balance,
-                'colour' => $data->colour,
-            ];
-        });
+        $account_mapped = $accounts->orderBy('updated_at', 'desc')
+            ->get()
+            ->map(function ($data) {
+                return [
+                    'id' => $data->id,
+                    'name' => $data->name,
+                    'balance' => $data->balance,
+                    'colour' => $data->colour,
+                ];
+            });
 
         return Inertia::render('App/Home', [
             'totalBalance' => $sum_balance,

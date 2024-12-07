@@ -8,7 +8,7 @@ const TransactionEmpty = ({ ...props }) => {
     >
       <div className="card-body flex items-center justify-center">
         <div className="text-lg font-normal text-neutral-500">
-          No Transaction.
+          Tidak ada transaksi.
         </div>
       </div>
     </div>

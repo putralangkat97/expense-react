@@ -42,59 +42,59 @@ const AccountView = ({ account, transactions, accounts, categories }) => {
         <Toast message={toastMessage} type={toastType} show={showToast} />
       )}
 
-      <div className="flex flex-col items-center justify-center space-y-2">
-        <h2 className="text-center text-3xl sm:text-4xl">{account.name}</h2>
-      </div>
-      <div className="mt-10 flex justify-end">
-        <PrimaryButton
-          type="button"
-          className=""
-          variant="info"
-          size="sm"
-          onClick={() =>
-            openAccountModal("Edit Account", account, "account-edit", true)
-          }
-        >
-          <Pencil size={16} />
-        </PrimaryButton>
-      </div>
-      <div className="mt-2 flex flex-col space-y-2">
-        <AccountCard data={account} />
-      </div>
-
-      {/* Recent transactions */}
-      <div className="mt-6">
-        <div className="flex items-end justify-between">
-          <h2 className="text-xl font-bold text-neutral sm:text-2xl">
-            Recent Transactions
-          </h2>
-          {transactions.length > 0 && (
-            <Link
-              href={route("transaction.index")}
-              className="transition-colors duration-200 hover:link hover:link-primary"
-            >
-              View all
-            </Link>
-          )}
+      <div className="px-6">
+        <div className="flex flex-col items-center justify-center space-y-2">
+          <h2 className="text-center text-3xl sm:text-4xl">{account.name}</h2>
         </div>
-        <div className="mt-4 flex flex-col space-y-2">
-          {transactions.length > 0 ? (
-            transactions.map((data, key) => (
-              <TransactionCard
-                data={data}
-                key={key}
-                onClick={() =>
-                  openTransactionModal(
-                    "Transaction Detail",
-                    data,
-                    "transaction-detail",
-                  )
-                }
-              />
-            ))
-          ) : (
-            <TransactionEmpty />
-          )}
+        <div className="mt-10 flex flex-col space-y-2">
+          <AccountCard data={account} />
+          <PrimaryButton
+            type="button"
+            className=""
+            variant="info"
+            onClick={() =>
+              openAccountModal("Edit Akun", account, "account-edit", true)
+            }
+          >
+            <Pencil size={16} />
+            edit akun
+          </PrimaryButton>
+        </div>
+
+        {/* Recent transactions */}
+        <div className="mt-6">
+          <div className="flex items-end justify-between">
+            <h2 className="text-xl font-bold text-neutral sm:text-2xl">
+              Recent Transactions
+            </h2>
+            {transactions.length > 0 && (
+              <Link
+                href={route("transaction.index")}
+                className="transition-colors duration-200 hover:link hover:link-primary"
+              >
+                View all
+              </Link>
+            )}
+          </div>
+          <div className="mt-4 flex flex-col space-y-2">
+            {transactions.length > 0 ? (
+              transactions.map((data, key) => (
+                <TransactionCard
+                  data={data}
+                  key={key}
+                  onClick={() =>
+                    openTransactionModal(
+                      "Transaction Detail",
+                      data,
+                      "transaction-detail",
+                    )
+                  }
+                />
+              ))
+            ) : (
+              <TransactionEmpty />
+            )}
+          </div>
         </div>
       </div>
 

@@ -13,7 +13,7 @@ export default function AppLayout({
     <>
       <Head title={title} />
       <div className="min-h-screen bg-base-100">
-        <div className="mx-auto w-full pb-36 pt-16 px-6 sm:max-w-md">
+        <div className="mx-auto w-full pb-28 pt-16 sm:max-w-md">
           {/* header nav */}
           {useNavHead && <NavHead user={user} />}
 

@@ -15,42 +15,44 @@ const ProfileIndex = () => {
         <Toast message={toastMessage} type={toastType} show={showToast} />
       )}
 
-      <div className="card card-compact border-x-2 border-b-4 border-t-2 border-primary bg-base-100 p-3">
-        <div className="card-body">
-          <div className="flex flex-col space-y-8">
-            <Link
-              href={route("profile.edit-information")}
-              className="flex w-full items-center justify-between"
-            >
-              <div>Informasi Personal</div>
-              <ChevronRight size={20} />
-            </Link>
-            <Link
-              href={route("profile.edit-password")}
-              className="flex w-full items-center justify-between"
-            >
-              <div>Keamanan</div>
-              <ChevronRight size={20} />
-            </Link>
-            <Link
-              href={"#"}
-              className="flex w-full items-center justify-between"
-            >
-              <div>Setting</div>
-              <ChevronRight size={20} />
-            </Link>
+      <div className="px-6">
+        <div className="card card-compact border-x-2 border-b-4 border-t-2 border-primary bg-base-100 p-3">
+          <div className="card-body">
+            <div className="flex flex-col space-y-8">
+              <Link
+                href={route("profile.edit-information")}
+                className="flex w-full items-center justify-between"
+              >
+                <div>Informasi Personal</div>
+                <ChevronRight size={20} />
+              </Link>
+              <Link
+                href={route("profile.edit-password")}
+                className="flex w-full items-center justify-between"
+              >
+                <div>Keamanan</div>
+                <ChevronRight size={20} />
+              </Link>
+              <Link
+                href={"#"}
+                className="flex w-full items-center justify-between"
+              >
+                <div>Setting</div>
+                <ChevronRight size={20} />
+              </Link>
+            </div>
           </div>
         </div>
+        <Divider />
+        <Link
+          as="button"
+          method="post"
+          href={route("logout")}
+          className="btn btn-error btn-block border-x-2 border-b-4 border-t-2 border-red-700 hover:border-red-700 hover:bg-red-700 hover:text-base-100"
+        >
+          Logout
+        </Link>
       </div>
-      <Divider />
-      <Link
-        as="button"
-        method="post"
-        href={route("logout")}
-        className="btn btn-error btn-block border-x-2 border-b-4 border-t-2 border-red-700 hover:border-red-700 hover:bg-red-700 hover:text-base-100"
-      >
-        Logout
-      </Link>
     </>
   );
 };
