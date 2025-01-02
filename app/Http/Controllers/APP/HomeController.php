@@ -65,7 +65,7 @@ class HomeController extends Controller
             'categories' => $categories_mapped,
             'accounts' => $account_mapped,
             'transactions' => $transactions,
-            'frequencies' => FrequencyEnum::setToLocale(),
+            'frequencies' => FrequencyEnum::optionToIndonesia(),
         ]);
     }
 }
