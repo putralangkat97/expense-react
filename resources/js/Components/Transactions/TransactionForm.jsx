@@ -4,15 +4,19 @@ import InputError from "../InputError";
 import PrimaryButton from "../PrimaryButton";
 import SelectInput from "../SelectInput";
 import TextInput from "../TextInput";
+import Checkbox from "../Checkbox";
+import { useEffect, useState } from "react";
 
 const TransactionForm = ({
   accounts,
   categories,
   categoryType,
   transactionData = null,
+  frequencies,
   closeModal,
 }) => {
   const configHelper = new ConfigHelper();
+  console.log(transactionData)
   const { data, setData, post, patch, processing, errors, reset } = useForm({
     name: transactionData ? transactionData.name : "",
     accountId: transactionData ? transactionData.accountId : "",
@@ -23,6 +27,9 @@ const TransactionForm = ({
     amount: transactionData ? transactionData.amount : "",
     note: transactionData ? transactionData.note : "",
     transactionType: categoryType,
+    is_recurring: transactionData ? transactionData.is_recurring : false,
+    frequency: transactionData ? transactionData.frequency : false,
+    next_due_date: transactionData ? transactionData.next_due_date : "",
     transactionId: transactionData ? transactionData.id : null,
   });
 
@@ -35,22 +42,58 @@ const TransactionForm = ({
       "amount",
       "note",
       "type",
+      "is_recurring",
+      "frequency",
+      "next_due_date",
       "transactionId",
     );
     closeModal();
   };
+
+  const nextDueDateHelper = (start_date, freq) => {
+    const date = new Date(start_date);
+
+    switch (freq) {
+      case "daily":
+        date.setDate(date.getDate() + 1);
+        break;
+      case "weekly":
+        date.setDate(date.getDate() + 7);
+        break;
+      case "monthly":
+        date.setMonth(date.getMonth() + 1);
+        break;
+      case "yearly":
+        date.setFullYear(date.getFullYear() + 1);
+        break;
+    }
+
+    const year = date.getFullYear();
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const day = ("0" + date.getDate()).slice(-2);
+
+    return `${year}-${month}-${day}`;
+  };
+
+  useEffect(() => {
+    if (data.is_recurring) {
+      const freq = data.frequency;
+      const due_date = nextDueDateHelper(data.transactionDate, freq);
+      setData("next_due_date", due_date);
+    }
+  }, [data.frequency, data.is_recurring]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (transactionData) {
       patch(route("transaction.update", transactionData.id), {
         preserveScroll: true,
-        onFinish: resetForm,
+        onSuccess: resetForm,
       });
     } else {
       post(route("transaction.store"), {
         preserveScroll: true,
-        onFinish: resetForm,
+        onSuccess: resetForm,
       });
     }
   };
@@ -131,6 +174,53 @@ const TransactionForm = ({
         />
         <InputError message={errors.note} className="mt-1" />
       </div>
+      <div>
+        <label className="flex items-center">
+          <Checkbox
+            className="mt-1"
+            checked={data.is_recurring}
+            onChange={(e) => setData("is_recurring", e.target.checked)}
+          />
+          <span className="ms-2 text-gray-600">Transaksi berulang?</span>
+        </label>
+      </div>
+      {data.transactionDate && data.is_recurring ? (
+        <>
+          <div>
+            <SelectInput
+              className="mt-1 block w-full"
+              defaultValue={data.frequency}
+              onChange={(e) => setData("frequency", e.target.value)}
+            >
+              <option value="">Pilih durasi</option>
+              {frequencies.map((frequency, key) => (
+                <option key={key} value={frequency.key}>
+                  {frequency.value}
+                </option>
+              ))}
+            </SelectInput>
+            <InputError message={errors.categoryId} className="mt-1" />
+          </div>
+          <div>
+            <TextInput
+              type="date"
+              className={`mt-1 block w-full`}
+              placeholder="tanggal"
+              value={data.next_due_date}
+              disabled
+              onChange={(e) => setData("next_due_date", e.target.value)}
+            />
+            <InputError message={errors.next_due_date} className="mt-1" />
+          </div>
+        </>
+      ) : (
+        data.is_recurring && (
+          <InputError
+            message={"Pilih tanggal transaksi terlebih dahulu"}
+            className="mt-1"
+          />
+        )
+      )}
       <input type="hidden" value={data.transactionType} />
       {transactionData && <input type="hidden" value={data.transactionId} />}
       <div className="mt-2">

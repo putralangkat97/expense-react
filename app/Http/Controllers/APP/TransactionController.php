@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\APP;
 
 use App\Actions\AccountAction;
+use App\Enums\FrequencyEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Category;
@@ -58,6 +59,10 @@ class TransactionController extends Controller
                     'transactionType' => $transaction->type ? 'in' : 'out',
                     'accountId' => $transaction->account_id,
                     'categoryId' => $transaction->category_id,
+                    'is_recurring' => $transaction->is_recurring,
+                    'frequency_id' => FrequencyEnum::setToIndonesia($transaction->frequency),
+                    'frequency' => $transaction->frequency,
+                    'next_due_date' => date('d/m/Y', strtotime($transaction->next_due_date)),
                     'note' => $transaction->note,
                 ];
             });
@@ -67,12 +72,14 @@ class TransactionController extends Controller
                 'transactions' => $transactions[0],
                 'categories' => $categories_mapped,
                 'accounts' => $account_mapped,
+                'frequencies' => FrequencyEnum::optionToIndonesia(),
             ]);
         }
         return Inertia::render('App/Transaction', [
             'transactions' => $transactions,
             'categories' => $categories_mapped,
             'accounts' => $account_mapped,
+            'frequencies' => FrequencyEnum::optionToIndonesia(),
         ]);
     }
 
@@ -86,6 +93,9 @@ class TransactionController extends Controller
             'amount' => 'required|numeric',
             'note' => 'nullable',
             'transactionType' => 'required',
+            'is_recurring' => 'nullable',
+            'frequency' => 'required_if:is_recurring,true',
+            'next_due_date' => 'required_if:is_recurring,true',
         ]);
 
         if ($validated) {
@@ -97,18 +107,26 @@ class TransactionController extends Controller
                     DB::rollBack();
                 } else {
                     $date = $validated['transactionDate'] . '00:00:00';
-                    $format = Carbon::parse($date, 'UTC')
+                    $transaction_date_format = Carbon::parse($date, 'UTC')
                         ->timezone(config('app.timezone_name'))
                         ->toDateTimeString();
+                    if ($validated['is_recurring']) {
+                        $next_due_date_format = Carbon::parse($validated['next_due_date'], 'UTC')
+                            ->timezone(config('app.timezone_name'))
+                            ->toDateTimeString();
+                    }
                     $message = 'created';
                     $transaction->name = $validated['name'];
                     $transaction->type = $validated['transactionType'] == 'in' ?? 0;
-                    $transaction->transaction_date = $format;
+                    $transaction->transaction_date = $transaction_date_format;
                     $transaction->category_id = $validated['categoryId'];
                     $transaction->user_id = Auth::user()->id;
                     $transaction->account_id = $validated['accountId'];
                     $transaction->amount = $validated['amount'];
                     $transaction->note = $validated['note'];
+                    $transaction->is_recurring = $validated['is_recurring'] ?? false;
+                    $transaction->frequency = $validated['is_recurring'] ? $validated['frequency'] : null;
+                    $transaction->next_due_date = $validated['is_recurring'] ? $next_due_date_format : null;
                     $transaction->save();
                     $type = 'success';
                     $message = 'Transaction ' . $message . ' successfully';
@@ -135,6 +153,9 @@ class TransactionController extends Controller
             'amount' => 'required|numeric',
             'note' => 'nullable',
             'transactionType' => 'required',
+            'is_recurring' => 'nullable',
+            'frequency' => 'required_if:is_recurring,true',
+            'next_due_date' => 'required_if:is_recurring,true',
         ]);
 
         if ($validated) {
@@ -145,19 +166,27 @@ class TransactionController extends Controller
                 if (!$action->accountHelper($validated, $transaction, $id)) {
                     DB::rollBack();
                 } else {
-                    $date = $validated['transactionDate'] . '' . now()->toTimeString();
-                    $format = Carbon::parse($date, 'UTC')
+                    $date = $validated['transactionDate'] . '00:00:00';
+                    $transaction_date_format = Carbon::parse($date, 'UTC')
                         ->timezone(config('app.timezone_name'))
                         ->toDateTimeString();
+                    if ($validated['is_recurring']) {
+                        $next_due_date_format = Carbon::parse($validated['next_due_date'], 'UTC')
+                            ->timezone(config('app.timezone_name'))
+                            ->toDateTimeString();
+                    }
                     $message = 'updated';
                     $transaction->name = $validated['name'];
                     $transaction->type = $validated['transactionType'] == 'in' ?? 0;
-                    $transaction->transaction_date = $format;
+                    $transaction->transaction_date = $transaction_date_format;
                     $transaction->category_id = $validated['categoryId'];
                     $transaction->user_id = Auth::user()->id;
                     $transaction->account_id = $validated['accountId'];
                     $transaction->amount = $validated['amount'];
                     $transaction->note = $validated['note'];
+                    $transaction->is_recurring = $validated['is_recurring'] ?? false;
+                    $transaction->frequency = $validated['is_recurring'] ? $validated['frequency'] : null;
+                    $transaction->next_due_date = $validated['is_recurring'] ? $next_due_date_format : null;
                     $transaction->save();
                     $type = 'success';
                     $message = 'Transaction ' . $message . ' successfully';

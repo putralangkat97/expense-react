@@ -47,10 +47,7 @@ const TransactionDetail = ({ data }) => {
           </h2>
         </div>
         <div>
-          <InputLabel
-            value={"Akun"}
-            className="text-sm font-bold sm:text-lg"
-          />
+          <InputLabel value={"Akun"} className="text-sm font-bold sm:text-lg" />
           <Link
             href={route("account.view", data.accountId)}
             className="text-gray-600 hover:underline"
@@ -65,6 +62,24 @@ const TransactionDetail = ({ data }) => {
           />
           <h2 className="text-gray-600">{data.note || "-"}</h2>
         </div>
+        {data.is_recurring && (
+          <>
+            <div>
+              <InputLabel
+                value={"Transaksi Berulang"}
+                className="text-sm font-bold sm:text-lg"
+              />
+              <h2 className="text-gray-600">{data.frequency_id}</h2>
+            </div>
+            <div>
+              <InputLabel
+                value={"Transaksi selanjutnya"}
+                className="text-sm font-bold sm:text-lg"
+              />
+              <h2 className="text-gray-600">{data.next_due_date}</h2>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\APP;
 
-use App\Helpers\LocalDateFormat;
+use App\Enums\FrequencyEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Category;
 use App\Models\Transaction;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Number;
 use Inertia\Inertia;
 
 class HomeController extends Controller
@@ -68,6 +65,7 @@ class HomeController extends Controller
             'categories' => $categories_mapped,
             'accounts' => $account_mapped,
             'transactions' => $transactions,
+            'frequencies' => FrequencyEnum::setToLocale(),
         ]);
     }
 }

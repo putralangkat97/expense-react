@@ -65,14 +65,14 @@ const AccountView = ({ account, transactions, accounts, categories }) => {
         <div className="mt-6">
           <div className="flex items-end justify-between">
             <h2 className="text-xl font-bold text-neutral sm:text-2xl">
-              Recent Transactions
+              Transaksi terakhir
             </h2>
             {transactions.length > 0 && (
               <Link
                 href={route("transaction.index")}
                 className="transition-colors duration-200 hover:link hover:link-primary"
               >
-                View all
+                Lihat semua
               </Link>
             )}
           </div>

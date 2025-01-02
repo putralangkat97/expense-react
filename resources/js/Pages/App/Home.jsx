@@ -21,7 +21,13 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 
-const Home = ({ totalBalance, transactions, categories, accounts }) => {
+const Home = ({
+  totalBalance,
+  transactions,
+  categories,
+  accounts,
+  frequencies,
+}) => {
   const {
     isModalOpen: isTransactionModalOpen,
     selectedItem: selectedTransaction,
@@ -77,9 +83,7 @@ const Home = ({ totalBalance, transactions, categories, accounts }) => {
       {/* Account List */}
       <div className="mt-10">
         <div className="flex items-end justify-between px-6">
-          <h2 className="text-xl font-bold text-neutral sm:text-2xl">
-            Akun
-          </h2>
+          <h2 className="text-xl font-bold text-neutral sm:text-2xl">Akun</h2>
           {accounts.length > 0 && (
             <Link
               href={route("account.index")}
@@ -182,6 +186,7 @@ const Home = ({ totalBalance, transactions, categories, accounts }) => {
             categories={categories}
             categoryType={categoryType}
             transactionData={selectedTransaction}
+            frequencies={frequencies}
             closeModal={closeTransactionModal}
           />
         ) : (

@@ -11,7 +11,12 @@ import AppLayout from "@/Layouts/AppLayout";
 import { Link } from "@inertiajs/react";
 import { Pencil, Trash, Trash2 } from "lucide-react";
 
-const TransactionView = ({ transactions, accounts, categories }) => {
+const TransactionView = ({
+  transactions,
+  accounts,
+  categories,
+  frequencies,
+}) => {
   const {
     isModalOpen: isTransactionModalOpen,
     selectedItem: selectedTransaction,
@@ -75,6 +80,7 @@ const TransactionView = ({ transactions, accounts, categories }) => {
             categories={categories}
             categoryType={categoryType}
             transactionData={selectedTransaction}
+            frequencies={frequencies}
             closeModal={closeTransactionModal}
           />
         )}

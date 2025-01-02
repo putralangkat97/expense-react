@@ -27,7 +27,12 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('transactions', function (Blueprint $table) {
-            //
+            $table->dropColumn([
+                'is_recurring',
+                'frequency',
+                'next_due_date',
+                'end_due_date'
+            ]);
         });
     }
 };
