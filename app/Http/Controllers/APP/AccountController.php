@@ -6,24 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Category;
 use App\Models\Transaction;
+use App\Repositories\AccountRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Number;
 use Inertia\Inertia;
 
 class AccountController extends Controller
 {
+    public function __construct(protected AccountRepository $account_repository) {}
+
     public function index(string|int $id = null)
     {
         $current_user = Auth::user();
-        $accounts = Account::where('user_id', $current_user->id);
-        $account_mapped = $accounts->get()->map(fn($data) => [
-            'id' => $data->id,
-            'name' => $data->name,
-            'balance' => $data->balance,
-            'colour' => $data->colour,
-        ]);
         $transactions = Transaction::with(['category', 'account'])
             ->where('user_id', $current_user->id)
             ->where('account_id', $id)
@@ -53,75 +48,30 @@ class AccountController extends Controller
             ];
         });
 
+        $account_list = $this->account_repository->getAccounts();
         if ($id) {
             return Inertia::render('App/Account/ViewAccount', [
-                'account' => $accounts->where('id', $id)->first(),
+                'account' => $this->account_repository->getAccount($id),
                 'transactions' => $transactions,
-                'accounts' => $account_mapped,
+                'accounts' => $account_list['accounts'],
                 'categories' => $categories_mapped,
             ]);
         } else {
             return Inertia::render('App/Account', [
-                'accounts' => $account_mapped,
+                'accounts' => $account_list['accounts'],
             ]);
         }
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-            'balance' => 'required',
-        ]);
-
-        if ($validated) {
-            DB::beginTransaction();
-            try {
-                $account = new Account();
-                $account->name = $validated['name'];
-                $account->balance = $validated['balance'];
-                $account->user_id = Auth::user()->id;
-                $account->save();
-                $type = 'success';
-                $message = 'Account created successfully';
-                DB::commit();
-            } catch (\Exception $e) {
-                $type = 'error';
-                $message = 'Internal server error';
-                info($e->getMessage());
-                DB::rollBack();
-            }
-
-            session()->flash($type, $message);
-        }
+        $account_create = $this->account_repository->createAccount($request);
+        session()->flash($account_create['type'], $account_create['message']);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $account_id)
     {
-        $validated = $request->validate([
-            'name' => 'required',
-            'balance' => 'required',
-        ]);
-
-        if ($validated) {
-            DB::beginTransaction();
-            try {
-                $account = Account::findOrFail($id);
-                $account->name = $validated['name'];
-                $account->balance = $validated['balance'];
-                $account->user_id = Auth::user()->id;
-                $account->save();
-                $type = 'success';
-                $message = 'Account updated successfully';
-                DB::commit();
-            } catch (\Exception $e) {
-                $type = 'error';
-                $message = 'Internal server error';
-                info($e->getMessage());
-                DB::rollBack();
-            }
-
-            session()->flash($type, $message);
-        }
+        $account_create = $this->account_repository->updateAccount($request, $account_id);
+        session()->flash($account_create['type'], $account_create['message']);
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Category;
 use App\Models\Transaction;
+use App\Repositories\AccountRepository;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -14,8 +15,9 @@ class HomeController extends Controller
 {
     public function __invoke()
     {
+        $account_repository = new AccountRepository();
+        $accounts = $account_repository->getAccounts();
         $current_user = Auth::user();
-        $accounts = Account::where('user_id', $current_user->id);
         $transactions = Transaction::with(['category', 'account'])
             ->where('user_id', $current_user->id)
             ->orderBy('id', 'desc')
@@ -37,8 +39,6 @@ class HomeController extends Controller
             ];
         });
 
-        $sum_balance = $accounts->sum('balance');
-
         $categories = Category::orderBy('name')
             ->get();
         $categories_mapped = $categories->map(function ($data) {
@@ -49,21 +49,10 @@ class HomeController extends Controller
             ];
         });
 
-        $account_mapped = $accounts->orderBy('updated_at', 'desc')
-            ->get()
-            ->map(function ($data) {
-                return [
-                    'id' => $data->id,
-                    'name' => $data->name,
-                    'balance' => $data->balance,
-                    'colour' => $data->colour,
-                ];
-            });
-
         return Inertia::render('App/Home', [
-            'totalBalance' => $sum_balance,
+            'totalBalance' => $accounts['sum_balance'],
+            'accounts' => $accounts['accounts'],
             'categories' => $categories_mapped,
-            'accounts' => $account_mapped,
             'transactions' => $transactions,
             'frequencies' => FrequencyEnum::optionToIndonesia(),
         ]);
