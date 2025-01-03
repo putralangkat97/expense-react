@@ -44,7 +44,7 @@ const TransactionView = ({
           <PrimaryButton
             type="button"
             className=""
-            variant="info"
+            variant="neutral"
             onClick={() =>
               openTransactionModal(
                 "Edit Transaction",

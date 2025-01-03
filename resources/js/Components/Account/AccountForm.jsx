@@ -35,21 +35,21 @@ const AccountForm = ({ accountData = null, closeModal }) => {
       <div>
         <TextInput
           placeholder="account name"
-          className="mt-1 block w-full"
+          className="mt-2 block w-full"
           value={data.name}
           onChange={(e) => setData("name", e.target.value)}
         />
-        <InputError message={errors.name} className="mt-1" />
+        <InputError message={errors.name} className="mt-2" />
       </div>
       <div>
         <TextInput
           type="number"
           placeholder="Rp. 0"
-          className="mt-1 block w-full"
+          className="mt-2 block w-full"
           value={data.balance}
           onChange={(e) => setData("balance", e.target.value)}
         />
-        <InputError message={errors.balance} className="mt-1" />
+        <InputError message={errors.balance} className="mt-2" />
       </div>
       {accountData && <input type="hidden" value={data.accountId} />}
       <div className="mt-2">

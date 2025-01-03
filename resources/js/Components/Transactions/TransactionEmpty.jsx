@@ -2,7 +2,7 @@ const TransactionEmpty = ({ ...props }) => {
   return (
     <div
       className={
-        'card card-compact h-20 w-full border-2 border-dashed border-primary bg-base-200'
+        'card card-compact h-20 w-full border-2 border-dashed border-neutral bg-base-200'
       }
       {...props}
     >

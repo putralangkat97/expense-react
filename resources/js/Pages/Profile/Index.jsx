@@ -16,9 +16,9 @@ const ProfileIndex = () => {
       )}
 
       <div className="px-6">
-        <div className="card card-compact border-2 border-neutral bg-base-100 p-3">
+        <div className="card card-compact bg-base-200 p-3">
           <div className="card-body">
-            <div className="flex flex-col space-y-8">
+            <div className="flex flex-col space-y-10">
               <Link
                 href={route("profile.edit-information")}
                 className="flex w-full items-center justify-between"

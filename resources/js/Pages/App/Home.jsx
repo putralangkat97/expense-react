@@ -1,6 +1,4 @@
-import AccountCard from "@/Components/Account/AccountCard";
 import BottomSheet from "@/Components/BottomSheet";
-import Divider from "@/Components/Divider";
 import TotalBalance from "@/Components/Home/TotalBalance";
 import TransactionButton from "@/Components/Home/TransactionButton";
 import TransactionCard from "@/Components/Transactions/TransactionCard";
@@ -8,18 +6,16 @@ import TransactionDetail from "@/Components/Transactions/TransactionDetail";
 import TransactionForm from "@/Components/Transactions/TransactionForm";
 import AppLayout from "@/Layouts/AppLayout";
 import { Link } from "@inertiajs/react";
-import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import AccountDetail from "@/Components/Account/AccountDetail";
-import AccountEmpty from "@/Components/Account/AccountEmpty";
 import AccountForm from "@/Components/Account/AccountForm";
 import Toast from "@/Components/Toast";
 import TransactionEmpty from "@/Components/Transactions/TransactionEmpty";
 import { useModalHook } from "@/Helpers/modalHook.js";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
+import { Banknote, Coins } from "lucide-react";
 
 const Home = ({
   totalBalance,
@@ -71,9 +67,15 @@ const Home = ({
 
       {/* Balance */}
       <div className="px-6">
-        <div className="card card-compact p-4 bg-neutral text-neutral-content">
+        <div className="relative card card-compact p-4 bg-neutral text-neutral-content overflow-hidden">
           <div className="card-body">
             <TotalBalance totalBalance={totalBalance} />
+          </div>
+          <div className="absolute -top-4 right-4">
+            <Coins size={72} className="text-gray-600" />
+          </div>
+          <div className="absolute -bottom-8 rotate-12 right-8">
+            <Banknote size={120} className="text-gray-600" />
           </div>
         </div>
       </div>

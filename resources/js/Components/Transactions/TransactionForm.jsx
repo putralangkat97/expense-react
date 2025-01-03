@@ -6,6 +6,8 @@ import SelectInput from "../SelectInput";
 import TextInput from "../TextInput";
 import Checkbox from "../Checkbox";
 import { useEffect, useState } from "react";
+import { CircleHelp } from "lucide-react";
+import InputLabel from "../InputLabel";
 
 const TransactionForm = ({
   accounts,
@@ -103,16 +105,16 @@ const TransactionForm = ({
       <div>
         <TextInput
           type="date"
-          className="mt-1 block w-full"
+          className="mt-2 block w-full"
           placeholder="tanggal"
           value={data.transactionDate}
           onChange={(e) => setData("transactionDate", e.target.value)}
         />
-        <InputError message={errors.transactionDate} className="mt-1" />
+        <InputError message={errors.transactionDate} className="mt-2" />
       </div>
       <div>
         <SelectInput
-          className="mt-1 block w-full"
+          className="mt-2 block w-full"
           defaultValue={data.accountId}
           onChange={(e) => setData("accountId", e.target.value)}
         >
@@ -125,30 +127,30 @@ const TransactionForm = ({
             </option>
           ))}
         </SelectInput>
-        <InputError message={errors.accountId} className="mt-1" />
+        <InputError message={errors.accountId} className="mt-2" />
       </div>
       <div>
         <TextInput
           placeholder="nama transaksi"
-          className="mt-1 block w-full"
+          className="mt-2 block w-full"
           value={data.name}
           onChange={(e) => setData("name", e.target.value)}
         />
-        <InputError message={errors.name} className="mt-1" />
+        <InputError message={errors.name} className="mt-2" />
       </div>
       <div>
         <TextInput
           type="number"
           placeholder="Rp. 0"
-          className="mt-1 block w-full"
+          className="mt-2 block w-full"
           value={data.amount}
           onChange={(e) => setData("amount", e.target.value)}
         />
-        <InputError message={errors.amount} className="mt-1" />
+        <InputError message={errors.amount} className="mt-2" />
       </div>
       <div>
         <SelectInput
-          className="mt-1 block w-full"
+          className="mt-2 block w-full"
           defaultValue={data.categoryId}
           onChange={(e) => setData("categoryId", e.target.value)}
         >
@@ -163,32 +165,38 @@ const TransactionForm = ({
               </option>
             ))}
         </SelectInput>
-        <InputError message={errors.categoryId} className="mt-1" />
+        <InputError message={errors.categoryId} className="mt-2" />
       </div>
       <div>
         <TextInput
           placeholder="catatan"
-          className="mt-1 block w-full"
+          className="mt-2 block w-full"
           value={data.note}
           onChange={(e) => setData("note", e.target.value)}
         />
-        <InputError message={errors.note} className="mt-1" />
+        <InputError message={errors.note} className="mt-2" />
       </div>
-      <div>
+      <div className="flex items-center">
         <label className="flex items-center">
           <Checkbox
-            className="mt-1"
+            className="mt-2"
             checked={data.is_recurring}
             onChange={(e) => setData("is_recurring", e.target.checked)}
           />
           <span className="ms-2 text-base-content">Transaksi berulang</span>
         </label>
+        <div
+          className="tooltip ml-1 text-base-content"
+          data-tip="Transaksi terbuat secara otomatis pada tanggal berikutnya"
+        >
+          <CircleHelp size={18} />
+        </div>
       </div>
       {data.transactionDate && data.is_recurring ? (
         <>
           <div>
             <SelectInput
-              className="mt-1 block w-full"
+              className="mt-2 block w-full"
               defaultValue={data.frequency}
               onChange={(e) => setData("frequency", e.target.value)}
             >
@@ -199,25 +207,26 @@ const TransactionForm = ({
                 </option>
               ))}
             </SelectInput>
-            <InputError message={errors.categoryId} className="mt-1" />
+            <InputError message={errors.categoryId} className="mt-2" />
           </div>
           <div>
+            <InputLabel value={"Transaksi berikutnya:"} />
             <TextInput
               type="date"
-              className={`mt-1 block w-full`}
+              className={`mt-2 block w-full`}
               placeholder="tanggal"
               value={data.next_due_date}
               disabled
               onChange={(e) => setData("next_due_date", e.target.value)}
             />
-            <InputError message={errors.next_due_date} className="mt-1" />
+            <InputError message={errors.next_due_date} className="mt-2" />
           </div>
         </>
       ) : (
         data.is_recurring == "1" && (
           <InputError
             message={"Pilih tanggal transaksi terlebih dahulu"}
-            className="mt-1"
+            className="mt-2"
           />
         )
       )}

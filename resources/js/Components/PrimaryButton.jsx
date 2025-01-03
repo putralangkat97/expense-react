@@ -29,7 +29,7 @@ export default function PrimaryButton({
       break;
     case "info":
       btnVariant =
-        "bg-info text-white border-sky-700 hover:bg-sky-700 hover:text-white hover:border-sky-700";
+        "bg-info text-white border-info hover:bg-info hover:text-white hover:border-info";
       break;
     case "error":
       btnVariant =

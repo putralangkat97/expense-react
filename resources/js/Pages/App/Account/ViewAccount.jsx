@@ -45,11 +45,11 @@ const AccountView = ({ account, transactions, accounts, categories }) => {
         <div className="flex flex-col items-center justify-center space-y-2">
           <h2 className="text-center text-3xl sm:text-4xl">{account.name}</h2>
         </div>
-        <div className="mt-10 flex flex-col space-y-2">
+        <div className="mt-10 flex flex-col space-y-4">
           <AccountCard data={account} />
           <PrimaryButton
             type="button"
-            variant="info"
+            variant="neutral"
             onClick={() =>
               openAccountModal("Edit Akun", account, "account-edit", true)
             }

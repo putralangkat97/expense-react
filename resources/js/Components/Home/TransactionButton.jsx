@@ -5,7 +5,7 @@ const TransactionButton = ({ triggerModal }) => {
     <div className="flex justify-start space-x-4" id="trx">
       <div className="flex flex-col items-center">
         <button
-          className="btn bg-neutral rounded-full py-2 px-3 border-2 border-neutral text-neutral-content hover:border-neutral hover:text-neutral-content"
+          className="btn btn-neutral rounded-full py-2 px-3 border-2 border-neutral text-neutral-content hover:border-neutral hover:text-neutral-content hover:btn-neutral"
           type="button"
           onClick={() =>
             triggerModal("Buat Pengeluaran", null, "transaction-out")
@@ -17,7 +17,7 @@ const TransactionButton = ({ triggerModal }) => {
       </div>
       <div className="flex flex-col items-center">
         <button
-          className="btn bg-neutral rounded-full py-2 px-3 border-2 border-neutral text-neutral-content hover:border-neutral hover:text-neutral-content"
+          className="btn btn-neutral rounded-full py-2 px-3 border-2 border-neutral text-neutral-content hover:border-neutral hover:text-neutral-content hover:btn-neutral"
           type="button"
           onClick={() => triggerModal("Buat Pemasukan", null, "transaction-in")}
         >
