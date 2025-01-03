@@ -5,7 +5,9 @@
     "start_url": "https://budget.hutacode.com",
     "display": "standalone",
     "background_color": "#F8FDEF",
-    "theme_color": "#F8FDEF",
+    "background_color_dark": "#1D232A",
+    "theme_color": "#FFFFFF",
+    "theme_color_dark": "#1D232A",
     "orientation": "portrait-primary",
     "icons": [
         {

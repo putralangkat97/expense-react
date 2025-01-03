@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {{-- pwa --}}
-    <meta name="apple-mobile-web-app-status-bar" content="#01d679">
+    <meta name="apple-mobile-web-app-status-bar" content="#FFFFFF" media="(prefers-color-scheme: light)">
+    <meta name="apple-mobile-web-app-status-bar" content="#1D232A" media="(prefers-color-scheme: dark)">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
     <title inertia>{{ config('app.name', 'Expense Tracker') }}</title>
