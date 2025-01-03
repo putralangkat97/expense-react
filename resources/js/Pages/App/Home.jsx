@@ -71,10 +71,10 @@ const Home = ({
           <div className="card-body">
             <TotalBalance totalBalance={totalBalance} />
           </div>
-          <div className="absolute -top-4 right-4">
+          <div className="absolute -top-4 right-4 -z-10">
             <Coins size={72} className="text-gray-600" />
           </div>
-          <div className="absolute -bottom-8 rotate-12 right-8">
+          <div className="absolute -bottom-8 rotate-12 right-8 z-10">
             <Banknote size={120} className="text-gray-600" />
           </div>
         </div>
