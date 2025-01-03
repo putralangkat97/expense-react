@@ -68,13 +68,13 @@ const Home = ({
       {/* Balance */}
       <div className="px-6">
         <div className="relative card card-compact p-4 bg-neutral text-neutral-content overflow-hidden">
-          <div className="card-body">
+          <div className="card-body z-10">
             <TotalBalance totalBalance={totalBalance} />
           </div>
-          <div className="absolute -top-4 right-4 -z-10">
+          <div className="absolute -top-4 right-4">
             <Coins size={72} className="text-gray-600" />
           </div>
-          <div className="absolute -bottom-8 rotate-12 right-8 z-10">
+          <div className="absolute -bottom-8 rotate-12 right-8">
             <Banknote size={120} className="text-gray-600" />
           </div>
         </div>
