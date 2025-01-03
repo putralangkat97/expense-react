@@ -1,15 +1,11 @@
-import AccountForm from "@/Components/Account/AccountForm";
 import BottomSheet from "@/Components/BottomSheet";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Toast from "@/Components/Toast";
-import TransactionCard from "@/Components/Transactions/TransactionCard";
 import TransactionDetail from "@/Components/Transactions/TransactionDetail";
-import TransactionEmpty from "@/Components/Transactions/TransactionEmpty";
 import TransactionForm from "@/Components/Transactions/TransactionForm";
 import { useModalHook } from "@/Helpers/modalHook";
 import AppLayout from "@/Layouts/AppLayout";
-import { Link } from "@inertiajs/react";
-import { Pencil, Trash, Trash2 } from "lucide-react";
+import { Pencil } from "lucide-react";
 
 const TransactionView = ({
   transactions,
@@ -29,7 +25,7 @@ const TransactionView = ({
     openModal: openTransactionModal,
     closeModal: closeTransactionModal,
   } = useModalHook({ type: "transaction" });
-
+  console.log(transactions);
   return (
     <>
       {/* toastr */}

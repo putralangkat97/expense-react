@@ -1,8 +1,6 @@
 import ConfigHelper from "@/Helpers/ConfigHelpers.js";
-import { Pencil } from "lucide-react";
 import CategoryIcon from "../Category/CategoryIcon";
 import InputLabel from "../InputLabel";
-import PrimaryButton from "../PrimaryButton";
 import { Link } from "@inertiajs/react";
 
 const TransactionDetail = ({ data }) => {

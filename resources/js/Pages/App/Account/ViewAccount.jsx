@@ -7,7 +7,6 @@ import TransactionCard from "@/Components/Transactions/TransactionCard";
 import TransactionDetail from "@/Components/Transactions/TransactionDetail";
 import TransactionEmpty from "@/Components/Transactions/TransactionEmpty";
 import TransactionForm from "@/Components/Transactions/TransactionForm";
-import { useAccountHook } from "@/Helpers/AccountModalHook";
 import { useModalHook } from "@/Helpers/modalHook";
 import AppLayout from "@/Layouts/AppLayout";
 import { Link } from "@inertiajs/react";

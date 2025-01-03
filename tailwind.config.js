@@ -21,6 +21,6 @@ export default {
   plugins: [forms, require('daisyui')],
 
   daisyui: {
-    themes: ['lemonade', 'light', 'halloween'],
+    themes: ['light', 'dark'],
   },
 };

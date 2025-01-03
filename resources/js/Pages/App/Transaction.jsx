@@ -5,7 +5,6 @@ import TransactionDetail from "@/Components/Transactions/TransactionDetail";
 import TransactionEmpty from "@/Components/Transactions/TransactionEmpty";
 import TransactionForm from "@/Components/Transactions/TransactionForm";
 import { useModalHook } from "@/Helpers/modalHook";
-import { useTransactionHook } from "@/Helpers/TransactionModalHook";
 import AppLayout from "@/Layouts/AppLayout";
 
 const Transaction = ({ transactions, categories, accounts }) => {

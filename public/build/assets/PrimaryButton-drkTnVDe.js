@@ -1,6 +1,0 @@
-import{j as t}from"./app-DYsoxiYW.js";import{c as i}from"./createLucideIcon-DdcoQB7Q.js";/**
- * @license lucide-react v0.456.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */const c=i("LoaderCircle",[["path",{d:"M21 12a9 9 0 1 1-6.219-8.56",key:"13zald"}]]);function g({className:s="",disabled:o,children:n,variant:a="default",size:b="md",...d}){let e=b;switch(b){case"sm":e="btn-sm";break;case"lg":e="btn-lg";break;default:e="btn-md";break}let r=a;switch(a){case"success":r="bg-success border-green-700 hover:bg-green-700 hover:text-white hover:border-green-700";break;case"info":r="bg-info border-sky-700 hover:bg-sky-700 hover:text-white hover:border-sky-700";break;case"error":r="bg-error border-red-700 hover:bg-red-700 hover:text-white hover:border-red-700";break;case"warning":r="bg-warning border-amber-700 hover:bg-amber-700 hover:text-white hover:border-amber-700";break;default:r="bg-primary/80 border-primary hover:bg-primary hover:border-primary";break}return t.jsxs("button",{...d,className:`btn border-x-2 border-b-4 border-t-2 ${r} ${o&&"disabled"} ${e} `+s,disabled:o,children:[n,o&&t.jsx(c,{size:20,className:"animate-spin"})]})}export{g as P};
