@@ -1,22 +1,18 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     {{-- pwa --}}
+    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1D232A" media="(prefers-color-scheme: dark)">
     <meta name="apple-mobile-web-app-status-bar" content="#FFFFFF" media="(prefers-color-scheme: light)">
     <meta name="apple-mobile-web-app-status-bar" content="#1D232A" media="(prefers-color-scheme: dark)">
     <meta name="apple-mobile-web-app-capable" content="yes">
-
     <title inertia>{{ config('app.name', 'Expense Tracker') }}</title>
-
     <link rel="manifest" href="/manifest.json">
 
     <!-- Fonts -->
-    {{-- <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" /> --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
@@ -63,6 +59,24 @@
 
 <body class="itim-regular antialiased">
     @inertia
+
+    <script>
+        function updateTheme() {
+            const html = document.documentElement;
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                html.setAttribute('data-theme', 'dark');
+            } else {
+                html.setAttribute('data-theme', 'light');
+            }
+        }
+
+        // Set theme on load
+        updateTheme();
+
+        // Watch for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)')
+            .addEventListener('change', updateTheme);
+    </script>
 </body>
 
 </html>

@@ -25,7 +25,6 @@ const TransactionView = ({
     openModal: openTransactionModal,
     closeModal: closeTransactionModal,
   } = useModalHook({ type: "transaction" });
-  console.log(transactions);
   return (
     <>
       {/* toastr */}

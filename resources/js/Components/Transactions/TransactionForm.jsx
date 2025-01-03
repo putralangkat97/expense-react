@@ -18,7 +18,6 @@ const TransactionForm = ({
   closeModal,
 }) => {
   const configHelper = new ConfigHelper();
-  console.log(transactionData);
   const { data, setData, post, patch, processing, errors, reset } = useForm({
     name: transactionData ? transactionData.name : "",
     accountId: transactionData ? transactionData.accountId : "",
