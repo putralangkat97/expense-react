@@ -10,10 +10,10 @@ const Welcome = () => {
       </div>
       <div className="mt-2 px-4 text-center">
         <div>
-          <h1 className="text-neutral text-4xl font-medium">
+          <h1 className="text-base-content text-4xl font-medium">
             Spend <span className="text-primary">Smarter</span>
           </h1>
-          <h1 className="text-neutral -mt-2 text-4xl font-medium">
+          <h1 className="text-base-content -mt-2 text-4xl font-medium">
             <span className="text-primary">Save</span> More
           </h1>
         </div>
@@ -25,7 +25,7 @@ const Welcome = () => {
           >
             {'Get Started'}
           </Link>
-          <div className="text-neutral mt-px text-sm">
+          <div className="text-base-content mt-px text-sm">
             {'already have account? '}
             <Link href={route('login')} className="text-primary link">
               Login

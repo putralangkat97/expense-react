@@ -1,24 +1,24 @@
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import GuestLayout from '@/Layouts/GuestLayout';
-import { Link, useForm } from '@inertiajs/react';
-import { ArrowLeft } from 'lucide-react';
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import PrimaryButton from "@/Components/PrimaryButton";
+import TextInput from "@/Components/TextInput";
+import GuestLayout from "@/Layouts/GuestLayout";
+import { Link, useForm } from "@inertiajs/react";
+import { ArrowLeft } from "lucide-react";
 
 const Register = () => {
   const { data, setData, post, processing, errors, reset } = useForm({
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
   });
 
   const submit = (e) => {
     e.preventDefault();
 
-    post(route('register'), {
-      onFinish: () => reset('password', 'password_confirmation'),
+    post(route("register"), {
+      onFinish: () => reset("password", "password_confirmation"),
     });
   };
 
@@ -26,7 +26,7 @@ const Register = () => {
     <>
       <div className="fixed left-4 top-6">
         <Link
-          href={route('welcome')}
+          href={route("welcome")}
           as="button"
           className="btn btn-ghost -ml-4"
         >
@@ -45,7 +45,7 @@ const Register = () => {
             autoComplete="name"
             placeholder="Name"
             isFocused={true}
-            onChange={(e) => setData('name', e.target.value)}
+            onChange={(e) => setData("name", e.target.value)}
             required
           />
           <InputError message={errors.name} className="mt-2" />
@@ -60,7 +60,7 @@ const Register = () => {
             className="mt-1 block w-full"
             autoComplete="username"
             placeholder="Email address"
-            onChange={(e) => setData('email', e.target.value)}
+            onChange={(e) => setData("email", e.target.value)}
             required
           />
           <InputError message={errors.email} className="mt-2" />
@@ -75,7 +75,7 @@ const Register = () => {
             className="mt-1 block w-full"
             autoComplete="new-password"
             placeholder="Password"
-            onChange={(e) => setData('password', e.target.value)}
+            onChange={(e) => setData("password", e.target.value)}
             required
           />
           <InputError message={errors.password} className="mt-2" />
@@ -93,20 +93,25 @@ const Register = () => {
             className="mt-1 block w-full"
             autoComplete="new-password"
             placeholder="Confirm password"
-            onChange={(e) => setData('password_confirmation', e.target.value)}
+            onChange={(e) => setData("password_confirmation", e.target.value)}
             required
           />
           <InputError message={errors.password_confirmation} className="mt-2" />
         </div>
         <div className="mt-6 flex flex-col items-center justify-center">
-          <PrimaryButton className="btn-block" size="lg" disabled={processing}>
+          <PrimaryButton
+            className="btn-block"
+            variant="neutral"
+            size="lg"
+            disabled={processing}
+          >
             Register
           </PrimaryButton>
         </div>
       </form>
 
       <div className="fixed bottom-6">
-        <Link href={route('login')} className="link text-primary text-sm">
+        <Link href={route("login")} className="link text-primary text-sm">
           Already registered?
         </Link>
       </div>
@@ -114,6 +119,6 @@ const Register = () => {
   );
 };
 
-Register.layout = (page) => <GuestLayout title={'Sign Up'}>{page}</GuestLayout>;
+Register.layout = (page) => <GuestLayout title={"Sign Up"}>{page}</GuestLayout>;
 
 export default Register;

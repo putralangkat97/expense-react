@@ -1,24 +1,24 @@
-import Checkbox from '@/Components/Checkbox';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import GuestLayout from '@/Layouts/GuestLayout';
-import { Link, useForm } from '@inertiajs/react';
-import { ArrowLeft } from 'lucide-react';
+import Checkbox from "@/Components/Checkbox";
+import InputError from "@/Components/InputError";
+import InputLabel from "@/Components/InputLabel";
+import PrimaryButton from "@/Components/PrimaryButton";
+import TextInput from "@/Components/TextInput";
+import GuestLayout from "@/Layouts/GuestLayout";
+import { Link, useForm } from "@inertiajs/react";
+import { ArrowLeft } from "lucide-react";
 
 const Login = ({ status, canResetPassword }) => {
   const { data, setData, post, processing, errors, reset } = useForm({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
     remember: false,
   });
 
   const submit = (e) => {
     e.preventDefault();
 
-    post(route('login'), {
-      onFinish: () => reset('password'),
+    post(route("login"), {
+      onFinish: () => reset("password"),
     });
   };
 
@@ -29,7 +29,11 @@ const Login = ({ status, canResetPassword }) => {
       )}
 
       <div className="fixed left-4 top-6">
-        <Link href={route('welcome')} as="button" className="-ml-4 btn btn-ghost">
+        <Link
+          href={route("welcome")}
+          as="button"
+          className="-ml-4 btn btn-ghost"
+        >
           <ArrowLeft size={44} />
         </Link>
       </div>
@@ -46,7 +50,7 @@ const Login = ({ status, canResetPassword }) => {
             autoComplete="username"
             placeholder="Email address"
             isFocused={true}
-            onChange={(e) => setData('email', e.target.value)}
+            onChange={(e) => setData("email", e.target.value)}
           />
           <InputError message={errors.email} className="mt-2" />
         </div>
@@ -60,7 +64,7 @@ const Login = ({ status, canResetPassword }) => {
             className="mt-1 block w-full"
             autoComplete="current-password"
             placeholder="Password"
-            onChange={(e) => setData('password', e.target.value)}
+            onChange={(e) => setData("password", e.target.value)}
           />
           <InputError message={errors.password} className="mt-2" />
         </div>
@@ -69,13 +73,18 @@ const Login = ({ status, canResetPassword }) => {
             <Checkbox
               name="remember"
               checked={data.remember}
-              onChange={(e) => setData('remember', e.target.checked)}
+              onChange={(e) => setData("remember", e.target.checked)}
             />
             <span className="ms-2 text-neutral">Remember me</span>
           </label>
         </div>
         <div className="mt-6 flex flex-col items-center justify-center">
-          <PrimaryButton className="btn-block" size="lg" disabled={processing}>
+          <PrimaryButton
+            className="btn-block"
+            variant="neutral"
+            size="lg"
+            disabled={processing}
+          >
             Log in
           </PrimaryButton>
         </div>
@@ -84,7 +93,7 @@ const Login = ({ status, canResetPassword }) => {
       {canResetPassword && (
         <div className="fixed bottom-6">
           <Link
-            href={route('password.request')}
+            href={route("password.request")}
             className="link text-primary text-sm"
           >
             Forgot your password?
@@ -95,6 +104,6 @@ const Login = ({ status, canResetPassword }) => {
   );
 };
 
-Login.layout = (page) => <GuestLayout title={'Log In'}>{page}</GuestLayout>;
+Login.layout = (page) => <GuestLayout title={"Log In"}>{page}</GuestLayout>;
 
 export default Login;

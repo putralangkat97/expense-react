@@ -46,7 +46,7 @@ export default function SecondaryButton({
     <button
       {...props}
       className={
-        `btn border-x-2 border-b-4 border-t-2 ${btnVariant} ${disabled && 'opacity-25'} ${btnSize} ` +
+        `btn border-2 ${btnVariant} ${disabled && 'opacity-25'} ${btnSize} ` +
         className
       }
       disabled={disabled}

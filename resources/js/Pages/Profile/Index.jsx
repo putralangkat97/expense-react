@@ -48,7 +48,7 @@ const ProfileIndex = () => {
           as="button"
           method="post"
           href={route("logout")}
-          className="btn btn-error btn-block border-x-2 border-b-4 border-t-2 border-red-700 hover:border-red-700 hover:bg-red-700 hover:text-base-100"
+          className="btn btn-error btn-block border-2 border-red-700 hover:border-red-700 hover:bg-red-700 hover:text-base-100"
         >
           Logout
         </Link>

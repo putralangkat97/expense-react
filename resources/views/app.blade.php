@@ -9,6 +9,10 @@
     <meta name="apple-mobile-web-app-status-bar" content="#FFFFFF" media="(prefers-color-scheme: light)">
     <meta name="apple-mobile-web-app-status-bar" content="#1D232A" media="(prefers-color-scheme: dark)">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="msapplication-TileColor" content="#1D232A" media="(prefers-color-scheme: dark)">
+    <meta name="msapplication-navbutton-color" content="#1D232A" media="(prefers-color-scheme: dark)">
+    <meta name="msapplication-TileColor" content="#FFFFFF" media="(prefers-color-scheme: light)">
+    <meta name="msapplication-navbutton-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
     <title inertia>{{ config('app.name', 'Expense Tracker') }}</title>
     <link rel="manifest" href="/manifest.json">
 
