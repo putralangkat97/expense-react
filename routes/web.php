@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
 })->middleware('guest')->name('welcome');
+
+Route::get('/cron', [\App\Http\Controllers\ArtisanController::class, 'handle']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', \App\Http\Controllers\APP\HomeController::class)

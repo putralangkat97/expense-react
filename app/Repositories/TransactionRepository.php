@@ -107,7 +107,7 @@ class TransactionRepository implements TransactionInterface
                 if (!$action->accountHelper($validated, $transaction)) {
                     DB::rollBack();
                 } else {
-                    $date = $validated['transactionDate'] . '00:00:00';
+                    $date = $validated['transactionDate'] . ' 00:00:00';
                     $transaction_date_format = Carbon::parse($date, 'UTC')
                         ->timezone(config('app.timezone_name'))
                         ->toDateTimeString();
@@ -159,7 +159,7 @@ class TransactionRepository implements TransactionInterface
                 if (!$action->accountHelper($validated, $transaction, $transaction_id)) {
                     DB::rollBack();
                 } else {
-                    $date = $validated['transactionDate'] . '00:00:00';
+                    $date = $validated['transactionDate'] . ' 00:00:00';
                     $transaction_date_format = Carbon::parse($date, 'UTC')
                         ->timezone(config('app.timezone_name'))
                         ->toDateTimeString();

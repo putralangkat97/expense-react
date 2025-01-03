@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class AccountAction
 {
-    public function accountHelper(array $data, object|array|null $transaction = null, $transaction_id = null): bool
+    public function accountHelper(array $data, object|array|null $transaction = null, $transaction_id = null, bool $cron = false): bool
     {
         DB::beginTransaction();
         try {
-            $account = Account::find($data['accountId']);
+            $account = Account::find($cron ? $data['account_id'] : $data['accountId']);
             $amount = $transaction->amount != $data['amount'] ? $transaction->amount : $data['amount'];
 
             if ($transaction_id) {
@@ -37,7 +37,7 @@ class AccountAction
                 }
             } else {
                 // For new transactions
-                if ($data['transactionType'] == 'in') {
+                if (($cron ? $data['type'] : $data['transactionType']) == 'in') {
                     $account->increment('balance', $data['amount']);
                 } else {
                     $account->decrement('balance', $data['amount']);
