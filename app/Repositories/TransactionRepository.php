@@ -55,9 +55,9 @@ class TransactionRepository implements TransactionInterface
                 'accountId' => $transaction->account_id,
                 'categoryId' => $transaction->category_id,
                 'is_recurring' => $transaction->is_recurring,
-                'frequency_id' => FrequencyEnum::setToIndonesia($transaction->frequency),
-                'frequency' => $transaction->frequency,
-                'next_due_date' => date('d/m/Y', strtotime($transaction->next_due_date)),
+                'frequency_id' => $transaction->is_recurring ? FrequencyEnum::setToIndonesia($transaction->frequency) : null,
+                'frequency' => $transaction->is_recurring ? $transaction->frequency : null,
+                'next_due_date' => $transaction->is_recurring ? date('d/m/Y', strtotime($transaction->next_due_date)) : null,
                 'note' => $transaction->note,
             ];
         });
@@ -86,9 +86,9 @@ class TransactionRepository implements TransactionInterface
                 'accountId' => $transaction->account_id,
                 'categoryId' => $transaction->category_id,
                 'is_recurring' => $transaction->is_recurring,
-                'frequency_id' => FrequencyEnum::setToIndonesia($transaction->frequency),
-                'frequency' => $transaction->frequency,
-                'next_due_date' => date('d/m/Y', strtotime($transaction->next_due_date)),
+                'frequency_id' => $transaction->is_recurring ? FrequencyEnum::setToIndonesia($transaction->frequency) : null,
+                'frequency' => $transaction->is_recurring ? $transaction->frequency : null,
+                'next_due_date' => $transaction->is_recurring ? date('d/m/Y', strtotime($transaction->next_due_date)) : null,
                 'note' => $transaction->note,
             ];
         });
