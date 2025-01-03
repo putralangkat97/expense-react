@@ -64,7 +64,7 @@ const TransactionDetail = ({ data }) => {
           />
           <h2 className="text-base-content">{data.note || "-"}</h2>
         </div>
-        {data.is_recurring && (
+        {data.is_recurring == "1" && (
           <>
             <div>
               <InputLabel

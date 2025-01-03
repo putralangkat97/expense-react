@@ -214,7 +214,7 @@ const TransactionForm = ({
           </div>
         </>
       ) : (
-        data.is_recurring && (
+        data.is_recurring == "1" && (
           <InputError
             message={"Pilih tanggal transaksi terlebih dahulu"}
             className="mt-1"
