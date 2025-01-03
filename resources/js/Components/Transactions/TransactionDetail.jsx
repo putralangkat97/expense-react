@@ -6,28 +6,28 @@ import { Link } from "@inertiajs/react";
 const TransactionDetail = ({ data }) => {
   const configHelper = new ConfigHelper();
   return (
-    <div className="card card-compact border-x-2 border-t-2 border-b-4 border-primary">
+    <div className="card card-compact border-2 border-neutral">
       <div className="card-body grid grid-cols-2 gap-6">
         <div>
           <InputLabel
             value={"Nama transaksi"}
             className="text-sm font-bold sm:text-lg"
           />
-          <h2 className="text-gray-600">{data.name}</h2>
+          <h2 className="text-base-content">{data.name}</h2>
         </div>
         <div>
           <InputLabel
             value={"Tanggal transaksi"}
             className="text-sm font-bold sm:text-lg"
           />
-          <h2 className="text-gray-600">{data.transactionDate}</h2>
+          <h2 className="text-base-content">{data.transactionDate}</h2>
         </div>
         <div>
           <InputLabel
             value={"Kategori"}
             className="text-sm font-bold sm:text-lg"
           />
-          <div className="flex items-center space-x-1 text-gray-600">
+          <div className="flex items-center space-x-1 text-base-content">
             <div>
               <CategoryIcon category={data.category_name} size={18} />
             </div>
@@ -39,7 +39,11 @@ const TransactionDetail = ({ data }) => {
             value={"Jumlah"}
             className="text-sm font-bold sm:text-lg"
           />
-          <h2 className="text-gray-600">
+          <h2
+            className={
+              data.transactionType === "in" ? "text-green-700" : "text-red-700"
+            }
+          >
             {data.transactionType === "in" ? "" : "-"}
             {configHelper.formatCurrency(data.amount)}
           </h2>
@@ -48,7 +52,7 @@ const TransactionDetail = ({ data }) => {
           <InputLabel value={"Akun"} className="text-sm font-bold sm:text-lg" />
           <Link
             href={route("account.view", data.accountId)}
-            className="text-gray-600 hover:underline"
+            className="text-base-content hover:underline"
           >
             {data.account_name}
           </Link>
@@ -58,7 +62,7 @@ const TransactionDetail = ({ data }) => {
             value={"Catatan"}
             className="text-sm font-bold sm:text-lg"
           />
-          <h2 className="text-gray-600">{data.note || "-"}</h2>
+          <h2 className="text-base-content">{data.note || "-"}</h2>
         </div>
         {data.is_recurring && (
           <>
@@ -67,14 +71,14 @@ const TransactionDetail = ({ data }) => {
                 value={"Transaksi Berulang"}
                 className="text-sm font-bold sm:text-lg"
               />
-              <h2 className="text-gray-600">{data.frequency_id}</h2>
+              <h2 className="text-base-content">{data.frequency_id}</h2>
             </div>
             <div>
               <InputLabel
                 value={"Transaksi selanjutnya"}
                 className="text-sm font-bold sm:text-lg"
               />
-              <h2 className="text-gray-600">{data.next_due_date}</h2>
+              <h2 className="text-base-content">{data.next_due_date}</h2>
             </div>
           </>
         )}

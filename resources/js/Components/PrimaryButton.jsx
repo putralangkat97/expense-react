@@ -1,47 +1,51 @@
-import { LoaderCircle } from 'lucide-react';
+import { LoaderCircle } from "lucide-react";
 
 export default function PrimaryButton({
-  className = '',
+  className = "",
   disabled,
   children,
-  variant = 'default',
-  size = 'md',
+  variant = "default",
+  size = "md",
   ...props
 }) {
   let btnSize = size;
   switch (size) {
-    case 'sm':
-      btnSize = 'btn-sm';
+    case "sm":
+      btnSize = "btn-sm";
       break;
-    case 'lg':
-      btnSize = 'btn-lg';
+    case "lg":
+      btnSize = "btn-lg";
       break;
     default:
-      btnSize = 'btn-md';
+      btnSize = "btn-md";
       break;
   }
 
   let btnVariant = variant;
   switch (variant) {
-    case 'success':
+    case "success":
       btnVariant =
-        'bg-success border-green-700 hover:bg-green-700 hover:text-white hover:border-green-700';
+        "bg-success border-green-700 hover:bg-green-700 hover:text-white hover:border-green-700";
       break;
-    case 'info':
+    case "info":
       btnVariant =
-        'bg-info border-sky-700 hover:bg-sky-700 hover:text-white hover:border-sky-700';
+        "bg-info text-white border-sky-700 hover:bg-sky-700 hover:text-white hover:border-sky-700";
       break;
-    case 'error':
+    case "error":
       btnVariant =
-        'bg-error border-red-700 hover:bg-red-700 hover:text-white hover:border-red-700';
+        "bg-error border-red-700 hover:bg-red-700 hover:text-white hover:border-red-700";
       break;
-    case 'warning':
+    case "warning":
       btnVariant =
-        'bg-warning border-amber-700 hover:bg-amber-700 hover:text-white hover:border-amber-700';
+        "bg-warning border-amber-700 hover:bg-amber-700 hover:text-white hover:border-amber-700";
+      break;
+    case "neutral":
+      btnVariant =
+        "bg-neutral border-neutral hover:bg-neutral text-neutral-content hover:border-neutral";
       break;
     default:
       btnVariant =
-        'bg-primary/80 border-primary hover:bg-primary hover:border-primary';
+        "bg-primary/80 border-primary hover:bg-primary hover:border-primary";
       break;
   }
 
@@ -49,7 +53,7 @@ export default function PrimaryButton({
     <button
       {...props}
       className={
-        `btn border-x-2 border-b-4 border-t-2 ${btnVariant} ${disabled && 'disabled'} ${btnSize} ` +
+        `btn border-2 ${btnVariant} ${disabled && "disabled"} ${btnSize} ` +
         className
       }
       disabled={disabled}

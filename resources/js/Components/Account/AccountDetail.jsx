@@ -12,14 +12,14 @@ const AccountDetail = ({ data, triggerModal }) => {
           value={'Transaction Name'}
           className="text-sm font-medium sm:text-lg"
         />
-        <h2 className="-mt-1 text-gray-600">{data.name}</h2>
+        <h2 className="-mt-1 text-neutral">{data.name}</h2>
       </div>
       <div>
         <InputLabel
           value={'Transaction Date'}
           className="text-sm font-medium sm:text-lg"
         />
-        <h2 className="-mt-1 text-gray-600">
+        <h2 className="-mt-1 text-neutral">
           {configHelper.formatCurrency(data.balance)}
         </h2>
       </div>

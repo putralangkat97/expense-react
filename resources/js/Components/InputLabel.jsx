@@ -1,14 +1,11 @@
 export default function InputLabel({
   value,
-  className = '',
+  className = "",
   children,
   ...props
 }) {
   return (
-    <label
-      {...props}
-      className={`block text-neutral ` + className}
-    >
+    <label {...props} className={`block text-base-content ` + className}>
       {value ? value : children}
     </label>
   );

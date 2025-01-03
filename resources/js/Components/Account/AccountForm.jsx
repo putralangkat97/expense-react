@@ -1,31 +1,31 @@
-import { useForm } from '@inertiajs/react';
-import InputError from '../InputError';
-import PrimaryButton from '../PrimaryButton';
-import TextInput from '../TextInput';
+import { useForm } from "@inertiajs/react";
+import InputError from "../InputError";
+import PrimaryButton from "../PrimaryButton";
+import TextInput from "../TextInput";
 
 const AccountForm = ({ accountData = null, closeModal }) => {
   const { data, setData, post, patch, processing, errors, reset } = useForm({
-    name: accountData ? accountData.name : '',
-    balance: accountData ? accountData.balance : '',
+    name: accountData ? accountData.name : "",
+    balance: accountData ? accountData.balance : "",
     accountId: accountData ? accountData.id : null,
   });
 
   const resetForm = () => {
-    reset('name', 'balance', 'accountId');
+    reset("name", "balance", "accountId");
     closeModal();
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (accountData) {
-      patch(route('account.update', accountData.id), {
+      patch(route("account.update", accountData.id), {
         preserveScroll: true,
-        onFinish: resetForm,
+        onSuccess: resetForm,
       });
     } else {
-      post(route('account.store'), {
+      post(route("account.store"), {
         preserveScroll: true,
-        onFinish: resetForm,
+        onSuccess: resetForm,
       });
     }
   };
@@ -37,7 +37,7 @@ const AccountForm = ({ accountData = null, closeModal }) => {
           placeholder="account name"
           className="mt-1 block w-full"
           value={data.name}
-          onChange={(e) => setData('name', e.target.value)}
+          onChange={(e) => setData("name", e.target.value)}
         />
         <InputError message={errors.name} className="mt-1" />
       </div>
@@ -47,14 +47,18 @@ const AccountForm = ({ accountData = null, closeModal }) => {
           placeholder="Rp. 0"
           className="mt-1 block w-full"
           value={data.balance}
-          onChange={(e) => setData('balance', e.target.value)}
+          onChange={(e) => setData("balance", e.target.value)}
         />
         <InputError message={errors.balance} className="mt-1" />
       </div>
       {accountData && <input type="hidden" value={data.accountId} />}
       <div className="mt-2">
-        <PrimaryButton className="btn-block" disabled={processing}>
-          {processing ? 'Saving...' : 'Save'}
+        <PrimaryButton
+          className="btn-block"
+          variant="neutral"
+          disabled={processing}
+        >
+          {processing ? "Saving..." : "Save"}
         </PrimaryButton>
       </div>
     </form>

@@ -71,7 +71,7 @@ const Login = ({ status, canResetPassword }) => {
               checked={data.remember}
               onChange={(e) => setData('remember', e.target.checked)}
             />
-            <span className="ms-2 text-gray-600">Remember me</span>
+            <span className="ms-2 text-neutral">Remember me</span>
           </label>
         </div>
         <div className="mt-6 flex flex-col items-center justify-center">

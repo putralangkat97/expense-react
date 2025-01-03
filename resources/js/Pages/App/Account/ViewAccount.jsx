@@ -49,7 +49,6 @@ const AccountView = ({ account, transactions, accounts, categories }) => {
           <AccountCard data={account} />
           <PrimaryButton
             type="button"
-            className=""
             variant="info"
             onClick={() =>
               openAccountModal("Edit Akun", account, "account-edit", true)
@@ -63,7 +62,7 @@ const AccountView = ({ account, transactions, accounts, categories }) => {
         {/* Recent transactions */}
         <div className="mt-6">
           <div className="flex items-end justify-between">
-            <h2 className="text-xl font-bold text-neutral sm:text-2xl">
+            <h2 className="text-xl font-bold text-base-content sm:text-2xl">
               Transaksi terakhir
             </h2>
             {transactions.length > 0 && (

@@ -16,7 +16,7 @@ const TransactionForm = ({
   closeModal,
 }) => {
   const configHelper = new ConfigHelper();
-  console.log(transactionData)
+  console.log(transactionData);
   const { data, setData, post, patch, processing, errors, reset } = useForm({
     name: transactionData ? transactionData.name : "",
     accountId: transactionData ? transactionData.accountId : "",
@@ -181,7 +181,7 @@ const TransactionForm = ({
             checked={data.is_recurring}
             onChange={(e) => setData("is_recurring", e.target.checked)}
           />
-          <span className="ms-2 text-gray-600">Transaksi berulang?</span>
+          <span className="ms-2 text-base-content">Transaksi berulang</span>
         </label>
       </div>
       {data.transactionDate && data.is_recurring ? (
@@ -224,7 +224,11 @@ const TransactionForm = ({
       <input type="hidden" value={data.transactionType} />
       {transactionData && <input type="hidden" value={data.transactionId} />}
       <div className="mt-2">
-        <PrimaryButton className="btn-block" disabled={processing}>
+        <PrimaryButton
+          className="btn-block"
+          variant="neutral"
+          disabled={processing}
+        >
           {processing ? "Saving..." : "Save"}
         </PrimaryButton>
       </div>

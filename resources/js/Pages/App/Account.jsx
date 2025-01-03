@@ -41,7 +41,7 @@ const Account = ({ accounts }) => {
           <PrimaryButton
             type="button"
             className="btn-block"
-            variant="success"
+            variant="neutral"
             onClick={() =>
               openAccountModal("Buat Akun", null, "account-create", true)
             }

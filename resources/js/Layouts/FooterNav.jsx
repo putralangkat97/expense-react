@@ -1,78 +1,66 @@
-import { Link, usePage } from '@inertiajs/react';
+import { Link, usePage } from "@inertiajs/react";
 import {
   ChartNoAxesCombined,
   CircleUserRound,
   Home,
   ScrollText,
   WalletMinimal,
-} from 'lucide-react';
+} from "lucide-react";
 
 const FooterNav = () => {
   const { url } = usePage();
 
+  const navContents = [
+    {
+      name: "Home",
+      icon: <Home size={32} />,
+      url: route("home"),
+      isActive: url.startsWith("/home"),
+    },
+    {
+      name: "Account",
+      icon: <WalletMinimal size={32} />,
+      url: route("account.index"),
+      isActive: url.startsWith("/account"),
+    },
+    {
+      name: "Transaction",
+      icon: <ScrollText size={32} />,
+      url: route("transaction.index"),
+      isActive: url.startsWith("/transaction"),
+    },
+    {
+      name: "Report",
+      icon: <ChartNoAxesCombined size={32} />,
+      url: route("report.index"),
+      isActive: url.startsWith("/report"),
+    },
+    {
+      name: "Profile",
+      icon: <CircleUserRound size={32} />,
+      url: route("profile.index"),
+      isActive: url.startsWith("/profile"),
+    },
+  ];
+
   return (
-    <div className="h-18 fixed bottom-0 left-1/2 z-50 w-full -translate-x-1/2 transform border-t-2 border-primary bg-base-100 shadow-md transition-transform duration-300 sm:h-20">
+    <div className="h-18 fixed bottom-0 left-1/2 z-50 w-full -translate-x-1/2 transform border-t-2 border-neutral bg-base-100 shadow-md transition-transform duration-300 sm:h-20">
       <div className="flex justify-around space-x-1.5 px-2 py-2 sm:-mt-0.5">
-        <Link
-          prefetch="click"
-          href={route('home')}
-          className={
-            'rounded-full border-x-2 border-b-4 border-t-2 p-2 transition-colors duration-200 ' +
-            (url.startsWith('/home')
-              ? 'border-primary bg-primary/70 text-base-100'
-              : 'border-transparent bg-transparent text-neutral')
-          }
-        >
-          <Home size={32} />
-        </Link>
-        <Link
-          prefetch="click"
-          href={route('account.index')}
-          className={
-            'rounded-full border-x-2 border-b-4 border-t-2 p-2 transition-colors duration-200 ' +
-            (url.startsWith('/account')
-              ? 'border-primary bg-primary/70 text-base-100'
-              : 'border-transparent bg-transparent text-neutral')
-          }
-        >
-          <WalletMinimal size={32} />
-        </Link>
-        <Link
-          prefetch="click"
-          href={route('transaction.index')}
-          className={
-            'rounded-full border-x-2 border-b-4 border-t-2 p-2 transition-colors duration-200 ' +
-            (url.startsWith('/transaction')
-              ? 'border-primary bg-primary/70 text-base-100'
-              : 'border-transparent bg-transparent text-neutral')
-          }
-        >
-          <ScrollText size={32} />
-        </Link>
-        <Link
-          prefetch="click"
-          href={route('report.index')}
-          className={
-            'rounded-full border-x-2 border-b-4 border-t-2 p-2 transition-colors duration-200 ' +
-            (url.startsWith('/report')
-              ? 'border-primary bg-primary/70 text-base-100'
-              : 'border-transparent bg-transparent text-neutral')
-          }
-        >
-          <ChartNoAxesCombined size={32} />
-        </Link>
-        <Link
-          prefetch="click"
-          href={route('profile.index')}
-          className={
-            'rounded-full border-x-2 border-b-4 border-t-2 p-2 transition-colors duration-200 ' +
-            (url.startsWith('/profile')
-              ? 'border-primary bg-primary/70 text-base-100'
-              : 'border-transparent bg-transparent text-neutral')
-          }
-        >
-          <CircleUserRound size={32} />
-        </Link>
+        {navContents.map((item) => (
+          <Link
+            key={item.name}
+            prefetch="click"
+            href={item.url}
+            className={
+              "rounded-full border-2 p-2 transition-colors duration-200 " +
+              (item.isActive
+                ? "border-neutral bg-neutral text-neutral-content"
+                : "border-transparent bg-transparent text-base-content")
+            }
+          >
+            {item.icon}
+          </Link>
+        ))}
       </div>
     </div>
   );

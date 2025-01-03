@@ -71,17 +71,19 @@ const Home = ({
 
       {/* Balance */}
       <div className="px-6">
-        <div className="card card-compact border-x-2 border-b-4 border-t-2 border-primary bg-base-200">
+        <div className="card card-compact p-4 bg-neutral text-neutral-content">
           <div className="card-body">
             <TotalBalance totalBalance={totalBalance} />
-            <Divider className={"my-2"} />
-            <TransactionButton triggerModal={openTransactionModal} />
           </div>
         </div>
       </div>
 
+      <div className="px-6 mt-4">
+        <TransactionButton triggerModal={openTransactionModal} />
+      </div>
+
       {/* Account List */}
-      <div className="mt-10">
+      {/* <div className="mt-10">
         <div className="flex items-end justify-between px-6">
           <h2 className="text-xl font-bold text-neutral sm:text-2xl">Akun</h2>
           {accounts.length > 0 && (
@@ -113,13 +115,13 @@ const Home = ({
             <AccountEmpty triggerModal={openAccountModal} />
           )}
         </div>
-      </div>
+      </div> */}
 
       {/* Recent transactions */}
       {accounts.length > 0 && (
         <div className="mt-10 px-6">
           <div className="flex items-end justify-between">
-            <h2 className="text-xl font-bold text-neutral sm:text-2xl">
+            <h2 className="text-xl font-bold text-base-content sm:text-2xl">
               Transaksi terakhir
             </h2>
             {accounts.length > 0 && transactions.length > 0 && (
