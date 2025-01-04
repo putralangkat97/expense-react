@@ -20,7 +20,7 @@ export default forwardRef(function TextInput(
     <input
       {...props}
       type={type}
-      className={'input input-bordered input-md ' + className}
+      className={'input input-bordered rounded-xl input-md ' + className}
       ref={localRef}
     />
   );

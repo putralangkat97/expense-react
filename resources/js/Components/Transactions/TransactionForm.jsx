@@ -175,14 +175,14 @@ const TransactionForm = ({
         />
         <InputError message={errors.note} className="mt-2" />
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center mt-2">
         <label className="flex items-center">
           <Checkbox
-            className="mt-2"
+            className=""
             checked={data.is_recurring}
             onChange={(e) => setData("is_recurring", e.target.checked)}
           />
-          <span className="ms-2 text-base-content">Transaksi berulang</span>
+          <span className="ms-2 text-base-content -mt-0.5">Transaksi berulang</span>
         </label>
         <div
           className="tooltip ml-1 text-base-content"
@@ -233,7 +233,7 @@ const TransactionForm = ({
       {transactionData && <input type="hidden" value={data.transactionId} />}
       <div className="mt-2">
         <PrimaryButton
-          className="btn-block"
+          className="btn-block rounded-xl"
           variant="neutral"
           disabled={processing}
         >

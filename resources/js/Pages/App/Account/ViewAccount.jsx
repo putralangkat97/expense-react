@@ -50,6 +50,7 @@ const AccountView = ({ account, transactions, accounts, categories }) => {
           <PrimaryButton
             type="button"
             variant="neutral"
+            className="rounded-xl"
             onClick={() =>
               openAccountModal("Edit Akun", account, "account-edit", true)
             }

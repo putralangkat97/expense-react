@@ -42,7 +42,7 @@ const TransactionView = ({
           <TransactionDetail data={transactions} />
           <PrimaryButton
             type="button"
-            className=""
+            className="rounded-xl"
             variant="neutral"
             onClick={() =>
               openTransactionModal(

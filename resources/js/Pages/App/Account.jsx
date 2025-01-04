@@ -37,10 +37,10 @@ const Account = ({ accounts }) => {
         <div className="flex items-center justify-center">
           <h2 className="text-center text-3xl sm:text-4xl">Daftar Akun</h2>
         </div>
-        <div className="mt-10 flex justify-end">
+        <div className="mt-10 mb-4 flex justify-end">
           <PrimaryButton
             type="button"
-            className="btn-block"
+            className="btn-block rounded-xl"
             variant="neutral"
             onClick={() =>
               openAccountModal("Buat Akun", null, "account-create", true)

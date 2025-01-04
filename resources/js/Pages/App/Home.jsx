@@ -68,7 +68,7 @@ const Home = ({
       {/* Balance */}
       <div className="px-6">
         <Link
-          className="relative card card-compact p-4 bg-base-200 text-neutral-content overflow-hidden border-2 border-base-300 hover:bg-base-300 transition-all duration-300"
+          className="relative card card-compact p-4 bg-base-200 text-neutral-content overflow-hidden border-2 border-base-300 hover:border-base-200 hover:bg-base-100 transition-all duration-300"
           href={route("account.index")}
         >
           <div className="card-body z-10">
