@@ -1,5 +1,6 @@
 import AppLayout from "@/Layouts/AppLayout";
 import {
+    BarElement,
   CategoryScale,
   Chart as ChartJS,
   Legend,
@@ -9,7 +10,7 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -19,6 +20,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
+  BarElement
 );
 
 const Report = ({ data }) => {
@@ -68,7 +70,7 @@ const Report = ({ data }) => {
       </div>
       <div className="px-2">
         <div className="mt-10 flex flex-col items-center justify-center space-y-2">
-          <Line options={options} data={chartData} />
+          <Bar options={options} data={chartData} />
         </div>
       </div>
     </>

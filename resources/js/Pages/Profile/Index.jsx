@@ -16,7 +16,7 @@ const ProfileIndex = () => {
       )}
 
       <div className="px-6">
-        <div className="card card-compact bg-base-200 p-3">
+        <div className="card card-compact bg-base-200 p-3 border-2 border-base-300">
           <div className="card-body">
             <div className="flex flex-col space-y-10">
               <Link

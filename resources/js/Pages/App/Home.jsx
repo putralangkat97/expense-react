@@ -67,7 +67,7 @@ const Home = ({
 
       {/* Balance */}
       <div className="px-6">
-        <div className="relative card card-compact p-4 bg-neutral text-neutral-content overflow-hidden">
+        <Link className="relative card card-compact p-4 bg-base-200 text-neutral-content overflow-hidden border-2 border-base-300 hover:bg-base-300 transition-all duration-300" href={route('account.index')}>
           <div className="card-body z-10">
             <TotalBalance totalBalance={totalBalance} />
           </div>
@@ -77,7 +77,7 @@ const Home = ({
           <div className="absolute -bottom-8 rotate-12 right-8">
             <Banknote size={120} className="text-gray-600" />
           </div>
-        </div>
+        </Link>
       </div>
 
       <div className="px-6 mt-4">

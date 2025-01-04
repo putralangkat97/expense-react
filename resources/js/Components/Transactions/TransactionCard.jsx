@@ -8,7 +8,7 @@ const TransactionCard = ({ data }) => {
     <Link
       href={route("transaction.view", data.id)}
       className={
-        "card card-compact sm:p-2 cursor-pointer bg-base-200 border-2 border-base-200"
+        "card card-compact sm:p-2 cursor-pointer bg-base-200 border-2 border-base-300 hover:bg-base-300 transition-all duration-300"
       }
     >
       <div className="card-body">
@@ -16,7 +16,7 @@ const TransactionCard = ({ data }) => {
           <div className="flex items-center space-x-2">
             <div
               className={
-                "rounded-full p-2 hover:text-base-100 bg-neutral text-neutral-content"
+                "rounded-full p-2 bg-base-200 text-base-content border-2 border-base-300"
               }
             >
               <CategoryIcon category={data.category_name} />

@@ -41,7 +41,7 @@ export default function PrimaryButton({
       break;
     case "neutral":
       btnVariant =
-        "bg-neutral border-neutral hover:bg-neutral text-neutral-content hover:border-neutral";
+        "bg-base-200 border-base-300 hover:bg-base-300 text-base-content hover:border-base-300";
       break;
     default:
       btnVariant =
