@@ -44,25 +44,45 @@ const FooterNav = () => {
   ];
 
   return (
-    <div className="h-18 fixed bottom-0 left-1/2 z-50 w-full -translate-x-1/2 transform border-t-2 border-base-300 bg-base-100 shadow-md transition-transform duration-300 sm:h-20">
-      <div className="flex justify-around space-x-1.5 px-2 py-2 sm:-mt-0.5">
+    <>
+      <div className="h-18 fixed md:hidden bottom-0 left-1/2 z-50 w-full -translate-x-1/2 transform border-t-2 border-base-300 bg-base-100 shadow-md transition-transform duration-300 sm:h-20">
+        <div className="flex justify-around space-x-1.5 px-2 py-2 sm:-mt-0.5">
+          {navContents.map((item) => (
+            <Link
+              key={item.name}
+              prefetch="click"
+              href={item.url}
+              className={
+                "rounded-full border-2 p-3 transition-colors duration-200 " +
+                (item.isActive
+                  ? "border-neutral bg-base-200 text-base-content"
+                  : "border-transparent bg-transparent text-base-content")
+              }
+            >
+              {item.icon}
+            </Link>
+          ))}
+        </div>
+      </div>
+      <div className="hidden md:fixed md:flex left-4 top-1/2 flex-col justify-around space-y-1.5 -translate-y-1/2 sm:-mt-0.5">
         {navContents.map((item) => (
           <Link
             key={item.name}
             prefetch="click"
             href={item.url}
             className={
-              "rounded-full border-2 p-3 transition-colors duration-200 " +
+              "rounded-full flex items-center border-2 p-3 transition-colors duration-200 tooltip tooltip-right " +
               (item.isActive
                 ? "border-neutral bg-base-200 text-base-content"
                 : "border-transparent bg-transparent text-base-content")
             }
+            data-tip={item.name}
           >
             {item.icon}
           </Link>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

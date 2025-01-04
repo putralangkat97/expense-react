@@ -13,12 +13,12 @@ export default function AppLayout({
     <>
       <Head title={title} />
       <div className="min-h-screen bg-base-100">
-        <div className="mx-auto w-full pb-28 pt-16 sm:max-w-md">
+        <div className="mx-auto w-full pb-28 pt-16 sm:max-w-lg">
           {/* header nav */}
           {useNavHead && <NavHead user={user} />}
 
           {/* main content */}
-          <main className={`${useNavHead ? "mt-10" : ""}`}>{children}</main>
+          <main className={`sm:pl-4 ${useNavHead ? "mt-10" : ""}`}>{children}</main>
 
           {/* footer nav */}
           <FooterNav />
