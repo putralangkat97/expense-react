@@ -67,15 +67,18 @@ const Home = ({
 
       {/* Balance */}
       <div className="px-6">
-        <Link className="relative card card-compact p-4 bg-base-200 text-neutral-content overflow-hidden border-2 border-base-300 hover:bg-base-300 transition-all duration-300" href={route('account.index')}>
+        <Link
+          className="relative card card-compact p-4 bg-base-200 text-neutral-content overflow-hidden border-2 border-base-300 hover:bg-base-300 transition-all duration-300"
+          href={route("account.index")}
+        >
           <div className="card-body z-10">
             <TotalBalance totalBalance={totalBalance} />
           </div>
           <div className="absolute -top-4 right-4">
-            <Coins size={72} className="text-gray-600" />
+            <Coins size={72} className="text-base-300" />
           </div>
           <div className="absolute -bottom-8 rotate-12 right-8">
-            <Banknote size={120} className="text-gray-600" />
+            <Banknote size={120} className="text-base-300" />
           </div>
         </Link>
       </div>
