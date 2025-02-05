@@ -24,28 +24,25 @@ export default function PrimaryButton({
   let btnVariant = variant;
   switch (variant) {
     case "success":
-      btnVariant =
-        "bg-success border-green-700 hover:bg-green-700 hover:text-white hover:border-green-700";
+      btnVariant = "btn-success";
       break;
     case "info":
-      btnVariant =
-        "bg-info text-white border-info hover:bg-info hover:text-white hover:border-info";
+      btnVariant = "btn-info";
       break;
     case "error":
-      btnVariant =
-        "bg-error border-red-700 hover:bg-red-700 hover:text-white hover:border-red-700";
+      btnVariant = "btn-error";
       break;
     case "warning":
-      btnVariant =
-        "bg-warning border-amber-700 hover:bg-amber-700 hover:text-white hover:border-amber-700";
+      btnVariant = "btn-warning";
       break;
     case "neutral":
-      btnVariant =
-        "bg-base-200 border-base-300 hover:bg-base-300 text-base-content hover:border-base-300";
+      btnVariant = "btn-neutral";
+      break;
+    case "default":
+      btnVariant = "";
       break;
     default:
-      btnVariant =
-        "bg-primary/80 border-primary hover:bg-primary hover:border-primary";
+      btnVariant = "btn-primary";
       break;
   }
 
@@ -53,13 +50,11 @@ export default function PrimaryButton({
     <button
       {...props}
       className={
-        `btn border-2 ${btnVariant} ${disabled && "disabled"} ${btnSize} ` +
-        className
+        `btn ${btnVariant} ${disabled && "disabled"} ${btnSize} ` + className
       }
       disabled={disabled}
     >
       {children}
-      {disabled && <LoaderCircle size={20} className="animate-spin" />}
     </button>
   );
 }

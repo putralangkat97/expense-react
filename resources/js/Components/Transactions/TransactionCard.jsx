@@ -8,17 +8,13 @@ const TransactionCard = ({ data }) => {
     <Link
       href={route("transaction.view", data.id)}
       className={
-        "card card-compact sm:p-2 cursor-pointer bg-base-200 border-2 border-base-300 hover:bg-base-300 transition-all duration-300"
+        "card card-compact sm:p-2 cursor-pointer bg-base-200 hover:bg-base-300 transition-all duration-200"
       }
     >
       <div className="card-body">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div
-              className={
-                "rounded-full p-2 bg-base-200 text-base-content border-2 border-base-300"
-              }
-            >
+            <div className={"rounded-full p-2 md:p-3 bg-base-100 text-base-content"}>
               <CategoryIcon category={data.category_name} />
             </div>
             <div className="flex flex-col items-start justify-center">
@@ -37,7 +33,7 @@ const TransactionCard = ({ data }) => {
           </div>
           <div
             className={
-              data.transactionType === "in" ? "text-green-700" : "text-red-700"
+              data.transactionType === "in" ? "text-success" : "text-error"
             }
           >
             {data.transactionType === "in" ? "" : "-"}

@@ -41,13 +41,13 @@ const Account = ({ accounts }) => {
           <PrimaryButton
             type="button"
             className="btn-block rounded-xl"
-            variant="neutral"
+            variant="default"
             onClick={() =>
               openAccountModal("Buat Akun", null, "account-create", true)
             }
           >
-            <CirclePlus size={16} />
             Buat Akun Baru
+            <CirclePlus size={16} className="text-primary" />
           </PrimaryButton>
         </div>
         <div className="mt-2 flex flex-col space-y-2">

@@ -3,7 +3,7 @@ export default function Checkbox({ className = "", ...props }) {
     <input
       {...props}
       type="checkbox"
-      className={"checkbox border border-gray-300 bg-base-200 " + className}
+      className={"checkbox checkbox-primary " + className}
     />
   );
 }

@@ -1,6 +1,0 @@
-import{j as t}from"./app-B7L1yXnD.js";import{c}from"./createLucideIcon-FOH8qvaN.js";/**
- * @license lucide-react v0.456.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */const d=c("LoaderCircle",[["path",{d:"M21 12a9 9 0 1 1-6.219-8.56",key:"13zald"}]]);function g({className:s="",disabled:o,children:n,variant:a="default",size:b="md",...i}){let r=b;switch(b){case"sm":r="btn-sm";break;case"lg":r="btn-lg";break;default:r="btn-md";break}let e=a;switch(a){case"success":e="bg-success border-green-700 hover:bg-green-700 hover:text-white hover:border-green-700";break;case"info":e="bg-info text-white border-info hover:bg-info hover:text-white hover:border-info";break;case"error":e="bg-error border-red-700 hover:bg-red-700 hover:text-white hover:border-red-700";break;case"warning":e="bg-warning border-amber-700 hover:bg-amber-700 hover:text-white hover:border-amber-700";break;case"neutral":e="bg-base-200 border-base-300 hover:bg-base-300 text-base-content hover:border-base-300";break;default:e="bg-primary/80 border-primary hover:bg-primary hover:border-primary";break}return t.jsxs("button",{...i,className:`btn border-2 ${e} ${o&&"disabled"} ${r} `+s,disabled:o,children:[n,o&&t.jsx(d,{size:20,className:"animate-spin"})]})}export{g as P};

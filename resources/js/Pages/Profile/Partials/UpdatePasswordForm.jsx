@@ -4,6 +4,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Transition } from "@headlessui/react";
 import { useForm } from "@inertiajs/react";
+import { LoaderIcon } from "lucide-react";
 import { useRef } from "react";
 
 export default function UpdatePasswordForm({ className = "" }) {
@@ -52,7 +53,6 @@ export default function UpdatePasswordForm({ className = "" }) {
       <form onSubmit={updatePassword} className="mt-6 space-y-6">
         <div>
           <InputLabel htmlFor="current_password" value="Current Password" />
-
           <TextInput
             id="current_password"
             ref={currentPasswordInput}
@@ -62,13 +62,10 @@ export default function UpdatePasswordForm({ className = "" }) {
             className="mt-1 block w-full"
             autoComplete="current-password"
           />
-
           <InputError message={errors.current_password} className="mt-2" />
         </div>
-
         <div>
           <InputLabel htmlFor="password" value="New Password" />
-
           <TextInput
             id="password"
             ref={passwordInput}
@@ -78,16 +75,13 @@ export default function UpdatePasswordForm({ className = "" }) {
             className="mt-1 block w-full"
             autoComplete="new-password"
           />
-
           <InputError message={errors.password} className="mt-2" />
         </div>
-
         <div>
           <InputLabel
             htmlFor="password_confirmation"
             value="Confirm Password"
           />
-
           <TextInput
             id="password_confirmation"
             value={data.password_confirmation}
@@ -96,17 +90,16 @@ export default function UpdatePasswordForm({ className = "" }) {
             className="mt-1 block w-full"
             autoComplete="new-password"
           />
-
           <InputError message={errors.password_confirmation} className="mt-2" />
         </div>
-
         <div className="flex items-center gap-4">
           <PrimaryButton
-            disabled={processing}
-            variant="neutral"
             className="btn-block"
+            variant="primary"
+            disabled={processing}
           >
-            Save
+            {processing && <LoaderIcon className="animate-spin" />}
+            {!processing && "Simpan"}
           </PrimaryButton>
 
           <Transition

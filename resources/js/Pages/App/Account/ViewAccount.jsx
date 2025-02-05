@@ -49,14 +49,14 @@ const AccountView = ({ account, transactions, accounts, categories }) => {
           <AccountCard data={account} />
           <PrimaryButton
             type="button"
-            variant="neutral"
+            variant="info"
             className="rounded-xl"
             onClick={() =>
               openAccountModal("Edit Akun", account, "account-edit", true)
             }
           >
-            <Pencil size={16} />
             edit akun
+            <Pencil size={16} className="text-info-content" />
           </PrimaryButton>
         </div>
 

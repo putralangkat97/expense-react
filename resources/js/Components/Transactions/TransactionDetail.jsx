@@ -6,7 +6,7 @@ import { Link } from "@inertiajs/react";
 const TransactionDetail = ({ data }) => {
   const configHelper = new ConfigHelper();
   return (
-    <div className="card card-compact bg-base-200 mb-2 border-2 border-base-300">
+    <div className="card card-compact bg-base-200 mb-2">
       <div className="card-body grid grid-cols-2 gap-6">
         <div>
           <InputLabel
@@ -41,7 +41,7 @@ const TransactionDetail = ({ data }) => {
           />
           <h2
             className={
-              data.transactionType === "in" ? "text-green-700" : "text-red-700"
+              data.transactionType === "in" ? "text-success" : "text-error"
             }
           >
             {data.transactionType === "in" ? "" : "-"}

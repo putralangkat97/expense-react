@@ -43,7 +43,7 @@ const Register = () => {
             value={data.name}
             className="mt-1 block w-full"
             autoComplete="name"
-            placeholder="Name"
+            placeholder="nama lengkap"
             isFocused={true}
             onChange={(e) => setData("name", e.target.value)}
             required
@@ -59,7 +59,7 @@ const Register = () => {
             value={data.email}
             className="mt-1 block w-full"
             autoComplete="username"
-            placeholder="Email address"
+            placeholder="alamat email"
             onChange={(e) => setData("email", e.target.value)}
             required
           />
@@ -74,7 +74,7 @@ const Register = () => {
             value={data.password}
             className="mt-1 block w-full"
             autoComplete="new-password"
-            placeholder="Password"
+            placeholder="password"
             onChange={(e) => setData("password", e.target.value)}
             required
           />
@@ -92,27 +92,23 @@ const Register = () => {
             value={data.password_confirmation}
             className="mt-1 block w-full"
             autoComplete="new-password"
-            placeholder="Confirm password"
+            placeholder="konfirmasi password"
             onChange={(e) => setData("password_confirmation", e.target.value)}
             required
           />
           <InputError message={errors.password_confirmation} className="mt-2" />
         </div>
         <div className="mt-6 flex flex-col items-center justify-center">
-          <PrimaryButton
-            className="btn-block"
-            variant="neutral"
-            size="lg"
-            disabled={processing}
-          >
-            Register
+          <PrimaryButton className="btn-block" size="lg" disabled={processing}>
+            {processing && <LoaderIcon className="animate-spin" />}
+            {!processing && "Daftar"}
           </PrimaryButton>
         </div>
       </form>
 
       <div className="fixed bottom-6">
         <Link href={route("login")} className="link text-primary text-sm">
-          Already registered?
+          sudah punya akun?
         </Link>
       </div>
     </>

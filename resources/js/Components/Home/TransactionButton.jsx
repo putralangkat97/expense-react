@@ -1,4 +1,10 @@
-import { ArrowDownFromLine, ArrowUpFromLine, Send } from "lucide-react";
+import {
+  ArrowDownFromLine,
+  ArrowUpFromLine,
+  Send,
+  TrendingDown,
+  TrendingUp,
+} from "lucide-react";
 import PrimaryButton from "../PrimaryButton";
 
 const TransactionButton = ({ triggerModal }) => {
@@ -6,26 +12,26 @@ const TransactionButton = ({ triggerModal }) => {
     <div className="flex space-x-4" id="trx">
       <div className="flex flex-1 flex-col items-center">
         <PrimaryButton
-          variant="neutral"
+          variant="default"
           type="button"
           className="rounded-xl w-full"
           onClick={() =>
             triggerModal("Buat Pengeluaran", null, "transaction-out")
           }
         >
-          <ArrowUpFromLine size={22} />
           Pengeluaran
+          <TrendingUp size={22} className="text-error" />
         </PrimaryButton>
       </div>
       <div className="flex flex-1 flex-col items-center">
         <PrimaryButton
-          variant="neutral"
+          variant="default"
           type="button"
           className="rounded-xl w-full"
           onClick={() => triggerModal("Buat Pemasukan", null, "transaction-in")}
         >
-          <ArrowDownFromLine size={22} />
           Pemasukan
+          <TrendingDown size={22} className="text-success" />
         </PrimaryButton>
       </div>
     </div>

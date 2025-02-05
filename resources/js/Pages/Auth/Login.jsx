@@ -5,7 +5,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import GuestLayout from "@/Layouts/GuestLayout";
 import { Link, useForm } from "@inertiajs/react";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, LoaderIcon } from "lucide-react";
 
 const Login = ({ status, canResetPassword }) => {
   const { data, setData, post, processing, errors, reset } = useForm({
@@ -48,7 +48,7 @@ const Login = ({ status, canResetPassword }) => {
             value={data.email}
             className="mt-2 block w-full"
             autoComplete="username"
-            placeholder="Email address"
+            placeholder="alamat email"
             isFocused={true}
             onChange={(e) => setData("email", e.target.value)}
           />
@@ -63,7 +63,7 @@ const Login = ({ status, canResetPassword }) => {
             value={data.password}
             className="mt-1 block w-full"
             autoComplete="current-password"
-            placeholder="Password"
+            placeholder="password"
             onChange={(e) => setData("password", e.target.value)}
           />
           <InputError message={errors.password} className="mt-2" />
@@ -75,17 +75,13 @@ const Login = ({ status, canResetPassword }) => {
               checked={data.remember}
               onChange={(e) => setData("remember", e.target.checked)}
             />
-            <span className="ms-2 text-neutral">Remember me</span>
+            <span className="ms-2 text-base-content">Ingat saya</span>
           </label>
         </div>
         <div className="mt-6 flex flex-col items-center justify-center">
-          <PrimaryButton
-            className="btn-block"
-            variant="neutral"
-            size="lg"
-            disabled={processing}
-          >
-            Log in
+          <PrimaryButton className="btn-block" size="lg" disabled={processing}>
+            {processing && <LoaderIcon className="animate-spin" />}
+            {!processing && "Masuk"}
           </PrimaryButton>
         </div>
       </form>

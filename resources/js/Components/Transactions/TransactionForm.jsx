@@ -6,7 +6,7 @@ import SelectInput from "../SelectInput";
 import TextInput from "../TextInput";
 import Checkbox from "../Checkbox";
 import { useEffect, useState } from "react";
-import { CircleHelp } from "lucide-react";
+import { CircleHelp, LoaderIcon } from "lucide-react";
 import InputLabel from "../InputLabel";
 
 const TransactionForm = ({
@@ -182,7 +182,9 @@ const TransactionForm = ({
             checked={data.is_recurring}
             onChange={(e) => setData("is_recurring", e.target.checked)}
           />
-          <span className="ms-2 text-base-content -mt-0.5">Transaksi berulang</span>
+          <span className="ms-2 text-base-content -mt-0.5">
+            Transaksi berulang
+          </span>
         </label>
         <div
           className="tooltip ml-1 text-base-content"
@@ -231,13 +233,15 @@ const TransactionForm = ({
       )}
       <input type="hidden" value={data.transactionType} />
       {transactionData && <input type="hidden" value={data.transactionId} />}
-      <div className="mt-2">
+      <div className="mt-2 md:mt-4">
         <PrimaryButton
-          className="btn-block rounded-xl"
-          variant="neutral"
+          className="btn-block"
+          variant="primary"
           disabled={processing}
         >
-          {processing ? "Saving..." : "Save"}
+          {processing && <LoaderIcon className="animate-spin" />}
+          {!processing &&
+            (categoryType === "in" ? "simpan pemasukan" : "simpan pengeluaran")}
         </PrimaryButton>
       </div>
     </form>

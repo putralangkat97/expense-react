@@ -2,19 +2,14 @@ import BottomSheet from "@/Components/BottomSheet";
 import TotalBalance from "@/Components/Home/TotalBalance";
 import TransactionButton from "@/Components/Home/TransactionButton";
 import TransactionCard from "@/Components/Transactions/TransactionCard";
-import TransactionDetail from "@/Components/Transactions/TransactionDetail";
 import TransactionForm from "@/Components/Transactions/TransactionForm";
 import AppLayout from "@/Layouts/AppLayout";
 import { Link } from "@inertiajs/react";
 
 // Import Swiper styles
-import AccountDetail from "@/Components/Account/AccountDetail";
-import AccountForm from "@/Components/Account/AccountForm";
 import Toast from "@/Components/Toast";
 import TransactionEmpty from "@/Components/Transactions/TransactionEmpty";
 import { useModalHook } from "@/Helpers/modalHook.js";
-import "swiper/css";
-import "swiper/css/pagination";
 import { Banknote, Coins } from "lucide-react";
 
 const Home = ({
@@ -68,17 +63,17 @@ const Home = ({
       {/* Balance */}
       <div className="px-6">
         <Link
-          className="relative card card-compact p-4 bg-base-200 text-neutral-content overflow-hidden border-2 border-base-300 hover:border-base-200 hover:bg-base-100 transition-all duration-300"
+          className="relative card card-compact p-4 bg-base-200 text-base-content overflow-hidden hover:bg-base-300 transition-all duration-200"
           href={route("account.index")}
         >
           <div className="card-body z-10">
             <TotalBalance totalBalance={totalBalance} />
           </div>
           <div className="absolute -top-4 right-4">
-            <Coins size={72} className="text-base-300" />
+            <Coins size={72} className="text-primary/10" />
           </div>
           <div className="absolute -bottom-8 rotate-12 right-8">
-            <Banknote size={120} className="text-base-300" />
+            <Banknote size={120} className="text-accent/10" />
           </div>
         </Link>
       </div>
@@ -86,41 +81,6 @@ const Home = ({
       <div className="px-6 mt-4">
         <TransactionButton triggerModal={openTransactionModal} />
       </div>
-
-      {/* Account List */}
-      {/* <div className="mt-10">
-        <div className="flex items-end justify-between px-6">
-          <h2 className="text-xl font-bold text-neutral sm:text-2xl">Akun</h2>
-          {accounts.length > 0 && (
-            <Link
-              href={route("account.index")}
-              className="transition-colors duration-200 hover:link hover:link-primary"
-            >
-              Lihat semua
-            </Link>
-          )}
-        </div>
-        <div className="mt-3 px-6">
-          {accounts.length > 0 ? (
-            <Swiper
-              grabCursor={true}
-              spaceBetween={32}
-              pagination={{
-                dynamicBullets: true,
-              }}
-              modules={[Pagination]}
-            >
-              {accounts.map((acc, key) => (
-                <SwiperSlide key={key}>
-                  <AccountCard data={acc} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          ) : (
-            <AccountEmpty triggerModal={openAccountModal} />
-          )}
-        </div>
-      </div> */}
 
       {/* Recent transactions */}
       {accounts.length > 0 && (
@@ -132,7 +92,7 @@ const Home = ({
             {accounts.length > 0 && transactions.length > 0 && (
               <Link
                 href={route("transaction.index")}
-                className="transition-colors duration-200 hover:link hover:link-primary"
+                className="transition-colors duration-200 link link-primary"
               >
                 Lihat semua
               </Link>
@@ -160,34 +120,13 @@ const Home = ({
         </div>
       )}
 
-      {/* Account Modal */}
-      <BottomSheet
-        isOpen={isAccountModalOpen}
-        onClose={closeAccountModal}
-        title={accountModalTitle}
-      >
-        {isAccountForm ? (
-          <AccountForm
-            accountData={selectedAccount}
-            closeModal={closeAccountModal}
-          />
-        ) : (
-          selectedAccount && (
-            <AccountDetail
-              data={selectedAccount}
-              triggerModal={openAccountModal}
-            />
-          )
-        )}
-      </BottomSheet>
-
       {/* Transaction Modal */}
       <BottomSheet
         isOpen={isTransactionModalOpen}
         onClose={closeTransactionModal}
         title={transactionModalTitle}
       >
-        {isTransactionForm ? (
+        {isTransactionForm && (
           <TransactionForm
             accounts={accounts}
             categories={categories}
@@ -196,13 +135,6 @@ const Home = ({
             frequencies={frequencies}
             closeModal={closeTransactionModal}
           />
-        ) : (
-          selectedTransaction && (
-            <TransactionDetail
-              data={selectedTransaction}
-              triggerModal={openTransactionModal}
-            />
-          )
         )}
       </BottomSheet>
     </>

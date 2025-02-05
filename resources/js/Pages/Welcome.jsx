@@ -1,6 +1,6 @@
-import Illustration from '@/Components/Icons/Illustration';
-import GuestLayout from '@/Layouts/GuestLayout';
-import { Link } from '@inertiajs/react';
+import Illustration from "@/Components/Icons/Illustration";
+import GuestLayout from "@/Layouts/GuestLayout";
+import { Link } from "@inertiajs/react";
 
 const Welcome = () => {
   return (
@@ -20,15 +20,15 @@ const Welcome = () => {
         <div>
           <Link
             as="button"
-            href={route('register')}
+            href={route("register")}
             className="btn btn-block btn-lg btn-primary mt-4"
           >
-            {'Get Started'}
+            {"daftar disini"}
           </Link>
-          <div className="text-base-content mt-px text-sm">
-            {'already have account? '}
-            <Link href={route('login')} className="text-primary link">
-              Login
+          <div className="text-base-content mt-1 text-sm">
+            {"sudah punya akun? "}
+            <Link href={route("login")} className="text-primary link">
+              masuk
             </Link>
           </div>
         </div>
@@ -37,6 +37,6 @@ const Welcome = () => {
   );
 };
 
-Welcome.layout = (page) => <GuestLayout title={'Welcome'}>{page}</GuestLayout>;
+Welcome.layout = (page) => <GuestLayout title={"Welcome"}>{page}</GuestLayout>;
 
 export default Welcome;

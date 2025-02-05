@@ -43,7 +43,7 @@ const TransactionView = ({
           <PrimaryButton
             type="button"
             className="rounded-xl"
-            variant="neutral"
+            variant="info"
             onClick={() =>
               openTransactionModal(
                 "Edit Transaction",
@@ -53,13 +53,9 @@ const TransactionView = ({
               )
             }
           >
-            <Pencil size={16} />
             edit transaksi
+            <Pencil size={16} className="text-info-content" />
           </PrimaryButton>
-          {/* <PrimaryButton type="button" className="" variant="error">
-            <Trash size={16} />
-            hapus transaksi
-          </PrimaryButton> */}
         </div>
       </div>
 

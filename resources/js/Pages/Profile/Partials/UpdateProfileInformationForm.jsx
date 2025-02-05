@@ -4,6 +4,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Transition } from "@headlessui/react";
 import { Link, useForm, usePage } from "@inertiajs/react";
+import { LoaderIcon } from "lucide-react";
 
 export default function UpdateProfileInformation({
   mustVerifyEmail,
@@ -28,18 +29,17 @@ export default function UpdateProfileInformation({
     <section className={className}>
       <header>
         <h2 className="text-lg font-medium text-base-content">
-          Profile Information
+          Informasi Personal
         </h2>
 
         <p className="mt-1 text-sm text-base-content">
-          Update your account's profile information and email address.
+          update informasi nama atau email kamu.
         </p>
       </header>
 
       <form onSubmit={submit} className="mt-6 space-y-6">
         <div>
           <InputLabel htmlFor="name" value="Name" />
-
           <TextInput
             id="name"
             className="mt-1 block w-full"
@@ -49,13 +49,10 @@ export default function UpdateProfileInformation({
             isFocused
             autoComplete="name"
           />
-
           <InputError className="mt-2" message={errors.name} />
         </div>
-
         <div>
           <InputLabel htmlFor="email" value="Email" />
-
           <TextInput
             id="email"
             type="email"
@@ -65,10 +62,8 @@ export default function UpdateProfileInformation({
             required
             autoComplete="username"
           />
-
           <InputError className="mt-2" message={errors.email} />
         </div>
-
         {mustVerifyEmail && user.email_verified_at === null && (
           <div>
             <p className="mt-2 text-sm text-base-content">
@@ -93,11 +88,12 @@ export default function UpdateProfileInformation({
 
         <div className="flex items-center gap-4">
           <PrimaryButton
-            disabled={processing}
-            variant="neutral"
             className="btn-block"
+            variant="primary"
+            disabled={processing}
           >
-            Save
+            {processing && <LoaderIcon className="animate-spin" />}
+            {!processing && "Simpan"}
           </PrimaryButton>
 
           <Transition

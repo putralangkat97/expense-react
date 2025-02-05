@@ -3,7 +3,7 @@ import Toast from "@/Components/Toast";
 import { useTransactionHook } from "@/Helpers/TransactionModalHook";
 import AppLayout from "@/Layouts/AppLayout";
 import { Link } from "@inertiajs/react";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, LogOut } from "lucide-react";
 
 const ProfileIndex = () => {
   const { showToast, toastMessage, toastType } = useTransactionHook();
@@ -16,7 +16,7 @@ const ProfileIndex = () => {
       )}
 
       <div className="px-6">
-        <div className="card card-compact bg-base-200 p-3 border-2 border-base-300">
+        <div className="card card-compact bg-base-200 p-3">
           <div className="card-body">
             <div className="flex flex-col space-y-10">
               <Link
@@ -48,9 +48,10 @@ const ProfileIndex = () => {
           as="button"
           method="post"
           href={route("logout")}
-          className="btn btn-error btn-block border-2 border-red-700 hover:border-red-700 hover:bg-red-700 hover:text-base-100"
+          className="btn btn-error btn-block border-2 hover:text-base-100"
         >
           Logout
+          <LogOut size={16} />
         </Link>
       </div>
     </>

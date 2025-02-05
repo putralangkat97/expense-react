@@ -2,6 +2,7 @@ import { useForm } from "@inertiajs/react";
 import InputError from "../InputError";
 import PrimaryButton from "../PrimaryButton";
 import TextInput from "../TextInput";
+import { LoaderIcon } from "lucide-react";
 
 const AccountForm = ({ accountData = null, closeModal }) => {
   const { data, setData, post, patch, processing, errors, reset } = useForm({
@@ -34,7 +35,7 @@ const AccountForm = ({ accountData = null, closeModal }) => {
     <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-1">
       <div>
         <TextInput
-          placeholder="account name"
+          placeholder="nama akun"
           className="mt-2 block w-full"
           value={data.name}
           onChange={(e) => setData("name", e.target.value)}
@@ -52,13 +53,14 @@ const AccountForm = ({ accountData = null, closeModal }) => {
         <InputError message={errors.balance} className="mt-2" />
       </div>
       {accountData && <input type="hidden" value={data.accountId} />}
-      <div className="mt-2">
+      <div className="mt-2 md:mt-4">
         <PrimaryButton
           className="btn-block"
-          variant="neutral"
+          variant="primary"
           disabled={processing}
         >
-          {processing ? "Saving..." : "Save"}
+          {processing && <LoaderIcon className="animate-spin" />}
+          {!processing && "simpan akun"}
         </PrimaryButton>
       </div>
     </form>
