@@ -14,10 +14,9 @@ class ReportController extends Controller
 {
     public function index()
     {
-        $data = $this->filter();
-        // dd($data);
+        $weekly_report = $this->filter();
         return Inertia::render('App/Report', [
-            'data' => $data,
+            'weekly_report' => $weekly_report,
         ]);
     }
 

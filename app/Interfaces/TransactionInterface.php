@@ -2,14 +2,13 @@
 
 namespace App\Interfaces;
 
-use App\Models\Transaction;
-use Illuminate\Http\Request;
+use App\Http\Requests\API\TransactionRequest;
 use Illuminate\Support\Collection;
 
 interface TransactionInterface
 {
-    public function getTransactions(): Collection;
+    public function getTransactions(int|null $limit): Collection;
     public function getTransaction(string|int $transaction_id): Collection;
-    public function createTransaction(Request $request);
-    public function updateTransaction(Request $request, string|int $transaction_id);
+    public function createTransaction(TransactionRequest $request): array;
+    public function updateTransaction(TransactionRequest $request, string|int $transaction_id): array;
 }

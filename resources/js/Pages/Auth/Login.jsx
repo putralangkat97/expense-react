@@ -79,7 +79,7 @@ const Login = ({ status, canResetPassword }) => {
           </label>
         </div>
         <div className="mt-6 flex flex-col items-center justify-center">
-          <PrimaryButton className="btn-block" size="lg" disabled={processing}>
+          <PrimaryButton className="btn-block" variant="primary" size="lg" disabled={processing}>
             {processing && <LoaderIcon className="animate-spin" />}
             {!processing && "Masuk"}
           </PrimaryButton>

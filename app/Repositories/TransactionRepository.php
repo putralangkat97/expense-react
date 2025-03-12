@@ -4,10 +4,10 @@ namespace App\Repositories;
 
 use App\Actions\AccountAction;
 use App\Enums\FrequencyEnum;
+use App\Http\Requests\API\TransactionRequest;
 use App\Interfaces\TransactionInterface;
 use App\Models\Transaction;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,28 +19,17 @@ class TransactionRepository implements TransactionInterface
         return Auth::user()->id;
     }
 
-    private function validateForm(Request $request): array
+    private function validateForm(TransactionRequest $request): array
     {
-        return $request->validate([
-            'name' => 'required|min:2|max:100',
-            'transactionDate' => 'required',
-            'categoryId' => 'required',
-            'accountId' => 'required',
-            'amount' => 'required|numeric',
-            'note' => 'nullable',
-            'transactionType' => 'required',
-            'is_recurring' => 'nullable',
-            'frequency' => 'required_if:is_recurring,true',
-            'next_due_date' => 'required_if:is_recurring,true',
-        ]);
+        return $request->validated();
     }
 
-    public function getTransactions(): Collection
+    public function getTransactions($limit): Collection
     {
         $transactions = Transaction::with(['category', 'account'])
             ->where('user_id', $this->getCurrentUser())
             ->orderBy('id', 'desc')
-            ->take(5)
+            ->take($limit ?? 5)
             ->get();
 
         $transactions = $transactions->map(function ($transaction) {
@@ -70,8 +59,6 @@ class TransactionRepository implements TransactionInterface
         $transaction = Transaction::with(['category', 'account'])
             ->where('user_id', $this->getCurrentUser())
             ->where('id', $transaction_id)
-            ->orderBy('id', 'desc')
-            ->take(5)
             ->get();
 
         $transaction = $transaction->map(function ($transaction) {
@@ -96,7 +83,7 @@ class TransactionRepository implements TransactionInterface
         return $transaction;
     }
 
-    public function createTransaction(Request $request)
+    public function createTransaction(TransactionRequest $request): array
     {
         $validated = $this->validateForm($request);
         if ($validated) {
@@ -111,7 +98,7 @@ class TransactionRepository implements TransactionInterface
                     $transaction_date_format = Carbon::parse($date, 'UTC')
                         ->timezone(config('app.timezone_name'))
                         ->toDateTimeString();
-                    if ($validated['is_recurring']) {
+                    if (isset($validated['is_recurring']) && $validated['is_recurring']) {
                         $next_due_date_format = Carbon::parse($validated['next_due_date'], 'UTC')
                             ->timezone(config('app.timezone_name'))
                             ->toDateTimeString();
@@ -124,13 +111,14 @@ class TransactionRepository implements TransactionInterface
                     $transaction->user_id = $this->getCurrentUser();
                     $transaction->account_id = $validated['accountId'];
                     $transaction->amount = $validated['amount'];
-                    $transaction->note = $validated['note'];
-                    $transaction->is_recurring = $validated['is_recurring'] ?? false;
-                    $transaction->frequency = $validated['is_recurring'] ? $validated['frequency'] : null;
-                    $transaction->next_due_date = $validated['is_recurring'] ? $next_due_date_format : null;
+                    $transaction->note = isset($validated['note']) ? $validated['note'] : null;
+                    $transaction->is_recurring = isset($validated['is_recurring']) && $validated['is_recurring'] ?? false;
+                    $transaction->frequency = isset($validated['is_recurring']) ? $validated['frequency'] : null;
+                    $transaction->next_due_date = isset($validated['is_recurring']) ? $next_due_date_format : null;
                     $transaction->save();
                     $type = 'success';
                     $message = 'Transaction ' . $message . ' successfully';
+                    $data = $transaction;
                     DB::commit();
                 }
             } catch (\Exception $e) {
@@ -144,10 +132,11 @@ class TransactionRepository implements TransactionInterface
         return [
             'message' => $message,
             'type' => $type,
+            'data' => $data ?? null,
         ];
     }
 
-    public function updateTransaction(Request $request, string|int $transaction_id)
+    public function updateTransaction(TransactionRequest $request, string|int $transaction_id): array
     {
         $validated = $this->validateForm($request);
 
@@ -163,7 +152,7 @@ class TransactionRepository implements TransactionInterface
                     $transaction_date_format = Carbon::parse($date, 'UTC')
                         ->timezone(config('app.timezone_name'))
                         ->toDateTimeString();
-                    if ($validated['is_recurring']) {
+                    if (isset($validated['is_recurring']) && $validated['is_recurring']) {
                         $next_due_date_format = Carbon::parse($validated['next_due_date'], 'UTC')
                             ->timezone(config('app.timezone_name'))
                             ->toDateTimeString();
@@ -176,14 +165,15 @@ class TransactionRepository implements TransactionInterface
                     $transaction->user_id = $this->getCurrentUser();
                     $transaction->account_id = $validated['accountId'];
                     $transaction->amount = $validated['amount'];
-                    $transaction->note = $validated['note'];
-                    $transaction->is_recurring = $validated['is_recurring'] ?? false;
-                    $transaction->frequency = $validated['is_recurring'] ? $validated['frequency'] : null;
-                    $transaction->next_due_date = $validated['is_recurring'] ? $next_due_date_format : null;
+                    $transaction->note = isset($validated['note']) ? $validated['note'] : null;
+                    $transaction->is_recurring = isset($validated['is_recurring']) && $validated['is_recurring'] ?? false;
+                    $transaction->frequency = isset($validated['is_recurring']) ? $validated['frequency'] : null;
+                    $transaction->next_due_date = isset($validated['is_recurring']) ? $next_due_date_format : null;
                     $transaction->save();
+                    DB::commit();
                     $type = 'success';
                     $message = 'Transaction ' . $message . ' successfully';
-                    DB::commit();
+                    $data = $transaction;
                 }
             } catch (\Exception $e) {
                 $type = 'error';
@@ -196,6 +186,7 @@ class TransactionRepository implements TransactionInterface
         return [
             'message' => $message,
             'type' => $type,
+            'data' => $data ?? null,
         ];
     }
 }

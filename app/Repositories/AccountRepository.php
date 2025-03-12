@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Http\Requests\API\AccountRequest;
 use App\Interfaces\AccountInterface;
 use App\Models\Account;
 use Illuminate\Http\Request;
@@ -15,12 +16,9 @@ class AccountRepository implements AccountInterface
         return Auth::user()->id;
     }
 
-    private function validateForm(Request $request): array
+    private function validateForm(AccountRequest $request): array
     {
-        return $request->validate([
-            'name' => 'required',
-            'balance' => 'required',
-        ]);
+        return $request->validated();
     }
 
     public function getAccounts(): array
@@ -50,7 +48,7 @@ class AccountRepository implements AccountInterface
             ->where('id', $account_id)->first();
     }
 
-    public function createAccount(Request $request): array
+    public function createAccount(AccountRequest $request): array
     {
         $validated = $this->validateForm($request);
         if ($validated) {
@@ -63,6 +61,7 @@ class AccountRepository implements AccountInterface
                 $account->save();
                 $type = 'success';
                 $message = 'Account created successfully';
+                $data = $account;
                 DB::commit();
             } catch (\Exception $e) {
                 $type = 'error';
@@ -75,10 +74,11 @@ class AccountRepository implements AccountInterface
         return [
             'message' => $message,
             'type' => $type,
+            'data' => $data ?? null,
         ];
     }
 
-    public function updateAccount(Request $request, string|int $account_id): array
+    public function updateAccount(AccountRequest $request, string|int $account_id): array
     {
         $validated = $this->validateForm($request);
         if ($validated) {
@@ -91,6 +91,7 @@ class AccountRepository implements AccountInterface
                 $account->save();
                 $type = 'success';
                 $message = 'Account updated successfully';
+                $data = $account;
                 DB::commit();
             } catch (\Exception $e) {
                 $type = 'error';
@@ -103,6 +104,18 @@ class AccountRepository implements AccountInterface
         return [
             'message' => $message,
             'type' => $type,
+            'data' => $data ?? null,
+        ];
+    }
+
+    public function deleteAccount(string|int $account_id): array
+    {
+        $account = Account::find($account_id);
+        $account->delete();
+
+        return [
+            'message' => "Account deleted successfully.",
+            'type' => 'success',
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\APP;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\AccountRequest;
 use App\Models\Account;
 use App\Models\Category;
 use App\Models\Transaction;
@@ -63,7 +64,7 @@ class AccountController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(AccountRequest $request)
     {
         $account_create = $this->account_repository->createAccount($request);
         session()->flash($account_create['type'], $account_create['message']);
