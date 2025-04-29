@@ -3,7 +3,7 @@
     "type": "module",
     "scripts": {
         "build": "vite build && vite build --ssr",
-        "dev": "vite --host 0.0.0.0",
+        "dev": "vite dev",
         "lint": "eslint resources/js --ext .js,.jsx --ignore-path .gitignore --fix"
     },
     "devDependencies": {
@@ -22,15 +22,16 @@
         "prettier-plugin-tailwindcss": "^0.6.5",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "tailwindcss": "^3.2.1",
         "vite": "^5.0"
     },
     "dependencies": {
+        "@tailwindcss/vite": "^4.1.4",
         "apexcharts": "^4.4.0",
         "chart.js": "^4.4.7",
         "lucide-react": "^0.456.0",
         "react-chartjs-2": "^5.2.0",
         "react-hot-toast": "^2.4.1",
-        "swiper": "^11.1.15"
+        "swiper": "^11.1.15",
+        "tailwindcss": "^4.1.4"
     }
 }

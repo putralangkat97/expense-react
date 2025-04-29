@@ -24,7 +24,7 @@ class TransactionRepository implements TransactionInterface
         return $request->validated();
     }
 
-    public function getTransactions($limit): Collection
+    public function getTransactions(int|null $limit = 5): Collection
     {
         $transactions = Transaction::with(['category', 'account'])
             ->where('user_id', $this->getCurrentUser())

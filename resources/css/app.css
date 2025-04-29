@@ -1,7 +1,8 @@
 @import "tailwindcss";
+
 @plugin "daisyui" {
-    themes: dim
-};
+    themes: dracula --default;
+}
 
 .itim-regular {
     font-family: 'Itim', cursive;

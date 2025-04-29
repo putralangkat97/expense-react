@@ -31,7 +31,7 @@ class HomeController extends Controller
             'totalBalance' => $accounts['sum_balance'],
             'accounts' => $accounts['accounts'],
             'categories' => $categories_mapped,
-            'transactions' => $transaction_repository->getTransactions(),
+            'transactions' => $transaction_repository->getTransactions(5),
             'frequencies' => FrequencyEnum::optionToIndonesia(),
         ]);
     }
