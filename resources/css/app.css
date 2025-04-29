@@ -1,28 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "daisyui" {
+    themes: dim
+};
 
 .itim-regular {
-  font-family: 'Itim', cursive;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.swiper {
-  min-width: 260px;
-}
-
-.swiper-slide {
-  border-radius: 1rem;
-}
-
-.swiper-pagination-bullet-active {
-  background: #419400 !important;
-}
-
-.swiper-horizontal
-  > .swiper-pagination-bullets.swiper-pagination-bullets-dynamic,
-.swiper-pagination-horizontal.swiper-pagination-bullets.swiper-pagination-bullets-dynamic {
-  bottom: 8%;
-  opacity: 0.3;
+    font-family: 'Itim', cursive;
+    font-weight: 400;
+    font-style: normal;
 }
