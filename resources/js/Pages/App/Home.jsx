@@ -63,7 +63,7 @@ const Home = ({
       {/* Balance */}
       <div className="px-6">
         <Link
-          className="relative card card-compact p-4 bg-base-200 text-base-content overflow-hidden hover:bg-base-300 transition-all duration-200"
+          className="relative card card-sm sm:card-md p-4 bg-base-300 text-base-content overflow-hidden hover:bg-base-300 transition-all duration-200"
           href={route("account.index")}
         >
           <div className="card-body z-10">
@@ -86,7 +86,7 @@ const Home = ({
       {accounts.length > 0 && (
         <div className="mt-10 px-6">
           <div className="flex items-end justify-between">
-            <h2 className="text-xl font-bold text-base-content sm:text-2xl">
+            <h2 className="text-lg font-bold text-base-content sm:text-xl">
               Transaksi terakhir
             </h2>
             {accounts.length > 0 && transactions.length > 0 && (

@@ -8,7 +8,7 @@ const AccountCard = ({ data }) => {
     <Link
       as="button"
       href={route("account.view", data.id)}
-      className="card card-compact mx-auto h-40 w-full bg-base-200 hover:bg-base-300 duration-200 transition-all text-base-content"
+      className="card card-sm sm:card-md mx-auto h-40 w-full bg-base-300 hover:bg-base-300 duration-200 transition-all text-base-content"
     >
       <div className="card-body flex w-full flex-row justify-between">
         <div className="flex flex-col items-start justify-end">

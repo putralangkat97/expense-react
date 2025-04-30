@@ -1,1 +1,0 @@
-import{j as e,a as r}from"./app-DI5z0xhG.js";function n({children:s,title:t}){return e.jsxs(e.Fragment,{children:[e.jsx(r,{title:t}),e.jsx("div",{className:"flex min-h-screen flex-col items-center bg-base-100 mx-auto justify-center",children:s})]})}export{n as G};

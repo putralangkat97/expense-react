@@ -6,7 +6,7 @@ import { Link } from "@inertiajs/react";
 const TransactionDetail = ({ data }) => {
   const configHelper = new ConfigHelper();
   return (
-    <div className="card card-compact bg-base-200 mb-2">
+    <div className="card card-sm sm:card-md bg-base-300 mb-2">
       <div className="card-body grid grid-cols-2 gap-6">
         <div>
           <InputLabel

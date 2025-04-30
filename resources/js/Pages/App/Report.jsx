@@ -98,19 +98,23 @@ const Report = ({ weekly_report }) => {
           <h2 className="text-center text-3xl sm:text-4xl">Insight</h2>
         </div>
       </div>
-      <div className="px-2 pb-6 bg-base-200 rounded-xl mt-10">
+      <div className="px-2 pb-6 bg-base-300 rounded-xl mt-10 mx-4">
         <div className="flex flex-col items-center justify-center space-y-2">
           <Bar options={options} data={chartData} />
         </div>
       </div>
-      <div className="flex items-center justify-start mt-10">
+      <div className="flex items-center justify-start mt-10 mx-4">
         <h2 className="text-xl font-bold text-base-content sm:text-2xl">
           Total Pengeluaran
         </h2>
       </div>
-      <div className="px-2 pb-6 bg-base-200 rounded-xl mt-4">
+      <div className="px-2 pb-6 bg-base-300 rounded-xl mt-4 mx-4">
         <div className="flex flex-col items-center justify-center space-y-2">
-          <Doughnut options={doughnut_options} data={doughnut_data} />
+          <Doughnut
+            options={doughnut_options}
+            data={doughnut_data}
+            className="mt-10"
+          />
         </div>
       </div>
     </>

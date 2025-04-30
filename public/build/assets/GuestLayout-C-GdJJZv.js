@@ -1,0 +1,1 @@
+import{j as e,a as r}from"./app-C9IvtIzT.js";import{T as a}from"./ThemeHandler-CadmiyHJ.js";function o({children:s,title:t}){return e.jsxs(a,{children:[e.jsx(r,{title:t}),e.jsx("div",{className:"flex min-h-screen flex-col items-center bg-base-100 mx-auto justify-center",children:s})]})}export{o as G};

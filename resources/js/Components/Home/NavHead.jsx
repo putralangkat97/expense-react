@@ -12,7 +12,7 @@ const NavHead = ({ user }) => {
         <div className="w-20 rounded-full border-2 border-base-300">
           <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
         </div>
-        <div className="absolute bottom-0 right-0 rounded-full border-2 border-base-300 bg-base-200 p-1 text-base-content">
+        <div className="absolute bottom-0 right-0 rounded-full border-2 border-base-300 bg-base-300 p-1 text-base-content">
           <Pencil size={10} />
         </div>
       </div>

@@ -8,7 +8,7 @@ const TransactionCard = ({ data }) => {
     <Link
       href={route("transaction.view", data.id)}
       className={
-        "card card-compact sm:p-2 cursor-pointer bg-base-200 hover:bg-base-300 transition-all duration-200"
+        "card card-sm sm:card-md sm:p-2 cursor-pointer bg-base-300 hover:bg-base-300 transition-all duration-200"
       }
     >
       <div className="card-body">

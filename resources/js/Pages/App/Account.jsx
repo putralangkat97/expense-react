@@ -40,7 +40,7 @@ const Account = ({ accounts }) => {
         <div className="mt-10 mb-4 flex justify-end">
           <PrimaryButton
             type="button"
-            className="btn-block rounded-xl"
+            className="btn-block"
             variant="default"
             onClick={() =>
               openAccountModal("Buat Akun", null, "account-create", true)

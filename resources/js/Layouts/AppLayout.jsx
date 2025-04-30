@@ -1,6 +1,7 @@
 import NavHead from "@/Components/Home/NavHead";
 import { Head, usePage } from "@inertiajs/react";
 import FooterNav from "./FooterNav";
+import ThemeHandler from "@/Components/ThemeHandler";
 
 export default function AppLayout({
   title = "App",
@@ -10,7 +11,7 @@ export default function AppLayout({
   const user = usePage().props.auth.user;
 
   return (
-    <>
+    <ThemeHandler>
       <Head title={title} />
       <div className="min-h-screen bg-base-100">
         <div className="mx-auto w-full pb-28 pt-16 sm:max-w-lg">
@@ -18,12 +19,14 @@ export default function AppLayout({
           {useNavHead && <NavHead user={user} />}
 
           {/* main content */}
-          <main className={`sm:pl-4 ${useNavHead ? "mt-10" : ""}`}>{children}</main>
+          <main className={`sm:pl-4 ${useNavHead ? "mt-10" : ""}`}>
+            {children}
+          </main>
 
           {/* footer nav */}
           <FooterNav />
         </div>
       </div>
-    </>
+    </ThemeHandler>
   );
 }

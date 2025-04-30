@@ -1,0 +1,1 @@
+import{q as o,r as n}from"./app-C9IvtIzT.js";function u({children:s}){var t;const{auth:e}=o().props;return n.useEffect(()=>{var r;const m=((r=e==null?void 0:e.user)==null?void 0:r.themes)||"light";document.documentElement.setAttribute("data-theme",m)},[(t=e==null?void 0:e.user)==null?void 0:t.themes]),s}export{u as T};

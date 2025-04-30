@@ -50,6 +50,14 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('/', 'index')->name('index');
         });
+
+    Route::controller(\App\Http\Controllers\APP\SettingController::class)
+        ->prefix('/setting')
+        ->name('setting.')
+        ->group(function () {
+            Route::get('/theme', 'theme')->name('theme');
+            Route::patch('/theme/update', 'updateTheme')->name('update-theme');
+        });
 });
 
 require __DIR__ . '/auth.php';

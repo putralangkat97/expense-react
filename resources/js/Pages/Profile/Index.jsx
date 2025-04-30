@@ -16,9 +16,9 @@ const ProfileIndex = () => {
       )}
 
       <div className="px-6">
-        <div className="card card-compact bg-base-200 p-3">
+        <div className="card card-sm sm:card-md bg-base-300 p-3">
           <div className="card-body">
-            <div className="flex flex-col space-y-10">
+            <div className="flex flex-col space-y-8">
               <Link
                 href={route("profile.edit-information")}
                 className="flex w-full items-center justify-between"
@@ -34,10 +34,10 @@ const ProfileIndex = () => {
                 <ChevronRight size={20} />
               </Link>
               <Link
-                href={"#"}
+                href={route("setting.theme")}
                 className="flex w-full items-center justify-between"
               >
-                <div>Setting</div>
+                <div>Tema</div>
                 <ChevronRight size={20} />
               </Link>
             </div>
@@ -48,7 +48,7 @@ const ProfileIndex = () => {
           as="button"
           method="post"
           href={route("logout")}
-          className="btn btn-error btn-block border-2 hover:text-base-100"
+          className="btn btn-error btn-block border-2"
         >
           Logout
           <LogOut size={16} />

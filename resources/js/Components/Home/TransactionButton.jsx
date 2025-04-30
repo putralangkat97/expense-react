@@ -9,29 +9,29 @@ import PrimaryButton from "../PrimaryButton";
 
 const TransactionButton = ({ triggerModal }) => {
   return (
-    <div className="flex space-x-4" id="trx">
-      <div className="flex flex-1 flex-col items-center">
+    <div className="flex justify-around space-x-4" id="trx">
+      <div className="flex flex-1 items-center">
         <PrimaryButton
           variant="default"
           type="button"
-          className="rounded-xl w-full"
+          className="w-full text-xs sm:text-md"
           onClick={() =>
             triggerModal("Buat Pengeluaran", null, "transaction-out")
           }
         >
           Pengeluaran
-          <TrendingUp size={22} className="text-error" />
+          <TrendingUp className="text-error size-4 sm:size-6" />
         </PrimaryButton>
       </div>
-      <div className="flex flex-1 flex-col items-center">
+      <div className="flex flex-1 items-center">
         <PrimaryButton
           variant="default"
           type="button"
-          className="rounded-xl w-full"
+          className="w-full text-xs sm:text-md"
           onClick={() => triggerModal("Buat Pemasukan", null, "transaction-in")}
         >
           Pemasukan
-          <TrendingDown size={22} className="text-success" />
+          <TrendingDown className="text-success size-4 sm:size-6" />
         </PrimaryButton>
       </div>
     </div>
