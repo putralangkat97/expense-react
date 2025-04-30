@@ -113,8 +113,8 @@ class TransactionRepository implements TransactionInterface
                     $transaction->amount = $validated['amount'];
                     $transaction->note = isset($validated['note']) ? $validated['note'] : null;
                     $transaction->is_recurring = isset($validated['is_recurring']) && $validated['is_recurring'] ?? false;
-                    $transaction->frequency = isset($validated['is_recurring']) ? $validated['frequency'] : null;
-                    $transaction->next_due_date = isset($validated['is_recurring']) ? $next_due_date_format : null;
+                    $transaction->frequency = isset($validated['is_recurring']) && $validated['is_recurring'] ? $validated['frequency'] : null;
+                    $transaction->next_due_date = isset($validated['is_recurring']) && $validated['is_recurring'] ? $next_due_date_format : null;
                     $transaction->save();
                     $type = 'success';
                     $message = 'Transaction ' . $message . ' successfully';
@@ -167,8 +167,8 @@ class TransactionRepository implements TransactionInterface
                     $transaction->amount = $validated['amount'];
                     $transaction->note = isset($validated['note']) ? $validated['note'] : null;
                     $transaction->is_recurring = isset($validated['is_recurring']) && $validated['is_recurring'] ?? false;
-                    $transaction->frequency = isset($validated['is_recurring']) ? $validated['frequency'] : null;
-                    $transaction->next_due_date = isset($validated['is_recurring']) ? $next_due_date_format : null;
+                    $transaction->frequency = isset($validated['is_recurring']) && $validated['is_recurring'] ? $validated['frequency'] : null;
+                    $transaction->next_due_date = isset($validated['is_recurring']) && $validated['is_recurring'] ? $next_due_date_format : null;
                     $transaction->save();
                     DB::commit();
                     $type = 'success';
