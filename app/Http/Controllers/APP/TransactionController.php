@@ -4,6 +4,7 @@ namespace App\Http\Controllers\APP;
 
 use App\Enums\FrequencyEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\TransactionRequest;
 use App\Models\Category;
 use App\Repositories\AccountRepository;
 use App\Repositories\TransactionRepository;
@@ -17,7 +18,7 @@ class TransactionController extends Controller
         protected AccountRepository $account_repository
     ) {}
 
-    public function index(string|int $id = null)
+    public function index(string|int|null $id = null)
     {
         $categories = Category::orderBy('name')
             ->get();
@@ -47,13 +48,13 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(TransactionRequest $request)
     {
         $transaction_create = $this->transaction_repository->createTransaction($request);
         session()->flash($transaction_create['type'], $transaction_create['message']);
     }
 
-    public function update(Request $request, $transaction_id)
+    public function update(TransactionRequest $request, string|int $transaction_id)
     {
         $transaction_update = $this->transaction_repository->updateTransaction($request, $transaction_id);
         session()->flash($transaction_update['type'], $transaction_update['message']);
